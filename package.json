@@ -4,10 +4,14 @@
 	"description": "可视化编辑器",
 	"main": "index.js",
 	"scripts": {
-		"editor:dev": "node ./scripts/editor.js dev",
-		"editor:build": "node ./scripts/editor.js build",
+		"editor:dev": "node ./scripts/run.js editor dev",
+		"editor:build": "node ./scripts/run.js editor build",
 		"server:start": "node ./packages/server/scripts/runServer.js",
 		"server:dev": "nodemon ./packages/server/scripts/runServer.js",
+		"preset:dev": "node ./script/run.js preset dev",
+		"preset:build": "node ./script/run.js preset build",
+		"widget:dev": "node ./script/run.js widget-factory dev",
+		"widget:build": "node ./script/run.js widget-factory build",
 		"test": "test"
 	},
 	"repository": {

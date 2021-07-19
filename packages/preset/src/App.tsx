@@ -1,4 +1,4 @@
-import { Editor, widgetsCenter } from "visible-editor" 
+import { Editor, widgetsCenter } from "@editor/editor" 
 import "visible-editor/dist/style.css"
 import './App.scss'
 
