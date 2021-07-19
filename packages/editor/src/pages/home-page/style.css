@@ -1,0 +1,58 @@
+.home-page {
+  font-size: 2rem;
+}
+
+.home-page .home-main {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.home-page .home-main .new-project {
+  font-size: 4rem;
+  cursor: pointer;
+  margin: 0 auto;
+}
+
+.home-page .home-main .project-list {
+  width: 100%;
+}
+
+.home-page .home-main .project-list .item {
+  cursor: pointer;
+  width: 100%;
+  margin: 15px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  background-color: #608aff;
+  color: #fff;
+  padding: 15px 15px 15px 45px;
+  border-radius: 50px;
+}
+
+.home-page .home-main .project-list .item .item-info .project-name {
+  font-size: 3rem;
+  margin-bottom: 10px;
+  color: white;
+}
+
+.home-page .home-main .project-list .item .item-info .project-time {
+  font-size: 12px;
+  color: white;
+}
+
+.home-page .home-main .project-list .item .delete {
+  border-radius: 50%;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 20px;
+  background-color: #f57676;
+  color: #fff;
+}
+
+.sm-page {
+  min-width: "150px";
+  height: "150px";
+  padding: 10px;
+  background-color: #ececec;
+}
+/*# sourceMappingURL=style.css.map */

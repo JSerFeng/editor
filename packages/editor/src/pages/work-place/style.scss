@@ -1,0 +1,95 @@
+.operators-list {
+	width: 20vw;
+	height: 100vh;
+	overflow: auto;
+	background-color: rgb(226, 226, 226);
+
+
+	.operators {
+		width: 100%;
+		padding: 15px;
+		box-sizing: border-box;
+
+		.config-list {
+			li {
+				.change-z-index {
+					background-color: #fff;
+
+					span {
+						width: 25px;
+						height: fit-content;
+						display: inline-block;
+						text-align: center;
+						background-color: rgb(140, 162, 211);
+						margin: 5px;
+
+						&:hover {
+							background-color: rgb(84, 124, 209);
+						}
+
+						color: #fff;
+						border-radius: 5px;
+					}
+				}
+			}
+		}
+	}
+
+}
+
+
+.widgets {
+	width: 20vw;
+	height: 100vh;
+	overflow: auto;
+	padding: 15px;
+	box-sizing: border-box;
+	background-color: rgb(226, 226, 226);
+
+	.widgets-list {
+		flex-wrap: wrap;
+		background-color: rgb(226, 226, 226);
+
+		.widgets-list-item {
+			width: 100%;
+			max-width: 100px;
+			box-sizing: border-box;
+			padding: 10px;
+			transition: .2s;
+			cursor: pointer;
+
+			.sm-pic {
+				background-color: rgb(197, 255, 255);
+				max-width: 100%;
+			}
+
+			&:hover {
+				background-color: rgb(231, 231, 231);
+			}
+		}
+	}
+}
+
+.header-config {
+	height: 10vh;
+	border-radius: 15px;
+	padding: 15px;
+	box-sizing: border-box;
+	background-color: rgb(226, 226, 226);
+
+	.tools {
+
+		.tool-item {
+			padding: 5px;
+			border-radius: 10px;
+
+			&:hover {
+				background-color: rgb(235, 235, 235);
+			}
+
+			&.active {
+				background-color: rgb(199, 199, 199);
+			}
+		}
+	}
+}
