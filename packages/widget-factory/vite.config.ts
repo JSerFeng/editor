@@ -11,21 +11,30 @@ const config = defineConfig(({ mode }) => {
 			external: [
 				"react",
 				"react-dom",
-				"visible-editor"
-			]
+				"@editor/editor"
+			],
+			output: {
+				globals: {
+					"react": "React",
+					"react-dom": "ReactDom",
+					"@editor/editor": "Editor"
+				}
+			}
 		}
 		buildOption.lib = {
 			name: "custom-widget",
-			entry: path.join(__dirname, "./lib/index.tsx")
+			entry: path.join(__dirname, "./lib/entry.ts")
 		}
 	}
+
+	buildOption.minify = false
 
 	return {
 		build: buildOption,
 		plugins: [
 			reactJsx(),
 			reactRefresh(),
-		]
+		],
 	}
 })
 

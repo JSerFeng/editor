@@ -1,5 +1,5 @@
 import Widget from "./Widget"
-import { createPkg, EditorTypes } from "visible-editor"
+import { createPkg, EditorTypes } from "@editor/editor"
 
 export default createPkg(
 	Widget,
@@ -17,7 +17,7 @@ export default createPkg(
 			{
 				type: EditorTypes.Color,
 				name: "颜色",
-				key: "titleColor"
+				key: "customColor"
 			}, {
 				type: EditorTypes.Text,
 				name: "标题内容",
@@ -29,7 +29,7 @@ export default createPkg(
 			}
 		],
 		config: {
-			"titleColor": "blue",
+			"customColor": "blue",
 			"title": "我是标题",
 			"content": "我是内容"
 		}

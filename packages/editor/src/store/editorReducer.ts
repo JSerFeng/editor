@@ -7,7 +7,10 @@ import { from, Subject } from 'rxjs'
 import { switchMap, throttleTime } from 'rxjs/operators'
 import { apiSave, ErrorCode } from '../api'
 import { notification } from 'antd'
+import type { GetActionTypes } from "."
+import { ServiceTypes } from './serviceReducer'
 
+export const AC = <T extends Types | ServiceTypes, P = null>(type: T, payload: P): { type: T, payload: P } => ({ type, payload })
 
 /**最大撤销步数 */
 const UNDO_LIMIT = 20
@@ -91,9 +94,6 @@ export enum Tools {
 	Select = "Select"
 }
 
-export const AC = <T extends Types, P = null>(type: T, payload: P): { type: T, payload: P } => ({ type, payload })
-
-
 export const EditorActions = {
 	actProjectName: (name: string) => AC(Types.ProjectName, name),
 	actSelect: (indexes: number[] | null) => AC(Types.SelectMultiple, indexes),
@@ -134,14 +134,14 @@ export const EditorActions = {
 	actDeleteHistory: (idx: number) => AC(Types.DeleteHistory, idx)
 }
 
-
 const defaultConfig: RenderConfig = {
 	projectName: "my-app",
 	widgets: [],
 	pos: { w: 400, h: 600 },
 	routerMode: "history",
 	histories: [{ path: "/" }],
-	currHistoryIdx: 0
+	currHistoryIdx: 0,
+	dependencies: {},
 }
 
 const defaultBaseEditorState: BaseState = {
@@ -168,8 +168,6 @@ const defaultBaseEditorState: BaseState = {
 	}
 }
 
-export type GetActionTypes<A extends { [k: string]: (...args: any[]) => { type: Types, payload: any } }> = { [K in keyof A]: ReturnType<A[K]> }[keyof A]
-
 const reqSave$ = new Subject<RenderConfig>()
 
 reqSave$.pipe(
@@ -183,7 +181,7 @@ reqSave$.pipe(
 	}
 })
 
-const reducer: Reducer<BaseState, GetActionTypes<typeof EditorActions>> = produce((state = defaultBaseEditorState, action) => {
+const editorReducer: Reducer<BaseState, GetActionTypes<typeof EditorActions>> = produce((state = defaultBaseEditorState, action) => {
 	let needSave = false
 	/**检查是否需要存入撤销栈 */
 	switch (action.type) {
@@ -237,7 +235,7 @@ const reducer: Reducer<BaseState, GetActionTypes<typeof EditorActions>> = produc
 			}
 			needSave = true
 	}
-	
+
 	switch (action.type) {
 		case Types.ProjectName: {
 			state.workplace.renderConfig.projectName = action.payload
@@ -432,4 +430,4 @@ const reducer: Reducer<BaseState, GetActionTypes<typeof EditorActions>> = produc
 	}
 }, defaultBaseEditorState)
 
-export default reducer
+export default editorReducer

@@ -32,16 +32,20 @@ const WorkPlace: FC<{
 		const widgetDescription = widgetsCenter.get(config)
 		return widgetDescription?.FC || null
 	}
-	
+
 	const createWidgetConfig = (name: string, pos?: Pos): WidgetConfig => {
 		const pkg = widgetsCenter.get(name)
 		if (pkg) {
-			pos = pos || pkg.description.initPos || {
-				x: 0,
-				y: 0,
-				w: 100,
-				h: 100
-			}
+			pos = pos
+				? pos
+				: pkg.description.initPos
+					? { ...pkg.description.initPos }
+					: {
+						x: 0,
+						y: 0,
+						w: 100,
+						h: 100
+					}
 			pos.x = renderConfig.pos.w / 2 - pos.w / 2
 			pos.y = renderConfig.pos.h / 2 - pos.h / 2
 			return {

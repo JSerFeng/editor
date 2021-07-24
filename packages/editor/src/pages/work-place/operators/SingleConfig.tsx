@@ -30,7 +30,6 @@ const SingleConfig: FC<{
 }> = ({ widgetConfig, dispatch, CustomConfig }) => {
 	const defaultConfig = useRef(widgetConfig.config)
 
-
 	if (widgetConfig.editorConfig === null ||
 		widgetConfig.config === null
 	) {

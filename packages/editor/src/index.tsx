@@ -14,6 +14,7 @@ import "antd/dist/antd.css"
 import Generator from "./pages/generate"
 import HomePage from "./pages/home-page"
 import Preset from "./pages/preset/Preset"
+import Login from "./pages/login"
 
 export type {
 	WidgetConfig,
@@ -35,10 +36,12 @@ export {
 
 export const widgetsCenter = defaultWidgetsCenter
 
+//这里把widgetsCenter实例挂载了window上方便后续添加远程组件
+window.widgetsCenter = widgetsCenter
 
 export const Editor: FC<{
 	widgetsCenter?: WidgetsCenter
-}> = ({ widgetsCenter }) => {
+}> = ({ widgetsCenter }) => { 
 	return (
 		<BrowserRouter>
 			<Provider store={ store }>
@@ -55,6 +58,9 @@ export const Editor: FC<{
 				</Route>
 				<Route path="/preset">
 					<Preset widgetsCenter={ widgetsCenter || defaultWidgetsCenter } />
+				</Route>
+				<Route path="/login">
+					<Login />
 				</Route>
 			</Provider>
 		</BrowserRouter>

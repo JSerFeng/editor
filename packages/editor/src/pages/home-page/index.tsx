@@ -1,6 +1,7 @@
 import { FC, useEffect, useRef, useState } from "react";
 import { Dispatch } from "redux"
 import {
+	Link,
 	useHistory
 } from "react-router-dom"
 import { checkIfValidRenderConfig, RenderConfig } from "../../render/interfaces";
@@ -36,7 +37,6 @@ const HomePage: FC<{
 	}[] | null>(null)
 	const fileRef = useRef<HTMLInputElement>(null)
 
-
 	const reqProjectList = async () => {
 		const res = await apiGetAllProjects()
 		if (res.code !== ErrorCode.Success) {
@@ -54,7 +54,6 @@ const HomePage: FC<{
 		history.push("/editor" + renderConfig.histories[renderConfig.currHistoryIdx].path)
 	}
 
-
 	const handleDelete = async (projectName: string) => {
 		await apiDeleteProject(projectName)
 		await reqProjectList()
@@ -64,7 +63,11 @@ const HomePage: FC<{
 		? (
 			<div className="home-page">
 				<div className="home-main">
-					<Grid container justify="center">
+					<Grid container justifyContent="center">
+						<Button
+							color="primary">
+							<Link to="/login">登陆</Link>
+						</Button>
 						<Button
 							color="primary"
 							className="new-project flex ac jc"
@@ -76,7 +79,7 @@ const HomePage: FC<{
 							<span className="ali-font">新项目</span>
 						</Button>
 					</Grid>
-					<Grid container justify="center">
+					<Grid container justifyContent="center">
 						<Button
 							variant="contained"
 							color="primary"
@@ -112,8 +115,7 @@ const HomePage: FC<{
 									<div
 										className="item flex jb ac"
 										key={ i }
-										onClick={ openProject.bind(null, item.renderConfig) }
-									>
+										onClick={ openProject.bind(null, item.renderConfig) }>
 										<div className="item-info">
 											<div className="project-name">{ item.renderConfig.projectName }</div>
 											<div className="project-time">最后保存时间: { item.lastModify }</div>
@@ -124,8 +126,7 @@ const HomePage: FC<{
 												onClick={ e => {
 													e.stopPropagation()
 													handleDelete(item.renderConfig.projectName)
-												} }
-											>
+												} }>
 												<Delete
 													style={ {
 														fontSize: "1.5em"
@@ -141,15 +142,13 @@ const HomePage: FC<{
 
 				<Modal
 					open={ workState === WorkState.Creating }
-					onClose={ setWorkState.bind(null, WorkState.Normal) }
-				>
+					onClose={ setWorkState.bind(null, WorkState.Normal) }>
 					<div
 						className="modal"
 						style={ {
 							width: "30%",
 							height: "fit-content"
-						} }
-					>
+						} }>
 						<InitProject />
 					</div>
 				</Modal>

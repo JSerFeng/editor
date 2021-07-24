@@ -5,7 +5,7 @@
 	"main": "index.js",
 	"scripts": {
 		"dev": "vite",
-		"build": "tsc && vite build",
+		"build": "vite build",
 		"serve": "vite preview"
 	},
 	"keywords": [],
@@ -18,13 +18,13 @@
 		]
 	},
 	"dependencies": {
+		"@editor/editor": "workspace:*",
 		"@material-ui/core": "^4.12.1",
 		"@material-ui/icons": "^4.11.2",
 		"@vitejs/plugin-react-refresh": "^1.3.5",
 		"antd": "^4.16.7",
 		"react": "^17.0.2",
 		"react-dom": "^17.0.2",
-		"visible-editor": "^0.1.4",
 		"vite-react-jsx": "^1.1.2"
 	},
 	"devDependencies": {

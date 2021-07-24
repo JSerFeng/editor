@@ -41,11 +41,12 @@ const Preset: FC<{
 					} }
 				>
 					{
-						renderConfig.widgets.map(widgetConfig => {
+						renderConfig.widgets.map((widgetConfig, i) => {
 							const { FC } = widgetsCenter.get(widgetConfig.name)!
 
 							return (
 								<Route
+									key={ i }
 									path={ widgetConfig.routeInfo.path }
 									exact={ widgetConfig.routeInfo.exact }
 								>

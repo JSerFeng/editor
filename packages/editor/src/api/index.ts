@@ -2,11 +2,67 @@ import { RenderConfig } from "../render/interfaces";
 import { request, ErrorCode } from "./request";
 export { ErrorCode } from "./request"
 
+export interface UserInfo {
+	id: string,
+	uid: string,
+	userName: string,
+	projects: string[],
+}
+
+export interface WidgetDoc {
+	name: string;
+	showName: string;
+	description: string;
+	widgetsInfoStr: string;
+	author: string;
+	umdPath: string;
+	esmPath: string;
+	stylePath: string;
+	privacy: boolean;
+}
+
 export interface Res<T = any> {
 	data: T,
 	code: ErrorCode,
 	msg: string
 }
+
+export const apiLogin = (uid: string, pwd: string) => request.post("/user/login", {
+	uid,
+	pwd
+}) as Promise<Res<{
+	access_token: string,
+	userInfo: UserInfo
+}>>
+
+export const apiRegister = (
+	uid: string,
+	userName: string,
+	pwd: string
+) => request.post("/user/register", {
+	uid,
+	userName,
+	pwd
+}) as Promise<Res>
+
+export const apiInstallWidget = (
+	wid: string,
+	pid: string
+) => request.post("/widgets-store/install", {
+	wid,
+	pid
+}) as Promise<Res>
+
+export const apiGetAllWidgets = (page: number) => request.post("widgets-store/all", {
+	page
+}) as Promise<Res<{
+	totalPages: number,
+	totalNum: number,
+	page: number,
+	widgets: WidgetDoc[],
+}>>
+
+export const apiFetchCode = () => request.post("/custom-widget", {}) as Promise<Res<string>>
 
 export const apiDirList = (dir: string) => request.post("/dir-list", {
 	dir

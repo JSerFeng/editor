@@ -1,7 +1,8 @@
 import axios from 'axios'
 import { notification } from "antd"
+import { storage } from '../utils'
 
-const baseURL = "http://localhost:61520"
+const baseURL = "http://localhost:7001/api"
 
 export const request = axios.create({
   baseURL,
@@ -10,13 +11,26 @@ export const request = axios.create({
   }
 })
 
-
 export enum ErrorCode {
 	Success = 200,
 	InternalError = 500,
-	ParamsError = 420,
-	UnknownError = 400
+	Fail = 415,
+	TokenExpire = 420,
+	ParamsError = 445,
+
+	HasBeenRegistered = 450,
+	PwdOrIdError = 455,
 }
+
+request.interceptors.request.use(
+	(req) => {
+		const tk = storage.get("access_token")
+		if (tk) {
+			req.headers["Authorization"] = "bearer " + tk
+		} 
+		return req
+	}
+)
 
 request.interceptors.response.use(
 	(res) => {
@@ -33,7 +47,7 @@ request.interceptors.response.use(
 		})
 		console.log(err);
 		return {
-			code: ErrorCode.UnknownError,
+			code: ErrorCode.InternalError,
 			msg: "error",
 			data: err
 		}

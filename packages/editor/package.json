@@ -2,9 +2,10 @@
 	"name": "@editor/editor",
 	"version": "1.0.0",
 	"description": "易扩展可视化编辑器",
-	"main": "./dist/visible-editor.umd.js",
-	"module": "./dist/visible-editor.es.js",
+	"main": "dist/editor.umd.js",
+	"module": "dist/editor.es.js",
 	"license": "MIT",
+	"author": "FY1010",
 	"types": "./type/index.d.ts",
 	"files": [
 		"dist",
@@ -12,13 +13,13 @@
 	],
 	"exports": {
 		".": {
-			"import": "./dist/visible-editor.es.js",
-			"require": "./dist/visible-editor.umd.js"
+			"import": "./dist/editor.es.js",
+			"require": "./dist/editor.umd.js"
 		}
 	},
 	"scripts": {
 		"dev": "vite",
-		"build": "tsc && vite build",
+		"build": "vite build",
 		"serve": "vite preview"
 	},
 	"eslintConfig": {
@@ -39,6 +40,7 @@
 		"react-redux": "^7.2.4",
 		"react-router-dom": "^5.2.0",
 		"redux": "^4.1.0",
+		"redux-observable": "^2.0.0",
 		"rxjs": "^7.1.0"
 	},
 	"devDependencies": {
@@ -48,7 +50,6 @@
 		"@types/react-color": "^3.0.4",
 		"@types/react-dom": "^17.0.0",
 		"@types/react-router-dom": "^5.1.7",
-		"@types/redux": "^3.6.0",
 		"@typescript-eslint/eslint-plugin": "^4.26.1",
 		"@typescript-eslint/parser": "^4.26.1",
 		"@vitejs/plugin-react-refresh": "^1.3.1",

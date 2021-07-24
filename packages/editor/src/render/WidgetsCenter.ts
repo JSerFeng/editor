@@ -90,7 +90,6 @@ const defaultDescription: Required<WidgetDescription> = {
 	dependencies: {}
 }
 
-/*@__PURE__*/
 export const createPkg = <T = any>(
 	Comp: ReactComp<WidgetProps<T>>,
 	options: WidgetDescription<T>,

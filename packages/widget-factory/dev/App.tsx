@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Editor, widgetsCenter } from "visible-editor";
+import { Editor, widgetsCenter } from "@editor/editor";
 
 import MyWidgets from "../lib"
 

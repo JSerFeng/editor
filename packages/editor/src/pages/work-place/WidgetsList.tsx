@@ -1,7 +1,9 @@
+import { Button } from "@material-ui/core"
 import { notification, Tooltip } from "antd"
 import { FC } from "react"
 import { connect } from "react-redux"
 import { Dispatch } from "redux"
+import { apiFetchCode, ErrorCode } from "../../api"
 import ErrorCatch from "../../components/error-widget"
 import { WidgetConfig, WidgetPackage } from "../../render/interfaces"
 import WidgetsCenter from "../../render/WidgetsCenter"
@@ -28,10 +30,22 @@ const WidgetsList: FC<{
 			})
 		}
 	}
+
+	const getRemoteWidget = async () => {
+		const rawCode = await apiFetchCode()
+		if (rawCode.code !== ErrorCode.Success) {
+			return
+		}
+		const scripts = document.createElement("script")
+		scripts.innerText = rawCode.data
+		document.body.appendChild(scripts)
+	}
+
 	return (
 		<div className="widgets">
 			<div>
 				组件列表
+				<Button variant="contained" onClick={ getRemoteWidget }>获取组件</Button>
 			</div>
 			<div className="widgets-list flex jb">
 				{

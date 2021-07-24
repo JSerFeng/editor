@@ -1,5 +1,5 @@
 import { FC } from "react"
-import { WidgetProps } from "visible-editor"
+import { WidgetProps } from "@editor/editor"
 
 interface Props {
 	customColor: string,
@@ -10,14 +10,16 @@ interface Props {
 const Widget: FC<WidgetProps<Props>> = ({ config }) => {
 	const { customColor, content, title } = config
 
-	return <div style={ {
-		display: "flex",
-		flexDirection: "column",
-		justifyContent: "center",
-		alignItems: "center",
-		width: "100%",
-		height: "100%"
-	} }>
+	return <div
+		className="widget-1"
+		style={ {
+			display: "flex",
+			flexDirection: "column",
+			justifyContent: "center",
+			alignItems: "center",
+			width: "100%",
+			height: "100%"
+		} }>
 		<h1 color={ customColor }>{ title }</h1>
 		<p>{ content }</p>
 	</div>

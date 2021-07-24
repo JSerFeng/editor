@@ -6,6 +6,57 @@ export enum StickFlags {
 	STICK_COL = /**  */ 1 << 1,
 }
 
+
+export const forEach = <T extends Record<string, any> | Array<any>>(
+	objOrArr: T,
+	fn: T extends Array<any>
+		? (val: T[keyof T], i: number) => void
+		: (k: string, v: any) => void
+) => {
+	if (objOrArr instanceof Array) {
+		return objOrArr.forEach(fn)
+	} else {
+		// @ts-ignore
+		Reflect.ownKeys(objOrArr).forEach((key: keyof T) => fn(key, objOrArr[key as string]))
+	}
+}
+
+export const storage = {
+	get(key: string) {
+		try {
+			const item = localStorage.getItem(key)
+			return item && JSON.parse(item)
+		} catch (e) {
+			return localStorage.getItem(key)
+		}
+	},
+	set(key: string, val: string | number | Record<any, any>) {
+		if (typeof val === 'object') {
+			val = JSON.stringify(val)
+		} else if (typeof val === 'number') {
+			val = val + ""
+		}
+		return localStorage.setItem(key, val)
+	},
+	store(target: Record<any, any>) {
+		if (typeof target !== "object" || target === null) {
+			console.warn(target, "is not object")
+			return
+		}
+		forEach(target, (k, v) => {
+			if (v) {
+				if (typeof v === 'object') {
+					v = JSON.stringify(v)
+				}
+				localStorage.setItem(k, v + "")
+			}
+		})
+	},
+	clear() {
+		return localStorage.clear()
+	}
+}
+
 interface RefLinesOptions {
 	stickTo: StickFlags,
 	showSelf: boolean,

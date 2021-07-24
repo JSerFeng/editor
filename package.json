@@ -6,12 +6,12 @@
 	"scripts": {
 		"editor:dev": "node ./scripts/run.js editor dev",
 		"editor:build": "node ./scripts/run.js editor build",
-		"server:start": "node ./packages/server/scripts/runServer.js",
+		"server:start": "node ./scripts/run.js server-side start:dev",
 		"server:dev": "nodemon ./packages/server/scripts/runServer.js",
-		"preset:dev": "node ./script/run.js preset dev",
-		"preset:build": "node ./script/run.js preset build",
-		"widget:dev": "node ./script/run.js widget-factory dev",
-		"widget:build": "node ./script/run.js widget-factory build",
+		"preset:dev": "node ./scripts/run.js preset dev",
+		"preset:build": "node ./scripts/run.js preset build",
+		"widget:dev": "node ./scripts/run.js widget-factory dev",
+		"widget:build": "node ./scripts/run.js widget-factory build",
 		"test": "test"
 	},
 	"repository": {

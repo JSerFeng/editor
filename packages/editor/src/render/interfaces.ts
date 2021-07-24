@@ -55,9 +55,11 @@ export interface RenderConfig {
 	pos: { w: number, h: number }, //页面大小，在工作台中位置
 	routerMode: "history" | "hash",
 	histories: { path: string }[],
-	currHistoryIdx: number
-}
+	currHistoryIdx: number,
 
+	//安装的其它组件
+	dependencies: Record<string, string>,
+}
 
 export interface WidgetDescription<T = any> {
 	name: string,
