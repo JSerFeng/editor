@@ -1,9 +1,8 @@
-import { Button } from "@material-ui/core"
+import { Button, Modal } from "@material-ui/core"
 import { notification, Tooltip } from "antd"
-import { FC } from "react"
+import { FC, useState } from "react"
 import { connect } from "react-redux"
 import { Dispatch } from "redux"
-import { apiFetchCode, ErrorCode } from "../../api"
 import ErrorCatch from "../../components/error-widget"
 import { WidgetConfig, WidgetPackage } from "../../render/interfaces"
 import WidgetsCenter from "../../render/WidgetsCenter"
@@ -19,6 +18,8 @@ const WidgetsList: FC<{
 	createWidgetConfig: (name: string) => WidgetConfig,
 	allWidgets: WidgetPackage[]
 }> = ({ createWidgetConfig, dispatch, allWidgets, currHistory }) => {
+	const [open, setOpen] = useState(false)
+
 	const addWidget = (name: string) => {
 		const widgetConfig = createWidgetConfig(name)
 		if (widgetConfig) {
@@ -31,21 +32,11 @@ const WidgetsList: FC<{
 		}
 	}
 
-	const getRemoteWidget = async () => {
-		const rawCode = await apiFetchCode()
-		if (rawCode.code !== ErrorCode.Success) {
-			return
-		}
-		const scripts = document.createElement("script")
-		scripts.innerText = rawCode.data
-		document.body.appendChild(scripts)
-	}
-
 	return (
 		<div className="widgets">
 			<div>
 				组件列表
-				<Button variant="contained" onClick={ getRemoteWidget }>获取组件</Button>
+				<Button variant="contained" onClick={ setOpen.bind(null, true) }>获取组件</Button>
 			</div>
 			<div className="widgets-list flex jb">
 				{
@@ -72,6 +63,14 @@ const WidgetsList: FC<{
 					))
 				}
 			</div>
+
+			<Modal
+				open={ open }
+				onClose={ setOpen.bind(null, false) }>
+				<div>
+				
+				</div>
+			</Modal>
 		</div>
 	)
 }

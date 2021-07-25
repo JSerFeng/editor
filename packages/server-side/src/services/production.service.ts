@@ -4,21 +4,22 @@ import { copy, ensureDir, readFile, remove, rename, writeFile } from "fs-extra";
 import * as path from "path";
 import { STORE_PATH } from "src/constant";
 import { RenderConfig } from "src/renderConfig.interface";
-import AdmZip from "adm-zip";
+import * as AdmZip from "adm-zip";
 import { comprese, findUserDir } from "src/utils";
 
 @Injectable()
-export class TplService {
+export class ProductionService {
 	constructor(private projectsService: ProjectsService,) { }
 
 	async createSourceCodeZip(uid: string, pid: string) {
 		const proj = await this.projectsService.findProject(pid);
-		const userDir = findUserDir(uid);
 		const codePath = await this.generateImpl(
 			uid,
 			proj.name,
 			JSON.parse(proj.renderConfigStr) as RenderConfig,
 		);
+
+		const userDir = findUserDir(uid);
 		const bundlePath = await comprese(codePath, path.resolve(userDir, "bundle.zip"));
 		return bundlePath;
 	}
@@ -34,12 +35,12 @@ export class TplService {
 		//清除上一次生成的代码
 		await remove(targetPath)
 		await ensureDir(targetPath)
-		
+
 		/**模板文件路径 */
 		const tplPath = path.resolve(STORE_PATH, "tpl", "commonTpl");
 
 		try {
-			await copy(tplPath, path.resolve(targetPath, "tpl"));
+			await copy(tplPath, targetPath);
 		} catch (e) {
 			console.log("模板获取失败，请检查网络");
 			throw "请求github模板失败\n" + e;
@@ -88,10 +89,12 @@ export class TplService {
 
 		const componentPath = path.join(targetPath, "/src/components");
 
-		await Promise.all(
-			widgetsToImport.map(([wid, name]) => 
-			writeInImportWidgets(wid, componentPath, name))
-		)
+		if (widgetsToImport.length > 0) {
+			await Promise.all(
+				widgetsToImport.map(([wid, name]) =>
+					writeInImportWidgets(wid, componentPath, name))
+			)
+		}
 
 		//需要获取组件信息中的react类组件或者函数组件
 		imported.clear();
@@ -159,6 +162,7 @@ export class TplService {
 		}
 	}
 }
+
 function compileTemplate(tpl: string, data: Record<string, string>): string {
 	let result = tpl;
 	Reflect.ownKeys(data).forEach((key: string) => {

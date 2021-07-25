@@ -1,5 +1,8 @@
+import { notification } from "antd";
 import { RenderConfig } from "../render/interfaces";
-import { request, ErrorCode, QueryBody } from "./request";
+import { aTagDownload, storage } from "../utils";
+import { request, ErrorCode, QueryBody, fileRequest, baseURL } from "./request";
+
 export { ErrorCode } from "./request"
 
 export interface UserInfo {
@@ -16,7 +19,7 @@ export interface PaginationInfo {
 	totalPages: number
 }
 
-export interface WidgetDoc {
+export interface WidgetPO {
 	name: string;
 	showName: string;
 	description: string;
@@ -101,15 +104,25 @@ export const apiInstallWidget = (
 	pid
 }) as Promise<Res>
 
-export const apiGetAllWidgets = (page: number) => request.post("widgets-store/all", {
+export const apiGetAllWidgets = (page: number) => request.post("/widgets-store/all", {
 	page
 }) as Promise<Res<{
 	totalPages: number,
 	totalNum: number,
 	page: number,
-	widgets: WidgetDoc[],
+	widgets: WidgetPO[],
 }>>
 
+export const apiGenerate = (pid: string) => {
+	const tk = storage.get("access_token")
+	if (!tk) {
+		notification.error({
+			message: "没有登录"
+		})
+	} else {
+		aTagDownload(baseURL + `/production/make?pid=${pid}&tk=${tk}`)
+	}
+}
 
 
 
@@ -141,10 +154,6 @@ export const apiDirCreate = (dir: string, dirname: string) => request.post("/dir
 
 export const apiDirEnter = (dir: string, dirname: string) => request.post("/dir-enter", { dir, dirname }) as Promise<Res<{ dir: string, sep: string }>>
 
-export const apiGenerate = (renderConfig: RenderConfig, dir: string) => request.post("/generate", {
-	renderConfig,
-	dir
-}) as Promise<Res>
 
 export const apiDirRemove = (dir: string, dirname: string) => request.post("/dir-remove", {
 	dir,

@@ -3,10 +3,10 @@ import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { Projects } from "./projects.schema";
 import { Widgets } from "./widgets-store.schema";
 
-export type TplDoc = Document & Tpl;
+export type ProductionDoc = Document & Production;
 
 @Schema()
-export class Tpl {
+export class Production {
 	@Prop()
 	userName: string;
 
@@ -23,4 +23,4 @@ export class Tpl {
 	widgets: Widgets[];
 }
 
-export const TplSchema = SchemaFactory.createForClass(Tpl);
+export const ProductionSchema = SchemaFactory.createForClass(Production);

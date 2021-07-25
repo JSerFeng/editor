@@ -6,6 +6,16 @@ export enum StickFlags {
 	STICK_COL = /**  */ 1 << 1,
 }
 
+export const aTagDownload = (url: string) => {
+	const aTag = document.createElement("a")
+	aTag.href = url;
+	aTag.download = "bundle.zip"
+	document.body.append(aTag)
+	aTag.click()
+	setTimeout(() => {
+		document.body.removeChild(aTag)	
+	});
+}
 
 export const forEach = <T extends Record<string, any> | Array<any>>(
 	objOrArr: T,

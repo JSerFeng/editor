@@ -27,7 +27,7 @@ import { RenderConfig } from "../../../render/interfaces";
 import {
 	useHistory
 } from "react-router-dom"
-import { apiSave, ErrorCode } from "../../../api";
+import { apiGenerate, apiSave, ErrorCode } from "../../../api";
 import { notification } from "antd";
 
 const {
@@ -58,174 +58,186 @@ const HeaderConfig: FC<{
 	currHistoryIdx: number,
 	openDrawer: () => void,
 	pid: string
-}> = ({ dispatch, workPlace, renderConfig, histories, currHistoryIdx, openDrawer, pid }) => {
-	const router = useHistory()
-	const [path, setPath] = useState(histories[currHistoryIdx].path)
-	const [workState, setWorkState] = useState(WorkState.Normal)
+}> = ({
+	dispatch,
+	workPlace,
+	renderConfig,
+	histories,
+	currHistoryIdx,
+	openDrawer,
+	pid
+}) => {
+		const router = useHistory()
+		const [path, setPath] = useState(histories[currHistoryIdx].path)
+		const [workState, setWorkState] = useState(WorkState.Normal)
 
-
-	const handleSave = async () => {
-		const { code, msg } = await apiSave(
-			renderConfig.projectName,
-			JSON.stringify(renderConfig),
-			pid
-		)
-		if (code !== ErrorCode.Success) {
-			notification.warn({
-				message: "保存失败 " + msg
-			})
-		} else {
-			notification.success({
-				message: "保存成功 "
-			})
+		const handleSave = async () => {
+			const { code, msg } = await apiSave(
+				renderConfig.projectName,
+				JSON.stringify(renderConfig),
+				pid
+			)
+			if (code !== ErrorCode.Success) {
+				notification.warn({
+					message: "保存失败 " + msg
+				})
+			} else {
+				notification.success({
+					message: "保存成功 "
+				})
+			}
 		}
-	}
 
-	const handleNewPage = () => {
-		dispatch(actAddPage(path))
-		dispatch(actChangeHistory(-1))
-		setWorkState(WorkState.Normal)
-		router.push("/editor" + path)
-	}
+		const handleNewPage = () => {
+			dispatch(actAddPage(path))
+			dispatch(actChangeHistory(-1))
+			setWorkState(WorkState.Normal)
+			router.push("/editor" + path)
+		}
 
-	return (
-		<header className="header-config pointer flex ac jb">
-			<div className="tools flex ac">
-				{
-					tools.map(({ Icon, type, title }) => {
-						return <Tooltip key={ type } placement="bottom" title={ title } color="blue">
-							<div
-								className={
-									"tool-item flex jc ac " + (workPlace.selectedTool === type
-										? "active" : "")
-								}
-								onClick={ () => {
-									dispatch(actSelectTool(
-										workPlace.selectedTool === type ? null : type
-									))
-								} }	>
-								<Icon />
-							</div>
-						</Tooltip>
-					})
-				}
-				<Tooltip placement="bottom" title="撤销(ctrl+z)">
-					<div className="tool-item flex jc ac "><Undo onClick={ dispatch.bind(null, actUndo()) } /></div>
-				</Tooltip>
-				<Tooltip placement="bottom" title="取消撤销(ctrl+shift+z)">
-					<div className="tool-item flex jc ac "><Redo onClick={ dispatch.bind(null, actRedo()) } /></div>
-				</Tooltip>
-			</div>
+		const handleMake = async () => {
+			await apiGenerate(pid)
+		}
 
-			<div style={ {
-				maxWidth: "50%"
-			} }>
-				<div>
+		return (
+			<header className="header-config pointer flex ac jb">
+				<div className="tools flex ac">
 					{
-						`http://${workPlace.renderConfig.projectName + (workPlace.renderConfig.routerMode === "hash"
-							? "/#"
-							: "")
-						}`
+						tools.map(({ Icon, type, title }) => {
+							return <Tooltip key={ type } placement="bottom" title={ title } color="blue">
+								<div
+									className={
+										"tool-item flex jc ac " + (workPlace.selectedTool === type
+											? "active" : "")
+									}
+									onClick={ () => {
+										dispatch(actSelectTool(
+											workPlace.selectedTool === type ? null : type
+										))
+									} }	>
+									<Icon />
+								</div>
+							</Tooltip>
+						})
 					}
-					<Select
-						autoWidth
-						native={ false }
-						value={ currHistoryIdx }
-						onChange={ e => {
-							const idx = e.target.value as number
-							dispatch(actChangeHistory(idx))
-							router.push("/editor" + histories[idx].path)
-						} }>
-						{
-							histories.map(({ path }, i) => (
-								<MenuItem value={ i } key={ i }>
-									<div className="flex jb ac">
-										<div style={ {
-											marginRight: "50px"
-										} }>{ path }</div>
-									</div>
-								</MenuItem>
-							))
-						}
-					</Select>
-					<IconButton onClick={ setWorkState.bind(null, WorkState.CreatingNewPage) }>
-						<Add
-							color="primary"
-							style={ {
-								fontSize: "2em"
-							} } />
-					</IconButton>
+					<Tooltip placement="bottom" title="撤销(ctrl+z)">
+						<div className="tool-item flex jc ac "><Undo onClick={ dispatch.bind(null, actUndo()) } /></div>
+					</Tooltip>
+					<Tooltip placement="bottom" title="取消撤销(ctrl+shift+z)">
+						<div className="tool-item flex jc ac "><Redo onClick={ dispatch.bind(null, actRedo()) } /></div>
+					</Tooltip>
 				</div>
-			</div>
 
-			<div>
-				<Tooltip
-					placement="bottom"
-					title="生成代码">
-					<IconButton
-						color="primary"
-						onClick={ () => {
-							router.push("/generator")
-						} }>
-						<Build style={ { fontSize: "2rem" } } />
-					</IconButton>
-				</Tooltip>
-				<Tooltip
-					placement="bottom"
-					title="保存">
-					<IconButton
-						color="primary"
-						onClick={ handleSave.bind(null, renderConfig) }
-					>
-						<SaveOutlined style={ { fontSize: "2rem" } } />
-					</IconButton>
-				</Tooltip>
-				<Tooltip
-					placement="bottom"
-					title="预览"
-				>
-					<IconButton
-						onClick={ () => {
-							router.push("/preset")
-						} }
-					>
-						<Visibility
-							color="primary"
-							style={ {
-								fontSize: "1.5em"
-							} } />
-					</IconButton>
-				</Tooltip>
-				<Tooltip
-					placement="bottom"
-					title="项目设置">
-					<IconButton
-						onClick={ openDrawer }>
-						<Settings style={ { fontSize: "1.5em" } } />
-					</IconButton>
-				</Tooltip>
-			</div>
-
-			<Modal
-				open={ workState === WorkState.CreatingNewPage }
-				onClose={ setWorkState.bind(null, WorkState.Normal) }
-			>
-				<div className="modal" style={ {
-					width: "fit-content",
-					height: "fit-content"
+				<div style={ {
+					maxWidth: "50%"
 				} }>
 					<div>
-						页面路径: &nbsp;
-						<Input value={ path } onChange={ e => {
-							setPath(e.target.value)
-						} } />
+						{
+							`http://${workPlace.renderConfig.projectName + (workPlace.renderConfig.routerMode === "hash"
+								? "/#"
+								: "")
+							}`
+						}
+						<Select
+							autoWidth
+							native={ false }
+							value={ currHistoryIdx }
+							onChange={ e => {
+								const idx = e.target.value as number
+								dispatch(actChangeHistory(idx))
+								router.push("/editor" + histories[idx].path)
+							} }>
+							{
+								histories.map(({ path }, i) => (
+									<MenuItem value={ i } key={ i }>
+										<div className="flex jb ac">
+											<div style={ {
+												marginRight: "50px"
+											} }>{ path }</div>
+										</div>
+									</MenuItem>
+								))
+							}
+						</Select>
+						<IconButton onClick={ setWorkState.bind(null, WorkState.CreatingNewPage) }>
+							<Add
+								color="primary"
+								style={ {
+									fontSize: "2em"
+								} } />
+						</IconButton>
 					</div>
-					<Button variant="contained" color="primary" onClick={ handleNewPage }>创建</Button>
 				</div>
-			</Modal>
-		</header>
-	)
-}
+
+				<div>
+					<Tooltip
+						placement="bottom"
+						title="生成代码">
+						<IconButton
+							color="primary"
+							// onClick={ () => {
+							// 	router.push("/generator")
+							// } }>
+							onClick={ handleMake }>
+							<Build style={ { fontSize: "2rem" } } />
+						</IconButton>
+					</Tooltip>
+					<Tooltip
+						placement="bottom"
+						title="保存">
+						<IconButton
+							color="primary"
+							onClick={ handleSave.bind(null, renderConfig) }
+						>
+							<SaveOutlined style={ { fontSize: "2rem" } } />
+						</IconButton>
+					</Tooltip>
+					<Tooltip
+						placement="bottom"
+						title="预览"
+					>
+						<IconButton
+							onClick={ () => {
+								router.push("/preset")
+							} }
+						>
+							<Visibility
+								color="primary"
+								style={ {
+									fontSize: "1.5em"
+								} } />
+						</IconButton>
+					</Tooltip>
+					<Tooltip
+						placement="bottom"
+						title="项目设置">
+						<IconButton
+							onClick={ openDrawer }>
+							<Settings style={ { fontSize: "1.5em" } } />
+						</IconButton>
+					</Tooltip>
+				</div>
+
+				<Modal
+					open={ workState === WorkState.CreatingNewPage }
+					onClose={ setWorkState.bind(null, WorkState.Normal) }
+				>
+					<div className="modal" style={ {
+						width: "fit-content",
+						height: "fit-content"
+					} }>
+						<div>
+							页面路径: &nbsp;
+							<Input value={ path } onChange={ e => {
+								setPath(e.target.value)
+							} } />
+						</div>
+						<Button variant="contained" color="primary" onClick={ handleNewPage }>创建</Button>
+					</div>
+				</Modal>
+			</header>
+		)
+	}
 
 export default connect(
 	(state: BaseState) => {

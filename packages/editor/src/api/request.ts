@@ -3,7 +3,7 @@ import { notification } from "antd"
 import { storage } from '../utils'
 import { Res } from '.'
 
-const baseURL = "http://localhost:3000/api"
+export const baseURL = "http://localhost:3000/api"
 
 export interface QueryBody {
 	page: number,
@@ -15,6 +15,19 @@ export const request = axios.create({
 	headers: {
 		"Content-Type": "application/json;charset=utf-8"
 	}
+})
+
+export const fileRequest = axios.create({
+	baseURL,
+	headers: {
+		"Content-Type": "application/json;charset=utf-8"
+	}
+})
+
+fileRequest.interceptors.request.use((config) => {
+	const tk = storage.get("access_token")
+	config.headers["Authorization"] = "bearer " + tk
+	return config
 })
 
 export enum ErrorCode {

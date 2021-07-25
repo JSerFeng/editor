@@ -11,7 +11,7 @@ import { ensureDir, createWriteStream } from "fs-extra";
 import * as path from "path";
 import { DEFAULT_PAGE_NUM, STORE_PATH } from "src/constant";
 import { Readable, Writable } from "stream";
-import AdmZip from "adm-zip";
+import * as AdmZip from "adm-zip";
 
 export enum ErrorCode {
 	Success = 200,
@@ -112,7 +112,6 @@ export async function pipe(ws: Writable, rsOrBuf: Readable | Buffer) {
 export async function comprese(dir: string, targetFile: string) {
 	const zip = new AdmZip()
 	zip.addLocalFolder(dir)
-	await ensureDir(targetFile)
 	zip.writeZip(targetFile)
 	return targetFile
 }

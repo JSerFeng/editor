@@ -16,7 +16,8 @@ import { JwtModule } from "@nestjs/jwt";
 import { jwtConstants } from "./constant";
 import { PassportModule } from "@nestjs/passport";
 import { JwtStrategy } from "./auth/auth.strategy";
-import { TplService } from "./services/tpl.service";
+import { ProductionService } from "./services/production.service";
+import { Productiontroller } from "./controllers/production.controller";
 
 @Module({
 	imports: [
@@ -44,6 +45,7 @@ import { TplService } from "./services/tpl.service";
 		ProjectsController,
 		WidgetsStoreController,
 		UserController,
+		Productiontroller,
 	],
 	providers: [
 		AppService,
@@ -52,7 +54,7 @@ import { TplService } from "./services/tpl.service";
 		UserService,
 		AuthService,
 		JwtStrategy,
-		TplService,
+		ProductionService,
 	],
 })
 export class AppModule {}
