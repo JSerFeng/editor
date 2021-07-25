@@ -11,6 +11,7 @@ import { ensureDir, createWriteStream } from "fs-extra";
 import * as path from "path";
 import { DEFAULT_PAGE_NUM, STORE_PATH } from "src/constant";
 import { Readable, Writable } from "stream";
+import AdmZip from "adm-zip";
 
 export enum ErrorCode {
 	Success = 200,
@@ -53,6 +54,10 @@ export function res(code: ErrorCode, data?: any, msg?: string): Res {
 	}
 }
 
+export function findUserDir(id: string) {
+	return path.resolve(STORE_PATH, "users", id)
+}
+
 export async function createUserDir(uid: string) {
 	const userPath = path.resolve(STORE_PATH, "users");
 	await ensureDir(path.resolve(userPath, uid));
@@ -61,14 +66,13 @@ export async function createUserDir(uid: string) {
 	await ensureDir(path.resolve(userPath, uid, "tpl"));
 }
 
-export async function addUserWidget(
-	uid: string,
-	widgetName: string,
+export async function addWidget(
+	wid: string,
 	umd: Express.Multer.File,
 	esm: Express.Multer.File,
 	style: Express.Multer.File,
 ) {
-	const targetPath = path.resolve(STORE_PATH, uid, "widgets", widgetName);
+	const targetPath = path.resolve(STORE_PATH, "widgets", wid, "dev");
 	await ensureDir(targetPath);
 
 	const umdPath = path.join(targetPath, umd.originalname);
@@ -103,6 +107,14 @@ export async function pipe(ws: Writable, rsOrBuf: Readable | Buffer) {
 		rs.on("end", resolve);
 		rs.on("error", reject);
 	});
+}
+
+export async function comprese(dir: string, targetFile: string) {
+	const zip = new AdmZip()
+	zip.addLocalFolder(dir)
+	await ensureDir(targetFile)
+	zip.writeZip(targetFile)
+	return targetFile
 }
 
 export class PageQueryDTO {

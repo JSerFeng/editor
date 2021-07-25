@@ -39,12 +39,15 @@ export class FileDTO {
 
 	@ApiProperty()
 	style: Express.Multer.File[];
+
+	@ApiProperty({ description: "lib文件夹的压缩包，格式是zip" })
+	libDirectoryZip: Express.Multer.File[];
 }
 
 @ApiTags("物料")
 @Controller("widgets-store")
 export class WidgetsStoreController {
-	constructor(private service: WidgetsStoreService) {}
+	constructor(private service: WidgetsStoreService) { }
 
 	@Post("all")
 	findAll(@Body() body: PageQueryDTO) {

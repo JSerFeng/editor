@@ -7,7 +7,7 @@ import {
 	ProjectsDoc,
 	ProjectsDTO,
 } from "src/schemas/projects.schema";
-import { res, ErrorCode } from "src/utils";
+import { res, ErrorCode, PageQueryDTO } from "src/utils";
 import { UserService } from "./user.service";
 
 @Injectable()
@@ -15,7 +15,7 @@ export class ProjectsService {
 	constructor(
 		@InjectModel(Projects.name) private projectModel: Model<ProjectsDoc>,
 		private userService: UserService,
-	) {}
+	) { }
 
 	async addNewProject(body: ProjectsDTO) {
 		const newProject = new this.projectModel({
@@ -50,8 +50,20 @@ export class ProjectsService {
 		return await this.projectModel.findById(pid).exec();
 	}
 
-	async findUserProjects(uid: string) {
-		const project = await this.projectModel.find({ userId: uid }).exec();
-		return project;
+	async findUserProjects(uid: string, query: PageQueryDTO) {
+		const author = await this.userService.findUser(uid)
+		const projects = await this.projectModel
+			.find({ author })
+			.skip(query.num * (query.page - 1))
+			.limit(query.num)
+			.exec();
+		const totalNum = await this.projectModel.countDocuments()
+
+		return {
+			projects, pagination: {
+				totalNum,
+				totalPages: Math.ceil(totalNum / query.num)
+			}
+		};
 	}
 }

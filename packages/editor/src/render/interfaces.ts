@@ -44,7 +44,14 @@ export interface WidgetConfig<T extends Record<string, any> = any> {
 	},
 	style?: Partial<CSSProperties>, //样式信息
 	from?: string,
-
+	
+	showName: string,
+	initPos?: Pos,
+	version?: string,
+	snapShot?: string,
+	description?: string,
+	dependencies?: Record<string, string>
+	
 	/* dev only!!! */
 	showInPage?: boolean
 }
@@ -114,4 +121,24 @@ export function checkIfValidRenderConfig(renderConfig: any): RenderConfig | null
 		Array.isArray(renderConfig.widgets)
 			? renderConfig
 			: null
+}
+
+export const sureStrToRenderConfig = (str: string): RenderConfig => {
+	try {
+		const renderConfig = JSON.parse(str) as RenderConfig
+		return renderConfig
+	} catch (e) {
+		return {
+			projectName: "BROKEN_PROJECT",
+			widgets: [],
+			pos: {
+				w: 0,
+				h: 0
+			},
+			routerMode: "history",
+			histories: [],
+			currHistoryIdx: -1,
+			dependencies: {}
+		}
+	}
 }

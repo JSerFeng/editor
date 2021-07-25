@@ -3,18 +3,22 @@ import { FC, useState } from "react"
 import { connect } from "react-redux"
 import { useHistory } from "react-router-dom"
 import { Dispatch } from "redux"
+import { RenderConfig } from "../.."
+import { apiAddProject, ErrorCode } from "../../api"
+import { BaseState } from "../../store"
 import { EditorActions } from "../../store/editorReducer"
 
 const {
-	actProjectName,
-	actChangeCanvasWH
+	actNewProject
 } = EditorActions
 
 
 const InitProject: FC<{
-	dispatch: Dispatch
+	dispatch: Dispatch,
+	renderConfig: RenderConfig
 }> = ({
-	dispatch
+	dispatch,
+	renderConfig
 }) => {
 		const [projectName, setProjectName] = useState("hello-world")
 		const [pageSize, setPageSize] = useState({
@@ -23,9 +27,12 @@ const InitProject: FC<{
 		})
 		const history = useHistory()
 
-		const handleNewProject = () => {
-			dispatch(actProjectName(projectName))
-			dispatch(actChangeCanvasWH(pageSize))
+		const handleNewProject = async () => {
+			actNewProject(projectName, pageSize)
+			const res = await apiAddProject(projectName, JSON.stringify(renderConfig))
+			if (res.code !== ErrorCode.Success) {
+				return
+			}
 			history.push("/editor")
 		}
 
@@ -54,7 +61,7 @@ const InitProject: FC<{
 				<Grid item xs={ 6 }>
 					宽度
 				</Grid>
-				<Grid xs={ 6 }>
+				<Grid item xs={ 6 }>
 					<TextField onChange={
 						e => {
 							setPageSize(prev => ({
@@ -67,7 +74,7 @@ const InitProject: FC<{
 				<Grid item xs={ 6 }>
 					高度
 				</Grid>
-				<Grid xs={ 6 }>
+				<Grid item xs={ 6 }>
 					<TextField onChange={
 						e => {
 							setPageSize(prev => ({
@@ -79,8 +86,7 @@ const InitProject: FC<{
 				</Grid>
 				<Grid item xs={ 12 }>
 					<div
-						className="sm-page flex jc ac"
-					>
+						className="sm-page flex jc ac">
 						<div
 							style={ {
 								backgroundColor: "#fff",
@@ -88,14 +94,13 @@ const InitProject: FC<{
 								height: pageSize.h * 0.1 + "px",
 								fontSize: "12px"
 							} }
-							className="flex jc ac"
-						>
+							className="flex jc ac">
 							{ pageSize.w } * { pageSize.h }
 						</div>
 					</div>
 				</Grid>
 			</Grid>
-			<Grid container justify="center">
+			<Grid container justifyContent="center">
 				<Button
 					onClick={ handleNewProject }
 					color="primary"
@@ -105,4 +110,7 @@ const InitProject: FC<{
 		</div>
 	}
 
-export default connect()(InitProject)
+export default connect(
+	(state: BaseState) => ({ renderConfig: state.editorReducer.workplace.renderConfig }),
+	dispatch => ({ dispatch })
+)(InitProject)

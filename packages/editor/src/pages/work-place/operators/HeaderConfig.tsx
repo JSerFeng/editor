@@ -56,15 +56,20 @@ const HeaderConfig: FC<{
 	renderConfig: RenderConfig,
 	histories: { path: string }[],
 	currHistoryIdx: number,
-	openDrawer: () => void
-}> = ({ dispatch, workPlace, renderConfig, histories, currHistoryIdx, openDrawer }) => {
+	openDrawer: () => void,
+	pid: string
+}> = ({ dispatch, workPlace, renderConfig, histories, currHistoryIdx, openDrawer, pid }) => {
 	const router = useHistory()
 	const [path, setPath] = useState(histories[currHistoryIdx].path)
 	const [workState, setWorkState] = useState(WorkState.Normal)
 
 
 	const handleSave = async () => {
-		const { code, msg } = await apiSave(renderConfig)
+		const { code, msg } = await apiSave(
+			renderConfig.projectName,
+			JSON.stringify(renderConfig),
+			pid
+		)
 		if (code !== ErrorCode.Success) {
 			notification.warn({
 				message: "保存失败 " + msg
@@ -75,8 +80,6 @@ const HeaderConfig: FC<{
 			})
 		}
 	}
-
-
 
 	const handleNewPage = () => {
 		dispatch(actAddPage(path))
@@ -100,8 +103,7 @@ const HeaderConfig: FC<{
 									dispatch(actSelectTool(
 										workPlace.selectedTool === type ? null : type
 									))
-								} }
-							>
+								} }	>
 								<Icon />
 							</div>
 						</Tooltip>
@@ -133,8 +135,7 @@ const HeaderConfig: FC<{
 							const idx = e.target.value as number
 							dispatch(actChangeHistory(idx))
 							router.push("/editor" + histories[idx].path)
-						} }
-					>
+						} }>
 						{
 							histories.map(({ path }, i) => (
 								<MenuItem value={ i } key={ i }>
@@ -165,8 +166,7 @@ const HeaderConfig: FC<{
 						color="primary"
 						onClick={ () => {
 							router.push("/generator")
-						} }
-					>
+						} }>
 						<Build style={ { fontSize: "2rem" } } />
 					</IconButton>
 				</Tooltip>
@@ -229,7 +229,7 @@ const HeaderConfig: FC<{
 
 export default connect(
 	(state: BaseState) => {
-		const { workplace } = state.editorReducer
+		const { workplace, pid } = state.editorReducer
 		const { renderConfig } = workplace
 		const { histories, currHistoryIdx } = renderConfig
 
@@ -237,7 +237,8 @@ export default connect(
 			workPlace: workplace,
 			renderConfig: renderConfig,
 			histories,
-			currHistoryIdx
+			currHistoryIdx,
+			pid
 		}
 	}
 )(HeaderConfig)

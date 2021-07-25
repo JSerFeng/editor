@@ -43,8 +43,7 @@ export class UserService {
 
 	async registerOne(body: RegisterBody): Promise<Res> {
 		//查询有无已注册
-		const result = await this.userModel.findOne({ userId: body.uid }).exec();
-		console.log(result);
+		const result = await this.userModel.findOne({ uid: body.uid }).exec();
 		if (result) {
 			return res(ErrorCode.HasBeenRegistered, "账号已被注册");
 		}

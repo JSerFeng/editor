@@ -10,6 +10,7 @@ import { notification } from 'antd'
 import type { GetActionTypes } from "."
 import { ServiceTypes } from './serviceReducer'
 
+//不要将这个AC从index引入，会引起循环依赖问题导致报错
 export const AC = <T extends Types | ServiceTypes, P = null>(type: T, payload: P): { type: T, payload: P } => ({ type, payload })
 
 /**最大撤销步数 */
@@ -43,10 +44,12 @@ export interface BaseState {
 			stickPx: number,
 			showPx: number,
 		}
-	}
+	},
+	pid: string
 }
 
 export enum Types {
+	NewProject = "NewProject",
 	ProjectName = "ProjectName",
 	RenderConfig = "RenderConfig",
 	SelectMultiple = "SelectMultiple",
@@ -54,6 +57,7 @@ export enum Types {
 	AddItem = "AddItem",
 	WidgetConfig = "WidgetConfig",
 	ChangeWidgetShowInPage = "ChangeWidgetShowInPage",
+	SetProjectId = "SetProjectId",
 
 	ChangeCanvasWH = "ChangeCanvasWH",
 
@@ -95,6 +99,17 @@ export enum Tools {
 }
 
 export const EditorActions = {
+	actNewProject: (
+		projectName: string,
+		pos: { w: number, h: number }
+	) => {
+		const renderConfig = deepCopy(defaultConfig)
+		renderConfig.projectName = projectName
+		renderConfig.pos = pos
+		return AC<Types.NewProject, RenderConfig>(Types.NewProject, renderConfig)
+	},
+
+	actPid: (pid: string) => AC(Types.SetProjectId, pid),
 	actProjectName: (name: string) => AC(Types.ProjectName, name),
 	actSelect: (indexes: number[] | null) => AC(Types.SelectMultiple, indexes),
 	actSelectOne: (idx: number | null) => AC(Types.SelectOne, idx),
@@ -165,26 +180,20 @@ const defaultBaseEditorState: BaseState = {
 			stickPx: 5,
 			showPx: 20,
 		}
-	}
+	},
+	pid: ""
 }
-
-const reqSave$ = new Subject<RenderConfig>()
-
-reqSave$.pipe(
-	throttleTime(10 * 1000),
-	switchMap((renderConfig) => from(apiSave(renderConfig)))
-).subscribe(({ code, msg }) => {
-	if (code !== ErrorCode.Success) {
-		notification.info({
-			message: "自动保存失败 " + msg
-		})
-	}
-})
 
 const editorReducer: Reducer<BaseState, GetActionTypes<typeof EditorActions>> = produce((state = defaultBaseEditorState, action) => {
 	let needSave = false
 	/**检查是否需要存入撤销栈 */
 	switch (action.type) {
+		case Types.NewProject: {
+			//新建项目需要清空撤销栈
+			state.workplace.undoStack = []
+			state.workplace.redoStack = []
+			break
+		}
 		case Types.Undo: {
 			const { renderConfig, selectArea, selectedIndex, selectedTool } = state.workplace
 			const memoState = state.workplace.undoStack.pop()
@@ -237,6 +246,14 @@ const editorReducer: Reducer<BaseState, GetActionTypes<typeof EditorActions>> = 
 	}
 
 	switch (action.type) {
+		case Types.NewProject: {
+			state.workplace.renderConfig = action.payload
+			break
+		}
+		case Types.SetProjectId: {
+			state.pid = action.payload
+			break
+		}
 		case Types.ProjectName: {
 			state.workplace.renderConfig.projectName = action.payload
 			break
@@ -425,8 +442,9 @@ const editorReducer: Reducer<BaseState, GetActionTypes<typeof EditorActions>> = 
 		}
 	}
 
+	const renderConfig = state.workplace.renderConfig
 	if (needSave) {
-		reqSave$.next(deepCopy(state.workplace.renderConfig))
+		apiSave(renderConfig.projectName, JSON.stringify(renderConfig), state.pid)
 	}
 }, defaultBaseEditorState)
 

@@ -6,6 +6,7 @@ import { UserInfo } from "../../api";
 import { AC } from "../";
 import { GetActionTypes } from "../";
 import { loginEpic } from "./epics";
+import { storage } from "../../utils";
 
 export interface ServiceState {
 	userInfo: UserInfo | null,
@@ -20,9 +21,12 @@ export enum ServiceTypes {
 export type SActions = GetActionTypes<typeof serviceActions>
 
 export const serviceActions = {
-	login: (uid: string, pwd: string) =>
+	actLogin: (uid: string, pwd: string) =>
 		AC(ServiceTypes.Login, { uid, pwd }),
-	doneLogin: (userInfo: UserInfo) => AC(ServiceTypes.DoneLogin, userInfo),
+	actDoneLogin: (data: { access_token: string, userInfo: UserInfo }) => {
+		const { access_token, userInfo } = data
+		return AC(ServiceTypes.DoneLogin, { access_token, userInfo })
+	},
 }
 
 const defaultState: ServiceState = {
@@ -36,6 +40,8 @@ export const rootEpic = combineEpics(
 export const serviceReducer: Reducer<ServiceState, SActions> = produce((state = defaultState, action) => {
 	switch (action.type) {
 		case ServiceTypes.DoneLogin:
-			state.userInfo = action.payload
+			state.userInfo = action.payload.userInfo
+			storage.set("access_token", action.payload.access_token)
+			break
 	}
 }, defaultState)

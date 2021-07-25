@@ -39,19 +39,26 @@ export interface Pos {
 }
 
 export interface WidgetConfig<T extends Record<string, any> = any> {
-	name: string;
-	editorConfig: EditorConfig[];
-	config: T;
-	pos: Pos; //位置信息
+	name: string,
+	editorConfig: EditorConfig[],
+	config: T,
+	pos: Pos, //位置信息
 	routeInfo: {
-		exact: boolean;
-		path: string[];
-	};
-	style?: Partial<CSSProperties>; //样式信息
-	from?: string;
+		exact: boolean,
+		path: string[],
+	},
+	style?: Partial<CSSProperties>, //样式信息
+	from?: string,
+
+	showName: string,
+	initPos?: Pos,
+	version?: string,
+	snapShot?: string,
+	description?: string,
+	dependencies?: Record<string, string>
 
 	/* dev only!!! */
-	showInPage?: boolean;
+	showInPage?: boolean
 }
 
 export interface RenderConfig {

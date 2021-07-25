@@ -9,12 +9,13 @@ import {
 	Route
 } from "react-router-dom"
 
-import './index.css';
+import './index.scss';
 import "antd/dist/antd.css"
 import Generator from "./pages/generate"
 import HomePage from "./pages/home-page"
 import Preset from "./pages/preset/Preset"
-import Login from "./pages/login"
+import Login from "./pages/loginAndRegister"
+import { Snackbar } from "@material-ui/core"
 
 export type {
 	WidgetConfig,
@@ -41,7 +42,7 @@ window.widgetsCenter = widgetsCenter
 
 export const Editor: FC<{
 	widgetsCenter?: WidgetsCenter
-}> = ({ widgetsCenter }) => { 
+}> = ({ widgetsCenter }) => {
 	return (
 		<BrowserRouter>
 			<Provider store={ store }>
@@ -50,8 +51,7 @@ export const Editor: FC<{
 				</Route>
 				<Route path="/editor">
 					<WorkPlace
-						widgetsCenter={ widgetsCenter || defaultWidgetsCenter }
-					/>
+						widgetsCenter={ widgetsCenter || defaultWidgetsCenter } />
 				</Route>
 				<Route path="/generator">
 					<Generator />
@@ -63,6 +63,7 @@ export const Editor: FC<{
 					<Login />
 				</Route>
 			</Provider>
+			<Snackbar></Snackbar>
 		</BrowserRouter>
 	)
 }

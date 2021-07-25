@@ -1,5 +1,5 @@
 import { RenderConfig } from "../render/interfaces";
-import { request, ErrorCode } from "./request";
+import { request, ErrorCode, QueryBody } from "./request";
 export { ErrorCode } from "./request"
 
 export interface UserInfo {
@@ -7,6 +7,13 @@ export interface UserInfo {
 	uid: string,
 	userName: string,
 	projects: string[],
+}
+
+export interface PaginationInfo {
+	page: number,
+	num: number,
+	totalNum: number,
+	totalPages: number
 }
 
 export interface WidgetDoc {
@@ -27,6 +34,21 @@ export interface Res<T = any> {
 	msg: string
 }
 
+export interface PO {
+	_id: string
+}
+
+export interface ProjectPO extends PO {
+	name: string;
+	createTime: Date;
+	lastModified: Date;
+	renderConfigStr: string;
+	author: string;
+	workmates: string[];
+	dependencies: string[];
+	private: boolean;
+}
+
 export const apiLogin = (uid: string, pwd: string) => request.post("/user/login", {
 	uid,
 	pwd
@@ -34,6 +56,27 @@ export const apiLogin = (uid: string, pwd: string) => request.post("/user/login"
 	access_token: string,
 	userInfo: UserInfo
 }>>
+
+export const apiSave = (
+	name: string,
+	renderConfigStr: string,
+	pid: string,
+) => request.post("/projects/modify", {
+	name,
+	renderConfigStr,
+	pid
+}) as Promise<Res>
+
+export const apiAddProject = (name: string, renderConfigStr: string) => request.post("/projects/add", {
+	name,
+	renderConfigStr
+}) as Promise<Res<{
+	pid: string
+}>>
+
+export const apiDropProject = (pid: string) => request.post("/projects/drop", {
+	pid
+}) as Promise<Res>
 
 export const apiRegister = (
 	uid: string,
@@ -44,6 +87,11 @@ export const apiRegister = (
 	userName,
 	pwd
 }) as Promise<Res>
+
+export const apiGetUserProjects = (query: QueryBody) => request.post("/projects/all", query) as Promise<Res<{
+	projects: ProjectPO[],
+	pagination: PaginationInfo
+}>>
 
 export const apiInstallWidget = (
 	wid: string,
@@ -62,6 +110,12 @@ export const apiGetAllWidgets = (page: number) => request.post("widgets-store/al
 	widgets: WidgetDoc[],
 }>>
 
+
+
+
+/**
+ * DEPRECATED API!!!!!!!!!
+ */
 export const apiFetchCode = () => request.post("/custom-widget", {}) as Promise<Res<string>>
 
 export const apiDirList = (dir: string) => request.post("/dir-list", {
@@ -97,21 +151,9 @@ export const apiDirRemove = (dir: string, dirname: string) => request.post("/dir
 	dirname
 }) as Promise<Res>
 
-export const apiGetAllProjects = () => request.post("/all-projects") as Promise<Res<{
-	projectList: {
-		lastModify: string,
-		renderConfig: RenderConfig
-	}[]
-}>>
-
-export const apiSave = (renderConfig: RenderConfig) => request.post("/save", {
-	renderConfig
-}) as Promise<Res>
-
 export const apiDeleteProject = (projectName: string) => request.post("/delete", {
 	projectName
 }) as Promise<Res>
-
 
 export const apiExportJSON = (dir: string, renderConfig: RenderConfig) => request.post("/export-json", {
 	dir,

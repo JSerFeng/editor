@@ -1,5 +1,5 @@
 import { Controller, Post, Body, UseGuards, Request } from "@nestjs/common";
-import { res, ErrorCode, ReqBody } from "src/utils";
+import { res, ErrorCode, ReqBody, PageQueryDTO } from "src/utils";
 import { ApiBearerAuth, ApiProperty, ApiTags } from "@nestjs/swagger";
 import { ProjectsDTO } from "src/schemas/projects.schema";
 import { ProjectsService } from "src/services/projects.service";
@@ -28,7 +28,26 @@ export class ProjectsController {
 	constructor(
 		private service: ProjectsService,
 		private userService: UserService,
-	) {}
+	) { }
+
+	@Post("all")
+	@ApiBearerAuth()
+	@UseGuards(JwtAuthGuard)
+	async findUserProjects(@Body() body: PageQueryDTO, @Request() req: ReqBody) {
+		try {
+			const { projects, pagination } = await this.service.findUserProjects(req.user._id, body);
+			return res(ErrorCode.Success, {
+				projects: projects,
+				pagination: {
+					page: body.page,
+					num: body.num,
+					...pagination
+				}
+			});
+		} catch (e) {
+			return res(ErrorCode.Fail, "查询用户项目失败");
+		}
+	}
 
 	@Post("add")
 	@ApiBearerAuth()
@@ -44,7 +63,9 @@ export class ProjectsController {
 			await proj.save();
 			user.projects.push(proj);
 			await user.save();
-			return res(ErrorCode.Success, "新建项目成功");
+			return res(ErrorCode.Success, {
+				pid: proj._id
+			});
 		} catch (e) {
 			console.log(e);
 			return res(ErrorCode.InternalError, e);
@@ -61,7 +82,8 @@ export class ProjectsController {
 	@Post("modify")
 	@ApiBearerAuth()
 	@UseGuards(JwtAuthGuard)
-	async modifyProject(_id: string, @Body() body: ModifyProjDTO) {
+	async modifyProject(@Request() req: ReqBody, @Body() body: ModifyProjDTO) {
+		const _id = req.user._id
 		const project = await this.service.findProject(body.pid);
 		if (!project) {
 			return res(ErrorCode.Fail, "没有找到此项目");
@@ -76,6 +98,6 @@ export class ProjectsController {
 		project.name = body.name;
 		project.renderConfigStr = body.renderConfigStr;
 		project.save();
-		return res(ErrorCode.Success, "更新项目成功");
+		return res(ErrorCode.Success);
 	}
 }

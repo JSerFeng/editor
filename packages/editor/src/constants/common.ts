@@ -1,0 +1,1 @@
+export const QUERY_PAGE_NUM = 20;
