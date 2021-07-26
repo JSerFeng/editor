@@ -69,7 +69,7 @@ export interface RenderConfig {
 	histories: { path: string }[];
 	currHistoryIdx: number;
 
-	dependencies: Record<string, string>;
+	dependencies: string[];
 }
 
 export interface WidgetDescription<T = any> {

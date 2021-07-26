@@ -8,6 +8,7 @@ import { WidgetConfig, WidgetPackage } from "../../render/interfaces"
 import WidgetsCenter from "../../render/WidgetsCenter"
 import { BaseState } from "../../store"
 import { EditorActions } from "../../store/editorReducer"
+import WidgetStore from "./widget-store"
 
 const { actAddItem } = EditorActions
 
@@ -67,8 +68,8 @@ const WidgetsList: FC<{
 			<Modal
 				open={ open }
 				onClose={ setOpen.bind(null, false) }>
-				<div>
-				
+				<div className="modal">
+					<WidgetStore />
 				</div>
 			</Modal>
 		</div>

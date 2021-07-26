@@ -56,10 +56,9 @@ const HomePage: FC<{
 		setQuery(res.data.pagination)
 	}
 
-
-
 	const openProject = (renderConfig: RenderConfig, pid: string) => {
 		dispatch(actImportJson(renderConfig))
+		console.log(renderConfig.dependencies)
 		dispatch(actPid(pid))
 		history.push("/editor" + renderConfig.histories[renderConfig.currHistoryIdx].path)
 	}

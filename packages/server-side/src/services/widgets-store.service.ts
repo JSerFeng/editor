@@ -33,58 +33,32 @@ export class WidgetsStoreService {
 	) { }
 
 	async createWidget(body: SingleWidgetDTO): Promise<WidgetsDoc> {
-		const newWidget = new this.widgetsModel({
-			name: body.name,
-			widgetsInfoStr: body.widgetsInfoStr,
-		});
+		console.log(body.img.length)
+		const newWidget = new this.widgetsModel(body);
 		await newWidget.save();
 		return newWidget;
-	}
-
-	/*
-	page从1开始
-	*/
-	async searchWidget(
-		keyword: string,
-		tag: number,
-		page: number,
-		num = DEFAULT_PAGE_NUM,
-	) {
-		const re = new RegExp(keyword);
-		const result: Widgets[] = [];
-		const queries: any[] = [];
-		if (tag & SearchTag.Name) {
-			queries.push({ name: { $regex: re } });
-		}
-		if (tag & SearchTag.ShowName) {
-			queries.push({ showName: { $regex: re } });
-		}
-		if (tag & SearchTag.Description) {
-			queries.push({ name: { $regex: re } });
-		}
-
-		await this.widgetsModel
-			.find({
-				$or: queries,
-			})
-			.skip((page - 1) * num)
-			.limit(num)
-			.exec();
-
-		return result;
 	}
 
 	async findWidget(id: string) {
 		return await this.widgetsModel.findById(id).exec();
 	}
 
-	async findAllWidgets(page: number, num = DEFAULT_PAGE_NUM) {
+	async findAllWidgets(page: number, num = DEFAULT_PAGE_NUM, kwd: string) {
+		const RE = new RegExp(kwd || "(?:)")
 		const widgets = await this.widgetsModel
-			.find({ privacy: false })
+			.find({
+				privacy: false,
+				$or: [
+					{ name: { $regex: RE } },
+					{ showName: { $regex: RE } },
+					{ description: { $regex: RE } },
+				]
+			})
 			.skip((page - 1) * num)
 			.limit(num)
 			.exec();
-		const all = await this.widgetsModel.count().exec();
+		const all = await this.widgetsModel.countDocuments().exec();
+		
 		return res(ErrorCode.Success, {
 			totalPages: Math.ceil(all / num),
 			totalNum: all,

@@ -19,7 +19,7 @@ export interface PaginationInfo {
 	totalPages: number
 }
 
-export interface WidgetPO {
+export interface WidgetPO extends PO {
 	name: string;
 	showName: string;
 	description: string;
@@ -29,6 +29,7 @@ export interface WidgetPO {
 	esmPath: string;
 	stylePath: string;
 	privacy: boolean;
+	img: string;
 }
 
 export interface Res<T = any> {
@@ -102,10 +103,15 @@ export const apiInstallWidget = (
 ) => request.post("/widgets-store/install", {
 	wid,
 	pid
-}) as Promise<Res>
+}) as Promise<Res<{
+	umdPath: string;
+	esmPath: string;
+	stylePath: string;
+}>>
 
-export const apiGetAllWidgets = (page: number) => request.post("/widgets-store/all", {
-	page
+export const apiGetAllWidgets = (page: number, kwd?: string) => request.post("/widgets-store/all", {
+	page,
+	kwd
 }) as Promise<Res<{
 	totalPages: number,
 	totalNum: number,

@@ -34,6 +34,9 @@ export class Widgets {
 
 	@Prop({ default: false })
 	privacy: boolean;
+
+	@Prop()
+	img: string;
 }
 
 export const WidgetsSchema = SchemaFactory.createForClass(Widgets);
@@ -58,6 +61,9 @@ export class SingleWidgetDTO {
 	@IsNotEmpty()
 	@ApiProperty()
 	uid: string;
+
+	@ApiProperty()
+	img: string;
 
 	@ApiProperty()
 	privacy: boolean;

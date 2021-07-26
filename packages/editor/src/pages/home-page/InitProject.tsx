@@ -9,7 +9,8 @@ import { BaseState } from "../../store"
 import { EditorActions } from "../../store/editorReducer"
 
 const {
-	actNewProject
+	actNewProject, 
+	actPid
 } = EditorActions
 
 
@@ -28,11 +29,16 @@ const InitProject: FC<{
 		const history = useHistory()
 
 		const handleNewProject = async () => {
-			actNewProject(projectName, pageSize)
-			const res = await apiAddProject(projectName, JSON.stringify(renderConfig))
+			const res = await apiAddProject(projectName, JSON.stringify({
+				...renderConfig,
+				projectName,
+				pos: pageSize
+			}))
 			if (res.code !== ErrorCode.Success) {
 				return
 			}
+			dispatch(actNewProject(projectName, pageSize))
+			dispatch(actPid(res.data.pid))
 			history.push("/editor")
 		}
 

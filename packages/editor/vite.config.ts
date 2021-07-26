@@ -40,6 +40,9 @@ export default defineConfig(({ mode }) => {
 	return {
 		plugins: [reactRefresh(), reactJsx()],
 		build: buildOption,
-		server
+		server,
+		define: mode === "development"
+			? { __DEV__: true }
+			: { __DEV__: false }
 	}
 })

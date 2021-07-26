@@ -64,8 +64,8 @@ export interface RenderConfig {
 	histories: { path: string }[],
 	currHistoryIdx: number,
 
-	//安装的其它组件
-	dependencies: Record<string, string>,
+	//安装过的其它组件的id集合
+	dependencies: string[],
 }
 
 export interface WidgetDescription<T = any> {
@@ -138,7 +138,7 @@ export const sureStrToRenderConfig = (str: string): RenderConfig => {
 			routerMode: "history",
 			histories: [],
 			currHistoryIdx: -1,
-			dependencies: {}
+			dependencies: []
 		}
 	}
 }

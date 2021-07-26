@@ -1,5 +1,6 @@
 import { Schema, Prop, SchemaFactory } from "@nestjs/mongoose";
 import { ApiProperty } from "@nestjs/swagger";
+import { IsNotEmpty } from "class-validator";
 import { Document, Schema as MSchema } from "mongoose";
 import { User } from "./user.schema";
 import { Widgets } from "./widgets-store.schema";
@@ -26,7 +27,7 @@ export class Projects {
 	@Prop([{ type: MSchema.Types.ObjectId, ref: "User" }])
 	workmates: User[];
 
-	@Prop({ type: MSchema.Types.ObjectId, ref: "Widgets" })
+	@Prop({ type: [MSchema.Types.ObjectId], ref: "Widgets", default: [] })
 	dependencies: Widgets[];
 
 	@Prop({ default: false })
@@ -36,9 +37,14 @@ export class Projects {
 export const ProjectsSchema = SchemaFactory.createForClass(Projects);
 
 export class ProjectsDTO {
+	@IsNotEmpty()
 	@ApiProperty()
 	name: string;
-
+	
+	@IsNotEmpty()
 	@ApiProperty()
 	renderConfigStr: string;
+
+	@ApiProperty()
+	dependencies: Widgets[]
 }

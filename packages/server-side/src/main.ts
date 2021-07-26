@@ -3,9 +3,11 @@ import { AppModule } from "./app.module";
 import { SwaggerModule, DocumentBuilder } from "@nestjs/swagger";
 import { ValidationPipe } from "@nestjs/common";
 import { UnauthErrorFilter } from "./utils";
+import { NestExpressApplication} from "@nestjs/platform-express"
+import * as path from "path"
 
 async function bootstrap() {
-	const app = await NestFactory.create(AppModule);
+	const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
 	const config = new DocumentBuilder()
 		.setTitle("Editor Api")
@@ -17,6 +19,7 @@ async function bootstrap() {
 
 	app.useGlobalPipes(new ValidationPipe());
 	app.useGlobalFilters(new UnauthErrorFilter());
+	app.useStaticAssets(path.resolve(__dirname, "..", "..", "..", "store"))
 
 	await app.listen(7001);
 }

@@ -7,7 +7,7 @@ import {
 	Request,
 	UseGuards,
 } from "@nestjs/common";
-import { FileFieldsInterceptor } from "@nestjs/platform-express";
+import { FileFieldsInterceptor, FilesInterceptor } from "@nestjs/platform-express";
 import {
 	ApiBearerAuth,
 	ApiConsumes,
@@ -52,9 +52,7 @@ export class WidgetsStoreController {
 	@Post("all")
 	findAll(@Body() body: PageQueryDTO) {
 		try {
-			return res(ErrorCode.Success, {
-				widgets: this.service.findAllWidgets(body.page, body.num),
-			});
+			return this.service.findAllWidgets(body.page, body.num, body.kwd);
 		} catch (e) {
 			console.log("err");
 			console.log(e);
@@ -71,6 +69,7 @@ export class WidgetsStoreController {
 			{ name: "umd", maxCount: 1 },
 			{ name: "esm", maxCount: 1 },
 			{ name: "style", maxCount: 1 },
+			{ name: "libDirectoryZip", maxCount: 1 },
 		]),
 	)
 	async publish(

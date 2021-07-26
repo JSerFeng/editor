@@ -18,12 +18,12 @@ export class ProjectsService {
 	) { }
 
 	async addNewProject(body: ProjectsDTO) {
-		const newProject = new this.projectModel({
-			name: body.name,
-			renderConfigStr: body.renderConfigStr,
-			createTime: new Date(),
-			lastModified: new Date(),
-		});
+		if (!body.dependencies) {
+			body.dependencies = [];
+		}
+		const newProject = new this.projectModel(body);
+		newProject.createTime = new Date()
+		newProject.lastModified = new Date()
 		await newProject.save();
 		return newProject;
 	}

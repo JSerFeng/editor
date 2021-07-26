@@ -84,7 +84,11 @@ export async function addWidget(
 		pipe(createWriteStream(stylePath), style.buffer),
 	]);
 
-	return { umdPath, esmPath, stylePath };
+	return {
+		umdPath: path.join("widgets", wid, "dev", umd.originalname),
+		esmPath: path.join("widgets", wid, "dev", esm.originalname),
+		stylePath: path.join("widgets", wid, "dev", style.originalname)
+	};
 }
 
 export async function pipe(ws: Writable, buf: Buffer): Promise<void>;
@@ -123,6 +127,9 @@ export class PageQueryDTO {
 
 	@ApiProperty({ type: Number })
 	num = DEFAULT_PAGE_NUM;
+
+	@ApiProperty()
+	kwd: string;
 }
 
 export class UnauthError extends UnauthorizedException {

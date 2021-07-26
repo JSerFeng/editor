@@ -1,14 +1,17 @@
-import { Grid } from "@material-ui/core"
+import { Grid, CircularProgress } from "@material-ui/core"
 import { Pagination } from "@material-ui/lab"
 import { FC, useEffect, useState } from "react"
 import { apiGetAllWidgets, ErrorCode, WidgetPO } from "../../../api"
 import { QUERY_PAGE_NUM } from "../../../constants/common"
-import WidgetItem from "./item"
+import WidgetSearch from "./widget-search"
+import WidgetCard from "./widget-card"
 
 import "./style.scss"
 
 const WidgetStore: FC = () => {
 	const [widgetsList, setWidgetsList] = useState<WidgetPO[]>([])
+	const [loading, setLoading] = useState(false)
+	const [kwd, setKwd] = useState("")
 	const [pageInfo, setPageInfo] = useState({
 		page: 1,
 		num: QUERY_PAGE_NUM,
@@ -17,14 +20,13 @@ const WidgetStore: FC = () => {
 	})
 
 	const handlePageChange = (_: any, page: number) => {
-		setPageInfo(it => {
-			it.page = page
-			return it
-		})
+		refreshList(page);
 	}
 
 	const refreshList = async (page: number) => {
-		const res = await apiGetAllWidgets(page)
+		setLoading(true)
+		const res = await apiGetAllWidgets(page, kwd)
+		setLoading(false)
 		if (res.code !== ErrorCode.Success) {
 			return
 		}
@@ -40,19 +42,30 @@ const WidgetStore: FC = () => {
 
 	useEffect(() => {
 		refreshList(1)
-	}, [])
+	}, [kwd])
 
 	return (
 		<div className="widget-store">
-			<Grid container>
+			<Grid container justifyContent="space-around" style={{
+				position: "sticky",
+				top: "0",
+				backgroundColor: "#fff",
+				zIndex: 1
+			}}>
+				<WidgetSearch kwd={ kwd } setKwd={ setKwd } />
+			</Grid>
+			<Grid container justifyContent="space-around">
 				{
-					widgetsList.map(item => (
-						<WidgetItem widget={ item } />
-					))
+					loading
+						? <CircularProgress />
+						: widgetsList.map(item => (
+							<WidgetCard key={ item._id } widget={ item } />
+						))
 				}
 			</Grid>
-			<Grid container>
+			<Grid container justifyContent="center">
 				<Pagination
+					color="primary"
 					count={ pageInfo.totalPages }
 					page={ pageInfo.page }
 					onChange={ handlePageChange } />
