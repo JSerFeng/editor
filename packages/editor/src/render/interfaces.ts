@@ -45,11 +45,23 @@ export interface Pos {
   h: number
 }
 
+export function normalizePos(pos: any): Pos {
+	return {
+		x: pos.x || 0,
+		y: pos.y || 0,
+		w: pos.w || 100,
+		h: pos.h || 100,
+	}
+}
+
 export type PathMeta = {
 	path: string,
 }
 
-//每个组件的具体位置信息
+/*
+WidgetPackage是基本的组件信息
+WidgetConfig是在编辑器中的组件信息，多了一些如位置参数的字段
+*/
 export interface WidgetConfig<T extends Record<string, any> = any> extends WidgetDescription<T> {
   pos: Pos, //位置信息
   routeInfo: {

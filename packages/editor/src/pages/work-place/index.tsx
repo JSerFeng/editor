@@ -2,7 +2,7 @@ import { FC, useEffect, useState } from "react";
 import Render from "../../render";
 import Operators from "./operators";
 import WidgetsList from "./WidgetsList";
-import { Pos, RenderConfig, WidgetConfig } from "../../render/interfaces";
+import { normalizePos, Pos, RenderConfig, WidgetConfig } from "../../render/interfaces";
 import WidgetsCenter, { HooksCallbak } from "../../render/WidgetsCenter";
 import HeaderConfig from "./operators/HeaderConfig";
 import EventEmitter from "../../utils/eventEmitter"
@@ -28,25 +28,19 @@ const WorkPlace: FC<{
 	const [openOperator, setOpenOperator] = useState(true)
 	const [openHeader, setOpenHeader] = useState(true)
 
-	//新建一个widget
+	//新建一个widget的函数组件
 	const createWidgets = (config: WidgetConfig | string) => {
 		const widgetDescription = widgetsCenter.get(config)
 		return widgetDescription?.FC || null
 	}
 
+	//用于根据一个组件的name去生成一份新的组件的config
 	const createWidgetConfig = (name: string, pos?: Pos): WidgetConfig => {
 		const pkg = widgetsCenter.get(name)
 		if (pkg) {
 			pos = pos
 				? pos
-				: pkg.description.initPos
-					? { ...pkg.description.initPos, x: 0, y: 0 }
-					: {
-						x: 0,
-						y: 0,
-						w: 100,
-						h: 100
-					}
+				: normalizePos(pkg.description.initPos)
 			pos.x = renderConfig.pos.w / 2 - pos.w / 2
 			pos.y = renderConfig.pos.h / 2 - pos.h / 2
 			return {
@@ -58,13 +52,14 @@ const WorkPlace: FC<{
 				pos
 			}
 		} else {
+			//永远不应该运行这里
 			throw new Error("没有找到该组件，组件名: " + name)
 		}
 	}
 
 	useEffect(() => {
-		widgetsCenter.subscribe(all => {
-			setAllWidgetPkges(all)
+		widgetsCenter.subscribe(allWidgets => {
+			setAllWidgetPkges(allWidgets)
 		})
 	}, [widgetsCenter, setAllWidgetPkges])
 
