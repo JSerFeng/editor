@@ -1,6 +1,12 @@
 import { Reducer } from 'redux';
 import { RenderConfig, WidgetConfig } from '../render/interfaces';
 import { StickFlags } from '../utils';
+import type { GetActionTypes } from ".";
+import { ServiceTypes } from './serviceReducer';
+export declare const AC: <T extends Types | ServiceTypes, P = null>(type: T, payload: P) => {
+    type: T;
+    payload: P;
+};
 export interface Pos {
     w: number;
     h: number;
@@ -34,8 +40,11 @@ export interface BaseState {
             showPx: number;
         };
     };
+    pid: string;
+    wid: string;
 }
 export declare enum Types {
+    NewProject = "NewProject",
     ProjectName = "ProjectName",
     RenderConfig = "RenderConfig",
     SelectMultiple = "SelectMultiple",
@@ -43,6 +52,10 @@ export declare enum Types {
     AddItem = "AddItem",
     WidgetConfig = "WidgetConfig",
     ChangeWidgetShowInPage = "ChangeWidgetShowInPage",
+    SetProjectId = "SetProjectId",
+    SetWid = "SetWid",
+    AddWidgetDep = "AddWidgetDep",
+    RemoveWidget = "RemoveWidget",
     ChangeCanvasWH = "ChangeCanvasWH",
     StartWidgetChange = "StartWidgetChange",
     ChangeWidgetPos = "ChangeWidgetPos",
@@ -74,11 +87,30 @@ export declare enum Tools {
     Drag = "Drag",
     Select = "Select"
 }
-export declare const AC: <T extends Types, P = null>(type: T, payload: P) => {
-    type: T;
-    payload: P;
-};
 export declare const EditorActions: {
+    actNewProject: (projectName: string, pos: {
+        w: number;
+        h: number;
+    }) => {
+        type: Types.NewProject;
+        payload: RenderConfig;
+    };
+    actAddWidgetDep: (wid: string) => {
+        type: Types.AddWidgetDep;
+        payload: string;
+    };
+    actRemoveWidget: (wid: string) => {
+        type: Types.RemoveWidget;
+        payload: string;
+    };
+    actWid: (wid: string) => {
+        type: Types.SetWid;
+        payload: string;
+    };
+    actPid: (pid: string) => {
+        type: Types.SetProjectId;
+        payload: string;
+    };
     actProjectName: (name: string) => {
         type: Types.ProjectName;
         payload: string;
@@ -224,13 +256,5 @@ export declare const EditorActions: {
         payload: number;
     };
 };
-export declare type GetActionTypes<A extends {
-    [k: string]: (...args: any[]) => {
-        type: Types;
-        payload: any;
-    };
-}> = {
-    [K in keyof A]: ReturnType<A[K]>;
-}[keyof A];
-declare const reducer: Reducer<BaseState, GetActionTypes<typeof EditorActions>>;
-export default reducer;
+declare const editorReducer: Reducer<BaseState, GetActionTypes<typeof EditorActions>>;
+export default editorReducer;

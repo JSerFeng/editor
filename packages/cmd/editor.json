@@ -1,0 +1,7 @@
+{
+  "outputDir": "dist",
+  "esmFileName": "bundle.es.js",
+  "umdFileName": "bundle.umd.js",
+  "styleFileName": "style.css",
+  "libDir": "lib"
+}

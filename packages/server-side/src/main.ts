@@ -5,6 +5,7 @@ import { ValidationPipe } from "@nestjs/common";
 import { UnauthErrorFilter } from "./utils";
 import { NestExpressApplication} from "@nestjs/platform-express"
 import * as path from "path"
+import { STORE_PATH } from "./constant";
 
 async function bootstrap() {
 	const app = await NestFactory.create<NestExpressApplication>(AppModule);
@@ -19,7 +20,7 @@ async function bootstrap() {
 
 	app.useGlobalPipes(new ValidationPipe());
 	app.useGlobalFilters(new UnauthErrorFilter());
-	app.useStaticAssets(path.resolve(__dirname, "..", "..", "..", "store"))
+	app.useStaticAssets(STORE_PATH)
 
 	await app.listen(7001);
 }

@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="80392a06-4b45-4403-b524-43b3a0a757d3" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../../.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../.idea/@editor.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/cmd.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bin.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/editor.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/configs.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/login.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/publish.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/request.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/util.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/store/.editor" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../editor/type/components/msg/index.d.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../editor/type/constants/common.d.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../editor/type/constants/theme.d.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../editor/type/pages/loginAndRegister/index.d.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../editor/type/pages/loginAndRegister/login.d.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../editor/type/pages/loginAndRegister/register.d.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../editor/type/pages/work-place/widget-store/index.d.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../editor/type/pages/work-place/widget-store/widget-card/index.d.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../editor/type/pages/work-place/widget-store/widget-search/index.d.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../editor/type/store/globalReducer.d.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../editor/type/store/serviceReducer/epics/index.d.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../editor/type/store/serviceReducer/index.d.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../editor/type/theme/index.d.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../editor/type/utils/dep.d.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../widget-factory/dist/bundle.es.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../widget-factory/dist/bundle.umd.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../widget-factory/lib/widget/widgetInfo.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../widget-factory/scripts/cmd.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../store/widgets/6102eeb94dcffb5234a78e31/dev/bundle.es.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../store/widgets/6102eeb94dcffb5234a78e31/dev/bundle.umd.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../store/widgets/6102eeb94dcffb5234a78e31/dev/style.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../store/widgets/6102eeb94dcffb5234a78e31/prod/lib.zip" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../store/widgets/6102f14e8e9baa4534e9c5aa/dev/bundle.es.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../store/widgets/6102f14e8e9baa4534e9c5aa/dev/bundle.umd.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../store/widgets/6102f14e8e9baa4534e9c5aa/dev/style.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../store/widgets/6102f14e8e9baa4534e9c5aa/prod/lib.zip" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../editor/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../editor/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../editor/src/api/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../editor/src/api/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../editor/src/constants/common.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../editor/src/constants/common.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../editor/src/global.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../editor/src/global.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../editor/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../editor/src/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../editor/src/pages/generate/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../editor/src/pages/generate/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../editor/src/pages/home-page/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../editor/src/pages/home-page/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../editor/src/pages/work-place/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../editor/src/pages/work-place/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../editor/src/pages/work-place/operators/SingleConfig.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../editor/src/pages/work-place/operators/SingleConfig.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../editor/src/pages/work-place/widget-store/widget-card/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../editor/src/pages/work-place/widget-store/widget-card/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../editor/src/render/WidgetsCenter.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../editor/src/render/WidgetsCenter.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../editor/src/render/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../editor/src/render/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../editor/src/render/interfaces.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../editor/src/render/interfaces.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../editor/src/store/editorReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../editor/src/store/editorReducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../editor/src/widgets/rectangle/rectangle.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../editor/src/widgets/rectangle/rectangle.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../editor/type/api/index.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../editor/type/api/index.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../editor/type/api/request.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../editor/type/api/request.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../editor/type/index.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../editor/type/index.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../editor/type/pages/home-page/InitProject.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../editor/type/pages/home-page/InitProject.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../editor/type/pages/work-place/WidgetsList.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../editor/type/pages/work-place/WidgetsList.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../editor/type/pages/work-place/index.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../editor/type/pages/work-place/index.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../editor/type/pages/work-place/operators/HeaderConfig.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../editor/type/pages/work-place/operators/HeaderConfig.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../editor/type/render/WidgetsCenter.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../editor/type/render/WidgetsCenter.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../editor/type/render/interfaces.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../editor/type/render/interfaces.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../editor/type/store/editorReducer.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../editor/type/store/editorReducer.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../editor/type/store/index.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../editor/type/store/index.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../editor/type/utils/index.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../editor/type/utils/index.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../editor/type/widgets/router-link/index.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../editor/type/widgets/router-link/index.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../editor/type/widgets/svg/index.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../editor/type/widgets/svg/index.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../editor/type/widgets/text/index.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../editor/type/widgets/text/index.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../editor/vite.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../editor/vite.config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server-side/src/constant.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server-side/src/controllers/production.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../server-side/src/controllers/production.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server-side/src/controllers/widgets-store.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../server-side/src/controllers/widgets-store.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server-side/src/main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../server-side/src/main.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server-side/src/renderConfig.interface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../server-side/src/renderConfig.interface.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server-side/src/schemas/widgets-store.schema.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../server-side/src/schemas/widgets-store.schema.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server-side/src/services/production.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../server-side/src/services/production.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server-side/src/services/widgets-store.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../server-side/src/services/widgets-store.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server-side/src/utils/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../server-side/src/utils/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../v-generator-template" beforeDir="false" afterPath="$PROJECT_DIR$/../v-generator-template" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../widget-factory/dist/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/../widget-factory/dist/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../widget-factory/dist/widget-factory.es.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../widget-factory/dist/widget-factory.umd.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../widget-factory/lib.zip" beforeDir="false" afterPath="$PROJECT_DIR$/../widget-factory/lib.zip" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../widget-factory/lib/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../widget-factory/lib/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../widget-factory/lib/my-widget-1/Widget.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../widget-factory/lib/my-widget-1/index.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../widget-factory/lib/my-widget-2/Widget.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../widget-factory/lib/my-widget-2/index.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../widget-factory/lib/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/../widget-factory/lib/index.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../widget-factory/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../widget-factory/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../widget-factory/vite.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../widget-factory/vite.config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../pnpm-lock.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../../pnpm-lock.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../store/tpl/commonTpl" beforeDir="false" afterPath="$PROJECT_DIR$/../../store/tpl/commonTpl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../store/users/60fc272d995d690ec4d59aa2/tpl" beforeDir="false" afterPath="$PROJECT_DIR$/../../store/users/60fc272d995d690ec4d59aa2/tpl" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution>
+      <executable />
+    </execution>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProjectId" id="1vvpiszGHsfwQOeXPouT9n0VdCG" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+    <option name="showVisibilityIcons" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="go.import.settings.migrated" value="true" />
+    <property name="javascript.nodejs.core.library.configured.version" value="14.17.1" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../.." />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="ts.external.directory.path" value="D:\IntelliJ IDEA 2019.2.3\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
+  </component>
+  <component name="RunManager">
+    <configuration name="index.js" type="NodeJSConfigurationType" application-parameters="login" nameIsGenerated="true" path-to-js-file="src/index.js" working-dir="$PROJECT_DIR$">
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="80392a06-4b45-4403-b524-43b3a0a757d3" name="Default Changelist" comment="" />
+      <created>1627452546481</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1627452546481</updated>
+      <workItem from="1627452547748" duration="165000" />
+      <workItem from="1627454815906" duration="7949000" />
+      <workItem from="1627467280080" duration="8794000" />
+      <workItem from="1627489048425" duration="2919000" />
+      <workItem from="1627569616779" duration="8805000" />
+      <workItem from="1627616286269" duration="948000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="223" y="70" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1627457394626">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="223" y="70" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1627457394626" />
+    <state x="496" y="221" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1627570542038">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="496" y="221" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1536.824@0.0.1536.824" timestamp="1627570542038" />
+    <state x="548" y="170" key="FileChooserDialogImpl" timestamp="1627617241269">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="548" y="170" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1627617241269" />
+    <state width="1493" height="203" key="GridCell.Tab.0.bottom" timestamp="1627467239774">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="203" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1627467239774" />
+    <state width="1493" height="203" key="GridCell.Tab.0.center" timestamp="1627467239774">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="203" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1627467239774" />
+    <state width="1493" height="203" key="GridCell.Tab.0.left" timestamp="1627467239774">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="203" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1627467239774" />
+    <state width="1493" height="203" key="GridCell.Tab.0.right" timestamp="1627467239774">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="203" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1627467239774" />
+    <state width="1493" height="252" key="GridCell.Tab.1.bottom" timestamp="1627467239705">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="252" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1627467239705" />
+    <state width="1493" height="252" key="GridCell.Tab.1.center" timestamp="1627467239703">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="252" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1627467239703" />
+    <state width="1493" height="252" key="GridCell.Tab.1.left" timestamp="1627467239702">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="252" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1627467239702" />
+    <state width="1493" height="252" key="GridCell.Tab.1.right" timestamp="1627467239705">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="252" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1627467239705" />
+    <state width="1493" height="252" key="GridCell.Tab.2.bottom" timestamp="1627467239706">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="252" key="GridCell.Tab.2.bottom/0.0.1536.824@0.0.1536.824" timestamp="1627467239706" />
+    <state width="1493" height="252" key="GridCell.Tab.2.center" timestamp="1627467239705">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="252" key="GridCell.Tab.2.center/0.0.1536.824@0.0.1536.824" timestamp="1627467239705" />
+    <state width="1493" height="252" key="GridCell.Tab.2.left" timestamp="1627467239705">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="252" key="GridCell.Tab.2.left/0.0.1536.824@0.0.1536.824" timestamp="1627467239705" />
+    <state width="1493" height="252" key="GridCell.Tab.2.right" timestamp="1627467239705">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="252" key="GridCell.Tab.2.right/0.0.1536.824@0.0.1536.824" timestamp="1627467239705" />
+    <state width="1493" height="252" key="GridCell.Tab.3.bottom" timestamp="1627467239707">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="252" key="GridCell.Tab.3.bottom/0.0.1536.824@0.0.1536.824" timestamp="1627467239707" />
+    <state width="1493" height="252" key="GridCell.Tab.3.center" timestamp="1627467239706">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="252" key="GridCell.Tab.3.center/0.0.1536.824@0.0.1536.824" timestamp="1627467239706" />
+    <state width="1493" height="252" key="GridCell.Tab.3.left" timestamp="1627467239706">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="252" key="GridCell.Tab.3.left/0.0.1536.824@0.0.1536.824" timestamp="1627467239706" />
+    <state width="1493" height="252" key="GridCell.Tab.3.right" timestamp="1627467239706">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="252" key="GridCell.Tab.3.right/0.0.1536.824@0.0.1536.824" timestamp="1627467239706" />
+    <state x="461" y="240" key="com.intellij.ide.util.TipDialog" timestamp="1627616388512">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="461" y="240" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1627616388512" />
+    <state x="425" y="187" key="run.anything.popup" timestamp="1627579984024">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="425" y="187" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1627579984024" />
+    <state x="431" y="145" key="search.everywhere.popup" timestamp="1627493645375">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="431" y="145" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1627493645375" />
+  </component>
+</project>

@@ -1,24 +1,27 @@
 import { ComponentClass, CSSProperties, FC } from "react";
 import EventEmitter from "../utils/eventEmitter";
-export declare enum EditorTypes {
-    Color = "Color",
-    Upload = "Upload",
-    Text = "Text",
-    Number = "Number",
-    Select = "Select"
-}
-export declare type EditorConfig<T extends EditorTypes = EditorTypes> = T extends EditorTypes.Number | EditorTypes.Text | EditorTypes.Color ? {
-    key: string;
+export declare const EditorTypes: {
+    Color: "Color";
+    Upload: "Upload";
+    Text: "Text";
+    Number: "Number";
+    Select: "Select";
+};
+declare type E<T extends Record<string, any>> = {
+    [K in keyof T]: K;
+}[keyof T];
+export declare type EditorConfig<T = any, U extends string = any> = U extends typeof EditorTypes.Select ? {
+    key: E<T>;
     name: string;
-    type: T;
-} : {
-    key: string;
-    name: string;
-    type: T;
-    options: T extends EditorTypes.Select ? {
+    type: U;
+    options: U extends typeof EditorTypes.Select ? {
         label: string;
         value: string;
-    }[] : T extends EditorTypes.Upload ? Record<string, any> : never;
+    }[] : Record<string, any>;
+} : {
+    key: E<T>;
+    name: string;
+    type: U;
 };
 export declare type ReactComp<T> = FC<T> | ComponentClass<T>;
 export interface Pos {
@@ -27,17 +30,13 @@ export interface Pos {
     w: number;
     h: number;
 }
-export interface WidgetConfig<T extends Record<string, any> = any> {
-    name: string;
-    editorConfig: EditorConfig[];
-    config: T;
+export interface WidgetConfig<T extends Record<string, any> = any> extends WidgetDescription<T> {
     pos: Pos;
     routeInfo: {
         exact: boolean;
         path: string[];
     };
-    style?: Partial<CSSProperties>;
-    from?: string;
+    dependencies?: Record<string, string>;
     showInPage?: boolean;
 }
 export interface RenderConfig {
@@ -52,13 +51,17 @@ export interface RenderConfig {
         path: string;
     }[];
     currHistoryIdx: number;
+    dependencies: string[];
 }
 export interface WidgetDescription<T = any> {
     name: string;
     showName: string;
-    editorConfig: EditorConfig[];
+    editorConfig: EditorConfig<T>[];
     config: T;
-    initPos?: Pos;
+    initPos?: {
+        w: number;
+        h: number;
+    };
     version?: string;
     from?: string;
     style?: Partial<CSSProperties>;
@@ -77,9 +80,9 @@ export interface WidgetConfigProp<T = any> {
     widgetConfig: WidgetConfig<T>;
     dispatchConfig: (widgetConfig: WidgetConfig<T>) => void;
 }
-export interface WidgetPackage {
-    FC: ReactComp<WidgetProps>;
-    description: WidgetDescription;
+export interface WidgetPackage<T = any> {
+    FC: ReactComp<WidgetProps<T>>;
+    description: WidgetDescription<T>;
     Configuration?: ReactComp<WidgetConfigProp> | undefined;
 }
 export declare type TransformConfig<T> = T extends Array<infer Item> ? Item extends {
@@ -88,3 +91,5 @@ export declare type TransformConfig<T> = T extends Array<infer Item> ? Item exte
     [P in Key]: any;
 } : {} : {} : T;
 export declare function checkIfValidRenderConfig(renderConfig: any): RenderConfig | null;
+export declare const sureStrToRenderConfig: (str: string) => RenderConfig;
+export {};

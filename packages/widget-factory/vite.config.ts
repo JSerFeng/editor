@@ -1,5 +1,5 @@
 import { defineConfig } from "vite"
-import path from "path"
+import * as path from "path"
 import type { UserConfig } from "vite"
 import reactRefresh from "@vitejs/plugin-react-refresh"
 import reactJsx from 'vite-react-jsx'
@@ -7,6 +7,8 @@ import reactJsx from 'vite-react-jsx'
 const config = defineConfig(({ mode }) => {
 	let buildOption: UserConfig["build"] = {}
 	if (mode === "production") {
+	  buildOption.minify = false
+	  buildOption.cssCodeSplit = false
 		buildOption.rollupOptions = {
 			external: [
 				"react",
@@ -22,12 +24,11 @@ const config = defineConfig(({ mode }) => {
 			}
 		}
 		buildOption.lib = {
-			name: "custom-widget",
+			fileName: "bundle",
+      name: "custom-widget",
 			entry: path.join(__dirname, "./lib/entry.ts")
 		}
 	}
-
-	buildOption.minify = false
 
 	return {
 		build: buildOption,

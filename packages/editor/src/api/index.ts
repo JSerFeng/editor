@@ -1,7 +1,7 @@
 import { notification } from "antd";
 import { RenderConfig } from "../render/interfaces";
 import { aTagDownload, storage } from "../utils";
-import { request, ErrorCode, QueryBody, fileRequest, baseURL } from "./request";
+import { request, ErrorCode, QueryBody, baseURL } from "./request";
 
 export { ErrorCode } from "./request"
 
@@ -23,13 +23,12 @@ export interface WidgetPO extends PO {
 	name: string;
 	showName: string;
 	description: string;
-	widgetsInfoStr: string;
 	author: string;
 	umdPath: string;
 	esmPath: string;
 	stylePath: string;
 	privacy: boolean;
-	img: string;
+	snapShot: string;
 }
 
 export interface Res<T = any> {
@@ -118,6 +117,14 @@ export const apiGetAllWidgets = (page: number, kwd?: string) => request.post("/w
 	page: number,
 	widgets: WidgetPO[],
 }>>
+
+export const apiRemoveWidget = (pid: string, wid: string) => request.post("/widgets-store/remove", {
+  pid,
+  wid
+}) as Promise<Res>
+
+export const apiDeleteWidget = (wid: string) =>
+    request.post("/widgets-store/delete") as Promise<Res>
 
 export const apiGenerate = (pid: string) => {
 	const tk = storage.get("access_token")

@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite'
 import reactRefresh from '@vitejs/plugin-react-refresh'
 import reactJsx from 'vite-react-jsx'
-import path from "path"
+import * as path from "path"
 
 import type { UserConfig } from "vite"
 
@@ -41,8 +41,5 @@ export default defineConfig(({ mode }) => {
 		plugins: [reactRefresh(), reactJsx()],
 		build: buildOption,
 		server,
-		define: mode === "development"
-			? { __DEV__: true }
-			: { __DEV__: false }
 	}
 })

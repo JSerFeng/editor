@@ -1,34 +1,60 @@
 import { deepCopy } from "../utils"
-import { ReactComp, WidgetConfig, WidgetConfigProp, WidgetDescription, WidgetPackage, WidgetProps } from "./interfaces"
+import {
+	ReactComp,
+	WidgetConfig,
+	WidgetConfigProp,
+	WidgetDescription,
+	WidgetPackage, WidgetProps
+} from "./interfaces"
 
 type WidgetsMap = Map<string, WidgetPackage>
+
+export type HooksCallbak = (pkg: WidgetPackage) => (WidgetPackage)
 
 class WidgetsCenter {
 	widgetsMap: WidgetsMap
 	subQueue: ((...args: any[]) => any)[]
+	preHooks: Set<HooksCallbak>
+
 	constructor(
 		initMap: WidgetsMap = new Map()
 	) {
 		this.widgetsMap = initMap
 		this.subQueue = []
+		this.preHooks = new Set()
 	}
 
-	static createConfig(info: WidgetDescription) {
+	createConfig(info: WidgetDescription): WidgetConfig {
 		return {
 			...info,
-			pos: info.initPos || { x: 10, y: 10, w: 60, h: 60 }
+			pos: info.initPos ? { ...info.initPos, x: 10, y: 10 } : { x: 10, y: 10, w: 60, h: 60 },
+			routeInfo: {
+				exact: true,
+				path: ["/"]
+			}
 		}
 	}
 
-	use(widgets: WidgetPackage | WidgetPackage[]) {
-		if (!Array.isArray(widgets)) {
-			widgets = [widgets]
+	use(widget: WidgetPackage) {
+		for (const cb of this.preHooks) {
+			widget = cb(widget)
 		}
-		widgets.forEach(widget => {
-			const { description, FC, Configuration } = widget
-			this.widgetsMap.set(description.name, { FC, description, Configuration })
-		})
+		const { description, FC, Configuration } = widget
+		this.widgetsMap.set(description.name, { FC, description, Configuration })
 		this.notify()
+	}
+
+	remove(name: string) {
+		if (this.widgetsMap.has(name)) {
+			this.widgetsMap.delete(name)
+			this.notify()
+		}
+	}
+
+	unPre(cb: HooksCallbak) {
+		if (this.preHooks.has(cb)) {
+			this.preHooks.delete(cb)
+		}
 	}
 
 	notify() {
@@ -44,8 +70,7 @@ class WidgetsCenter {
 		let name: string
 		if (typeof widgetConfig === "string") {
 			name = widgetConfig
-		}
-		else {
+		} else {
 			name = widgetConfig.name
 		}
 
@@ -58,13 +83,19 @@ class WidgetsCenter {
 		return widgets
 	}
 
+	pre(cb: HooksCallbak) {
+		this.preHooks.add(cb)
+	}
+
 	create(widgetName: string): WidgetConfig | null {
 		let widget = this.widgetsMap.get(widgetName)
 		if (!widget) return null
 		widget.description = deepCopy(widget.description)
 		return {
 			...widget.description,
-			pos: widget.description.initPos || { x: 10, y: 10, w: 60, h: 60 },
+			pos: widget.description.initPos
+				? { ...widget.description.initPos, x: 10, y: 10 }
+				: { x: 10, y: 10, w: 60, h: 60 },
 			routeInfo: {
 				exact: true,
 				path: ["/"],
@@ -75,7 +106,6 @@ class WidgetsCenter {
 
 export default WidgetsCenter
 
-
 const defaultDescription: Required<WidgetDescription> = {
 	name: "no-name",
 	showName: "未命名",
@@ -83,10 +113,10 @@ const defaultDescription: Required<WidgetDescription> = {
 	version: "*",
 	editorConfig: [],
 	config: {},
-	initPos: { x: 0, y: 0, w: 80, h: 80 },
+	initPos: { w: 100, h: 100 },
 	style: {},
 	description: "无描述",
-	from: "local",
+	from: "presets",
 	dependencies: {}
 }
 

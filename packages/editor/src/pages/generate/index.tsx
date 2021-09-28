@@ -47,8 +47,10 @@ const Generator: FC<{
 
 	useEffect(() => {
 		if (genState === GeneratorState.Generating) {
-			apiGenerate(renderConfig, dir)
-				.then((res) => {
+			// @ts-ignore
+      apiGenerate(renderConfig, dir)
+          // @ts-ignore
+          .then((res) => {
 					if (res.code !== ErrorCode.Success) {
 						setGenState(GeneratorState.GenFail)
 						return

@@ -17,9 +17,6 @@ export class Widgets {
 	@Prop()
 	description: string;
 
-	@Prop()
-	widgetsInfoStr: string;
-
 	@Prop({ type: MSchema.Types.ObjectId, ref: "User" })
 	author: User;
 
@@ -36,7 +33,7 @@ export class Widgets {
 	privacy: boolean;
 
 	@Prop()
-	img: string;
+	snapShot: string;
 }
 
 export const WidgetsSchema = SchemaFactory.createForClass(Widgets);
@@ -54,16 +51,8 @@ export class SingleWidgetDTO {
 	@ApiProperty()
 	description: string;
 
-	@IsNotEmpty()
 	@ApiProperty()
-	widgetsInfoStr: string;
-
-	@IsNotEmpty()
-	@ApiProperty()
-	uid: string;
-
-	@ApiProperty()
-	img: string;
+	snapShot: string;
 
 	@ApiProperty()
 	privacy: boolean;

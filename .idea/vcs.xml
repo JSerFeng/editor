@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/packages/server/store/tpl/prodTemplate" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/packages/v-generator-template" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/store/tpl/commonTpl" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/store/users/60fc272d995d690ec4d59aa2/tpl" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/store/users/6100e6b6f82eea20a44adaec/tpl" vcs="Git" />
+  </component>
+</project>

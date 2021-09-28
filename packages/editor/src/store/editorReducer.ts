@@ -3,10 +3,7 @@ import { Reducer } from 'redux'
 import { RenderConfig, WidgetConfig } from '../render/interfaces'
 import { WritableDraft } from 'immer/dist/internal'
 import { deepCopy, StickFlags } from '../utils'
-import { from, Subject } from 'rxjs'
-import { switchMap, throttleTime } from 'rxjs/operators'
-import { apiSave, ErrorCode } from '../api'
-import { notification } from 'antd'
+import { apiSave } from '../api'
 import type { GetActionTypes } from "."
 import { ServiceTypes } from './serviceReducer'
 
@@ -23,6 +20,17 @@ export interface Pos { //画布位置坐标信息
 }
 
 type MemoState = Pick<BaseState["workplace"], "renderConfig" | "selectedIndex" | "selectArea" | "selectedTool">
+
+enum MessageType {
+	WARN = "warnCount",
+	ERROR = "errorCount",
+	TIP = "tipCount",
+}
+
+type Message = {
+	type: MessageType,
+	text: string,
+}
 export interface BaseState {
 	workplace: {
 		renderConfig: RenderConfig, //全局最终配置
@@ -45,10 +53,23 @@ export interface BaseState {
 			showPx: number,
 		}
 	},
-	pid: string
+	pid: string,
+	wid: string,
+	messages: {
+		total: number,
+		warnCount: number,
+		errorCount: number,
+		tipCount: number,
+		list: Message[]
+	}
 }
 
 export enum Types {
+	//消息和通知
+	NewMessage = "NewMessage",
+	RemoveMessage = "RemoveMessage",
+
+	//编辑器相关
 	NewProject = "NewProject",
 	ProjectName = "ProjectName",
 	RenderConfig = "RenderConfig",
@@ -58,6 +79,11 @@ export enum Types {
 	WidgetConfig = "WidgetConfig",
 	ChangeWidgetShowInPage = "ChangeWidgetShowInPage",
 	SetProjectId = "SetProjectId",
+	SetWid = "SetWid",
+
+	//添加移除依赖
+	AddWidgetDep = "AddWidgetDep",
+	RemoveWidget = "RemoveWidget",
 
 	ChangeCanvasWH = "ChangeCanvasWH",
 
@@ -99,6 +125,13 @@ export enum Tools {
 }
 
 export const EditorActions = {
+	newMessage(type: MessageType, text: string) {
+		return AC<Types.NewMessage, Message>(Types.NewMessage, { type, text })
+	},
+	removeMessage(type: MessageType, idx: number) {
+		return AC(Types.RemoveMessage, { type, idx })
+	},
+
 	actNewProject: (
 		projectName: string,
 		pos: { w: number, h: number }
@@ -108,7 +141,9 @@ export const EditorActions = {
 		renderConfig.pos = pos
 		return AC<Types.NewProject, RenderConfig>(Types.NewProject, renderConfig)
 	},
-
+	actAddWidgetDep: (wid: string) => AC(Types.AddWidgetDep, wid),
+	actRemoveWidget: (wid: string) => AC(Types.RemoveWidget, wid),
+	actWid: (wid: string) => AC(Types.SetWid, wid),
 	actPid: (pid: string) => AC(Types.SetProjectId, pid),
 	actProjectName: (name: string) => AC(Types.ProjectName, name),
 	actSelect: (indexes: number[] | null) => AC(Types.SelectMultiple, indexes),
@@ -156,7 +191,7 @@ const defaultConfig: RenderConfig = {
 	routerMode: "history",
 	histories: [{ path: "/" }],
 	currHistoryIdx: 0,
-	dependencies: {},
+	dependencies: [],
 }
 
 const defaultBaseEditorState: BaseState = {
@@ -181,7 +216,15 @@ const defaultBaseEditorState: BaseState = {
 			showPx: 20,
 		}
 	},
-	pid: ""
+	pid: "",
+	wid: "",
+	messages: {
+		total: 0,
+		warnCount: 0,
+		errorCount: 0,
+		tipCount: 0,
+		list: []
+	}
 }
 
 const editorReducer: Reducer<BaseState, GetActionTypes<typeof EditorActions>> = produce((state = defaultBaseEditorState, action) => {
@@ -246,12 +289,41 @@ const editorReducer: Reducer<BaseState, GetActionTypes<typeof EditorActions>> = 
 	}
 
 	switch (action.type) {
+		case Types.NewMessage: {
+			const msg = action.payload
+			state.messages.list.push(msg)
+			state.messages.total++
+			state.messages[msg.type]++
+			break
+		}
+		case Types.RemoveMessage: {
+			const { type, idx } = action.payload
+			state.messages.list.splice(idx, 1)
+			state.messages.total--
+			state.messages[type]--
+			break
+		}
+		case Types.AddWidgetDep: {
+			state.workplace.renderConfig.dependencies.push(action.payload)
+			break
+		}
+		case Types.RemoveWidget: {
+			const idx = state.workplace.renderConfig.dependencies.indexOf(action.payload)
+			if (idx !== -1) {
+				state.workplace.renderConfig.dependencies.splice(idx, 1)
+			}
+			break
+		}
 		case Types.NewProject: {
 			state.workplace.renderConfig = action.payload
 			break
 		}
 		case Types.SetProjectId: {
 			state.pid = action.payload
+			break
+		}
+		case Types.SetWid: {
+			state.wid = action.payload
 			break
 		}
 		case Types.ProjectName: {

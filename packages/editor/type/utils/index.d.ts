@@ -3,6 +3,14 @@ export declare enum StickFlags {
     STICK_ROW = /**  */ 1,
     STICK_COL = /**  */ 2
 }
+export declare const aTagDownload: (url: string) => void;
+export declare const forEach: <T extends any[] | Record<string, any>>(objOrArr: T, fn: T extends any[] ? (val: T[keyof T], i: number) => void : (k: string, v: any) => void) => void;
+export declare const storage: {
+    get(key: string): any;
+    set(key: string, val: string | number | Record<any, any>): void;
+    store(target: Record<any, any>): void;
+    clear(): void;
+};
 interface RefLinesOptions {
     stickTo: StickFlags;
     showSelf: boolean;

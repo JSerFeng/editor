@@ -3,6 +3,7 @@
 	height: 100vh;
 
 	>.back-button {
+		z-index: 9999999999;
 		position: fixed;
 		left: 10px;
 		top: 10px;

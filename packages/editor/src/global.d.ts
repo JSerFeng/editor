@@ -5,5 +5,5 @@ declare global {
 		widgetsCenter: WidgetsCenter
 	}
 
-	const __DEV__: boolean
+	// const __DEV__: boolean
 }

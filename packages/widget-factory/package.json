@@ -1,47 +1,80 @@
 {
-	"name": "@editor/widget-factory",
-	"version": "1.0.0",
-	"description": "可视化编辑器组件模板",
-	"main": "index.js",
-	"scripts": {
-		"dev": "vite",
-		"build": "vite build",
-		"serve": "vite preview"
-	},
-	"keywords": [],
-	"author": "FY1010",
-	"license": "MIT",
-	"eslintConfig": {
-		"extends": [
-			"eslint:recommended",
-			"plugin:react/recommended"
-		]
-	},
-	"dependencies": {
-		"@editor/editor": "workspace:*",
-		"@material-ui/core": "^4.12.1",
-		"@material-ui/icons": "^4.11.2",
-		"@vitejs/plugin-react-refresh": "^1.3.5",
-		"antd": "^4.16.7",
-		"react": "^17.0.2",
-		"react-dom": "^17.0.2",
-		"vite-react-jsx": "^1.1.2"
-	},
-	"devDependencies": {
-		"@rollup/plugin-babel": "^5.3.0",
-		"@types/react": "^17.0.8",
-		"@types/react-color": "^3.0.4",
-		"@types/react-dom": "^17.0.5",
-		"@types/react-redux": "^7.1.16",
-		"@types/react-router-dom": "^5.1.7",
-		"@typescript-eslint/eslint-plugin": "^4.26.1",
-		"@typescript-eslint/parser": "^4.26.1",
-		"eslint": "^7.28.0",
-		"eslint-config-react": "^1.1.7",
-		"eslint-config-react-app": "^6.0.0",
-		"eslint-plugin-react-app": "^6.2.2",
-		"eslint-plugin-react-hooks": "^4.2.0",
-		"typescript": "^4.3.2",
-		"vite": "^2.3.7"
-	}
+  "name": "my-widget",
+  "version": "1.0.0",
+  "showName": "组件demo",
+  "description": "这是一个组件示例",
+  "snapShot": "",
+  "initPos": {
+    "w": 200,
+    "h": 200
+  },
+  "editorConfig": [
+    {
+      "type": "Color",
+      "name": "颜色",
+      "key": "customColor"
+    },
+    {
+      "type": "Text",
+      "name": "标题内容",
+      "key": "title"
+    },
+    {
+      "type": "Text",
+      "name": "文章内容",
+      "key": "content"
+    }
+  ],
+  "config": {
+    "customColor": "blue",
+    "title": "我是标题",
+    "content": "我是E内容"
+  },
+  "from": "custom",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview",
+    "pub": "node scripts/cmd.js publish",
+    "login": "node scripts/cmd.js login"
+  },
+  "keywords": [],
+  "author": "FY1010",
+  "license": "MIT",
+  "eslintConfig": {
+    "extends": [
+      "eslint:recommended",
+      "plugin:react/recommended"
+    ]
+  },
+  "dependencies": {
+    "@v-editor/cmd": "workspace:*",
+    "@v-editor/editor": "workspace:*",
+    "@material-ui/core": "^4.12.1",
+    "@material-ui/icons": "^4.11.2",
+    "@vitejs/plugin-react-refresh": "^1.3.5",
+    "antd": "^4.16.7",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "vite-react-jsx": "^1.1.2"
+  },
+  "devDependencies": {
+    "@rollup/plugin-babel": "^5.3.0",
+    "@types/react": "^17.0.8",
+    "@types/react-color": "^3.0.4",
+    "@types/react-dom": "^17.0.5",
+    "@types/react-redux": "^7.1.16",
+    "@types/react-router-dom": "^5.1.7",
+    "@typescript-eslint/eslint-plugin": "^4.26.1",
+    "@typescript-eslint/parser": "^4.26.1",
+    "eslint": "^7.28.0",
+    "eslint-config-react": "^1.1.7",
+    "eslint-config-react-app": "^6.0.0",
+    "eslint-plugin-react-app": "^6.2.2",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "sass": "^1.36.0",
+    "typescript": "^4.3.2",
+    "vite": "^2.3.7"
+  }
 }

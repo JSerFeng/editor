@@ -10,9 +10,17 @@ import {
 import { Add } from "@material-ui/icons"
 import { FC, useState } from "react"
 import { connect } from "react-redux"
-import { apiInstallWidget, ErrorCode, WidgetPO } from "../../../../api"
+import { Dispatch } from "redux"
+import { WidgetPO } from "../../../../api"
 import { BaseState } from "../../../../store"
+import { EditorActions } from "../../../../store/editorReducer"
+import { installWidget } from "../../../../utils/dep"
 import "./card.scss"
+
+const {
+	actWid,
+	actAddWidgetDep
+} = EditorActions
 
 const useCardImageStyle = makeStyles({
 	root: {
@@ -58,8 +66,9 @@ const useCardContentStyle = makeStyles({
 
 const WidgetCard: FC<{
 	widget: WidgetPO,
-	pid: string
-}> = ({ widget, pid }) => {
+	pid: string,
+	dispatch: Dispatch
+}> = ({ widget, pid, dispatch }) => {
 	const cardImg = useCardImageStyle()
 	const cardContainerStyle = useCardContainerStyle()
 	const btnStyle = useColorBtnStyle()
@@ -68,29 +77,17 @@ const WidgetCard: FC<{
 
 	const handleInstall = async () => {
 		setLoading(true)
-		const res = await apiInstallWidget(widget._id, pid)
+		dispatch(actWid(widget._id))
+		await installWidget(widget._id, pid)
+		dispatch(actAddWidgetDep(widget._id))
 		setLoading(false)
-		if (res.code !== ErrorCode.Success) {
-			return
-		}
-		let { umdPath, stylePath } = res.data
-		let prefix = "http://localhost:7001/"
-		umdPath = prefix + umdPath
-		stylePath = prefix + stylePath
-		const scriptTag = document.createElement("script")
-		scriptTag.src = umdPath
-		const linkTag = document.createElement("link")
-		linkTag.href = stylePath
-		document.body.appendChild(scriptTag)
-		document.body.appendChild(linkTag)
 	}
 
 	return (
 		<Card classes={ cardContainerStyle }>
 			<CardMedia
 				classes={ cardImg }
-				image={ widget.img || "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Git_icon.svg/2000px-Git_icon.svg.png" }>
-
+				image={ widget.snapShot || "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Git_icon.svg/2000px-Git_icon.svg.png" }>
 			</CardMedia>
 			<CardContent classes={ containerStyle }>
 				<div>
@@ -107,7 +104,10 @@ const WidgetCard: FC<{
 						onClick={ handleInstall }>
 						{
 							loading
-								? <CircularProgress />
+								? <CircularProgress style={ {
+									fontSize: "14px",
+									color: "#fff"
+								} } />
 								: <Add style={ {
 									color: "#fff"
 								} } />

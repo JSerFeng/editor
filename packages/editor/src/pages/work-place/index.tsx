@@ -3,7 +3,7 @@ import Render from "../../render";
 import Operators from "./operators";
 import WidgetsList from "./WidgetsList";
 import { Pos, RenderConfig, WidgetConfig } from "../../render/interfaces";
-import WidgetsCenter from "../../render/WidgetsCenter";
+import WidgetsCenter, { HooksCallbak } from "../../render/WidgetsCenter";
 import HeaderConfig from "./operators/HeaderConfig";
 import EventEmitter from "../../utils/eventEmitter"
 import Side from "../../components/Side";
@@ -19,15 +19,16 @@ const eventPool = new EventEmitter()
 const WorkPlace: FC<{
 	widgetsCenter: WidgetsCenter,
 	currHistory: string,
-	renderConfig: RenderConfig
-}> = ({ widgetsCenter, currHistory, renderConfig }) => {
+	renderConfig: RenderConfig,
+	wid: string
+}> = ({ widgetsCenter, currHistory, renderConfig, wid }) => {
 	const [allWidgetPkges, setAllWidgetPkges] = useState(widgetsCenter.getAll())
 	const [openDrawer, setOpenDrawer] = useState(false)
 	const [openWidgetList, setOpenWidgetList] = useState(true)
 	const [openOperator, setOpenOperator] = useState(true)
 	const [openHeader, setOpenHeader] = useState(true)
 
-
+	//新建一个widget
 	const createWidgets = (config: WidgetConfig | string) => {
 		const widgetDescription = widgetsCenter.get(config)
 		return widgetDescription?.FC || null
@@ -39,7 +40,7 @@ const WorkPlace: FC<{
 			pos = pos
 				? pos
 				: pkg.description.initPos
-					? { ...pkg.description.initPos }
+					? { ...pkg.description.initPos, x: 0, y: 0 }
 					: {
 						x: 0,
 						y: 0,
@@ -67,6 +68,19 @@ const WorkPlace: FC<{
 		})
 	}, [widgetsCenter, setAllWidgetPkges])
 
+	useEffect(() => {
+		const cb: HooksCallbak = (w) => {
+			if (w.description.from === "custom") {
+				w.description.from = wid
+			}
+			return w
+		}
+		widgetsCenter.pre(cb)
+
+		return () => {
+			widgetsCenter.unPre(cb)
+		}
+	}, [wid, widgetsCenter])
 
 	return (
 		<>
@@ -105,8 +119,7 @@ const WorkPlace: FC<{
 			<Drawer
 				open={ openDrawer }
 				anchor="right"
-				onClose={ setOpenDrawer.bind(null, false) }
-			>
+				onClose={ setOpenDrawer.bind(null, false) }>
 				<ProjectConfig />
 			</Drawer>
 		</>
@@ -118,7 +131,8 @@ export default connect(
 		const { histories, currHistoryIdx } = state.editorReducer.workplace.renderConfig
 		return {
 			currHistory: histories[currHistoryIdx].path,
-			renderConfig: state.editorReducer.workplace.renderConfig
+			renderConfig: state.editorReducer.workplace.renderConfig,
+			wid: state.editorReducer.wid
 		}
 	}
 )(WorkPlace)

@@ -1,144 +1,150 @@
-import { ComponentClass, CSSProperties, FC } from "react";
+import {ComponentClass, CSSProperties, FC} from "react";
 import EventEmitter from "../utils/eventEmitter";
 
-export enum EditorTypes {
-	Color = "Color",
-	Upload = "Upload",
-	Text = "Text",
-	Number = "Number",
-	Select = "Select"
+export const EditorTypes: {
+  Color: "Color",
+  Upload: "Upload",
+  Text: "Text",
+  Number: "Number",
+  Select: "Select"
+} = {
+  Color: "Color",
+  Upload: "Upload",
+  Text: "Text",
+  Number: "Number",
+  Select: "Select"
 }
 
-export type EditorConfig<T extends EditorTypes = EditorTypes> =
-	T extends EditorTypes.Number | EditorTypes.Text | EditorTypes.Color
-	? {
-		key: string,
-		name: string,
-		type: T,
-	}
-	: {
-		key: string,
-		name: string,
-		type: T,
-		options: T extends EditorTypes.Select
-/* */ ? { label: string, value: string }[]
-/* */ : T extends EditorTypes.Upload
-/*   */ ? Record<string, any>
-/*   */ : never
-	}
+type E<T extends Record<string, any>>
+    = { [K in keyof T]: K }[keyof T]
+
+
+export type EditorConfig<T = any, U extends string = any> =
+    U extends typeof EditorTypes.Select
+        ? {
+          key: E<T>,
+          name: string,
+          type: U,
+          options:
+              U extends typeof EditorTypes.Select
+                  ? { label: string, value: string }[]
+                  : Record<string, any>
+        }
+        : {
+          key: E<T>,
+          name: string,
+          type: U,
+        }
 
 export type ReactComp<T> = FC<T> | ComponentClass<T>
 
 export interface Pos {
-	x: number, y: number, w: number, h: number
+  x: number,
+  y: number,
+  w: number,
+  h: number
 }
 
-export interface WidgetConfig<T extends Record<string, any> = any> {
-	name: string,
-	editorConfig: EditorConfig[],
-	config: T,
-	pos: Pos, //位置信息
-	routeInfo: {
-		exact: boolean,
-		path: string[],
-	},
-	style?: Partial<CSSProperties>, //样式信息
-	from?: string,
-	
-	showName: string,
-	initPos?: Pos,
-	version?: string,
-	snapShot?: string,
-	description?: string,
-	dependencies?: Record<string, string>
-	
-	/* dev only!!! */
-	showInPage?: boolean
+export type PathMeta = {
+	path: string,
+}
+
+//每个组件的具体位置信息
+export interface WidgetConfig<T extends Record<string, any> = any> extends WidgetDescription<T> {
+  pos: Pos, //位置信息
+  routeInfo: {
+    exact: boolean,
+    path: string[],
+  },
+  dependencies?: Record<string, string>
+
+  /*
+   dev only!!!
+   与路由显示相关
+   */
+  showInPage?: boolean
 }
 
 export interface RenderConfig {
-	projectName: string,
-	widgets: WidgetConfig[],
-	pos: { w: number, h: number }, //页面大小，在工作台中位置
-	routerMode: "history" | "hash",
-	histories: { path: string }[],
-	currHistoryIdx: number,
+  projectName: string,
+  widgets: WidgetConfig[],
+  pos: { w: number, h: number }, //页面大小，在工作台中位置
+  routerMode: "history" | "hash",
+  histories: { path: string }[],
+  currHistoryIdx: number,
 
-	//安装过的其它组件的id集合
-	dependencies: string[],
+  //安装过的其它组件的id集合
+  dependencies: string[],
 }
 
 export interface WidgetDescription<T = any> {
-	name: string,
-	showName: string,
-	editorConfig: EditorConfig[],
-	config: T,
-	initPos?: Pos,
-	version?: string,
-	from?: string,
-	style?: Partial<CSSProperties>,
-	snapShot?: string,
-	description?: string,
-	dependencies?: Record<string, string>
+  name: string,
+  showName: string,
+  editorConfig: EditorConfig<T>[],
+  config: T,
+  initPos?: { w: number, h: number },
+  version?: string,
+  from?: string,
+  style?: Partial<CSSProperties>,
+  snapShot?: string,
+  description?: string,
+  dependencies?: Record<string, string>
 }
 
 export interface WidgetProps<T = any> {
-	config: T,
-	pos: Pos,
-	isDev: boolean
-	style?: Partial<CSSProperties>,
-	eventPool?: EventEmitter,
+  config: T,
+  pos: Pos,
+  isDev: boolean
+  style?: Partial<CSSProperties>,
+  eventPool?: EventEmitter,
 }
-
 
 export interface WidgetConfigProp<T = any> {
-	widgetConfig: WidgetConfig<T>,
-	dispatchConfig: (widgetConfig: WidgetConfig<T>) => void
+  widgetConfig: WidgetConfig<T>,
+  dispatchConfig: (widgetConfig: WidgetConfig<T>) => void
 }
 
-export interface WidgetPackage {
-	FC: ReactComp<WidgetProps>,
-	description: WidgetDescription
-	Configuration?: ReactComp<WidgetConfigProp> | undefined,
+export interface WidgetPackage<T = any> {
+  FC: ReactComp<WidgetProps<T>>,
+  description: WidgetDescription<T>
+  Configuration?: ReactComp<WidgetConfigProp> | undefined,
 }
-
 
 export type TransformConfig<T> = T extends Array<infer Item>
-/**/ ? Item extends { key: infer Key }
-/****/ ? Key extends string
-/******/ ? { [P in Key]: any }
-/******/ : {}
-/****/ : {}
-/**/ : T
+    /**/ ? Item extends { key: infer Key }
+        /****/ ? Key extends string
+            /******/ ? { [P in Key]: any }
+            /******/ : {}
+        /****/ : {}
+    /**/ : T
 
 
 export function checkIfValidRenderConfig(renderConfig: any): RenderConfig | null {
-	if (renderConfig.renderConfig) {
-		renderConfig = renderConfig.renderConfig
-	}
-	return renderConfig.projectName &&
-		renderConfig.widgets &&
-		Array.isArray(renderConfig.widgets)
-			? renderConfig
-			: null
+  if (renderConfig.renderConfig) {
+    renderConfig = renderConfig.renderConfig
+  }
+  return renderConfig.projectName &&
+  renderConfig.widgets &&
+  Array.isArray(renderConfig.widgets)
+      ? renderConfig
+      : null
 }
 
 export const sureStrToRenderConfig = (str: string): RenderConfig => {
-	try {
-		const renderConfig = JSON.parse(str) as RenderConfig
-		return renderConfig
-	} catch (e) {
-		return {
-			projectName: "BROKEN_PROJECT",
-			widgets: [],
-			pos: {
-				w: 0,
-				h: 0
-			},
-			routerMode: "history",
-			histories: [],
-			currHistoryIdx: -1,
-			dependencies: []
-		}
-	}
+  try {
+    return JSON.parse(str) as RenderConfig
+  } catch (e) {
+    return {
+      projectName: "BROKEN_PROJECT",
+      widgets: [],
+      pos: {
+        w: 0,
+        h: 0
+      },
+      routerMode: "history",
+      histories: [],
+      currHistoryIdx: -1,
+      dependencies: []
+    }
+  }
 }

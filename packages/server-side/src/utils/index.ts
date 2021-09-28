@@ -12,6 +12,7 @@ import * as path from "path";
 import { DEFAULT_PAGE_NUM, STORE_PATH } from "src/constant";
 import { Readable, Writable } from "stream";
 import * as AdmZip from "adm-zip";
+import { produce } from "immer"
 
 export enum ErrorCode {
 	Success = 200,
@@ -66,6 +67,12 @@ export async function createUserDir(uid: string) {
 	await ensureDir(path.resolve(userPath, uid, "tpl"));
 }
 
+export function updateStringObj<T>(str: string, cb: (it: T) => void): string {
+	console.log(str)
+	const target = JSON.parse(str) as T
+	return JSON.stringify(produce(target, cb))
+}
+
 export async function addWidget(
 	wid: string,
 	umd: Express.Multer.File,
@@ -74,14 +81,10 @@ export async function addWidget(
 ) {
 	const targetPath = path.resolve(STORE_PATH, "widgets", wid, "dev");
 	await ensureDir(targetPath);
-
-	const umdPath = path.join(targetPath, umd.originalname);
-	const esmPath = path.join(targetPath, esm.originalname);
-	const stylePath = path.join(targetPath, style.originalname);
 	await Promise.all([
-		pipe(createWriteStream(umdPath), umd.buffer),
-		pipe(createWriteStream(esmPath), esm.buffer),
-		pipe(createWriteStream(stylePath), style.buffer),
+		pipe(createWriteStream(path.join(targetPath, umd.originalname)), umd.buffer),
+		pipe(createWriteStream(path.join(targetPath, esm.originalname)), esm.buffer),
+		pipe(createWriteStream(path.join(targetPath, style.originalname)), style.buffer),
 	]);
 
 	return {

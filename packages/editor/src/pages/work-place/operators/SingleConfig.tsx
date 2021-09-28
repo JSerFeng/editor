@@ -139,7 +139,7 @@ const Config: FC<{
 					onChange={ e => { setProperty(e.target.value) } }
 				>
 					{
-						(config as EditorConfig<EditorTypes.Select>).options.map(({ label, value }) => (
+						(config as EditorConfig<any, typeof EditorTypes.Select>).options.map(({ label, value }) => (
 							<FormControlLabel
 								key={ value }
 								control={ <Radio /> }

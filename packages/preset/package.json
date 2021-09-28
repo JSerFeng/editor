@@ -1,9 +1,9 @@
 {
-	"name": "@editor/preset",
+	"name": "@v-editor/preset",
 	"version": "0.1.1",
 	"private": true,
 	"dependencies": {
-		"@editor/editor": "workspace:*",
+		"@v-editor/editor": "workspace:*",
 		"@material-ui/core": "^4.11.4",
 		"@material-ui/icons": "^4.11.2",
 		"@testing-library/jest-dom": "^5.11.4",

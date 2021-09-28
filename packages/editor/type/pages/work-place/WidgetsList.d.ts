@@ -9,7 +9,7 @@ declare const _default: import("react-redux").ConnectedComponent<FC<{
         path: string;
     };
     createWidgetConfig: (name: string) => WidgetConfig<any>;
-    allWidgets: WidgetPackage[];
+    allWidgets: WidgetPackage<any>[];
 }>, import("react-redux").Omit<{
     widgetsCenter: WidgetsCenter;
     dispatch: Dispatch<import("redux").AnyAction>;
@@ -17,6 +17,6 @@ declare const _default: import("react-redux").ConnectedComponent<FC<{
         path: string;
     };
     createWidgetConfig: (name: string) => WidgetConfig<any>;
-    allWidgets: WidgetPackage[];
+    allWidgets: WidgetPackage<any>[];
 }, "dispatch" | "currHistory">>;
 export default _default;

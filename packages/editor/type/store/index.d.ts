@@ -1,67 +1,110 @@
+import { Types } from './editorReducer';
+import { ServiceTypes } from "./serviceReducer";
+export declare const AC: <T extends Types | ServiceTypes, P = null>(type: T, payload: P) => {
+    type: T;
+    payload: P;
+};
+export declare type GetActionTypes<A extends {
+    [k: string]: (...args: any[]) => {
+        type: Types | ServiceTypes;
+        payload: any;
+    };
+}> = {
+    [K in keyof A]: ReturnType<A[K]>;
+}[keyof A];
+declare type GetBaseState<T extends {
+    [k: string]: (...args: any) => any;
+}> = {
+    [K in keyof T]: ReturnType<T[K]>;
+};
 declare const reducersMap: {
-    editorReducer: import("redux").Reducer<import("./editorReducer").BaseState, import("./editorReducer").GetActionTypes<{
+    serviceReducer: import("redux").Reducer<import("./serviceReducer").ServiceState, import("./serviceReducer").SActions>;
+    editorReducer: import("redux").Reducer<import("./editorReducer").BaseState, GetActionTypes<{
+        actNewProject: (projectName: string, pos: {
+            w: number;
+            h: number;
+        }) => {
+            type: Types.NewProject;
+            payload: import("..").RenderConfig;
+        };
+        actAddWidgetDep: (wid: string) => {
+            type: Types.AddWidgetDep;
+            payload: string;
+        };
+        actRemoveWidget: (wid: string) => {
+            type: Types.RemoveWidget;
+            payload: string;
+        };
+        actWid: (wid: string) => {
+            type: Types.SetWid;
+            payload: string;
+        };
+        actPid: (pid: string) => {
+            type: Types.SetProjectId;
+            payload: string;
+        };
         actProjectName: (name: string) => {
-            type: import("./editorReducer").Types.ProjectName;
+            type: Types.ProjectName;
             payload: string;
         };
         actSelect: (indexes: number[] | null) => {
-            type: import("./editorReducer").Types.SelectMultiple;
+            type: Types.SelectMultiple;
             payload: number[] | null;
         };
         actSelectOne: (idx: number | null) => {
-            type: import("./editorReducer").Types.SelectOne;
+            type: Types.SelectOne;
             payload: number | null;
         };
         actChangeCanvasWH: (pos: {
             w: number;
             h: number;
         }) => {
-            type: import("./editorReducer").Types.ChangeCanvasWH;
+            type: Types.ChangeCanvasWH;
             payload: {
                 w: number;
                 h: number;
             };
         };
         actAddItem: (config: import("..").WidgetConfig<any>) => {
-            type: import("./editorReducer").Types.AddItem;
+            type: Types.AddItem;
             payload: import("..").WidgetConfig<any>;
         };
         actWidgetConfig: (config: import("..").WidgetConfig<any>) => {
-            type: import("./editorReducer").Types.WidgetConfig;
+            type: Types.WidgetConfig;
             payload: import("..").WidgetConfig<any>;
         };
         actChangeWidgetShowInPage: (idx: number, show: boolean) => {
-            type: import("./editorReducer").Types.ChangeWidgetShowInPage;
+            type: Types.ChangeWidgetShowInPage;
             payload: {
                 idx: number;
                 show: boolean;
             };
         };
         actStartWidgetPos: (initPos: import("./editorReducer").Pos) => {
-            type: import("./editorReducer").Types.StartWidgetChange;
+            type: Types.StartWidgetChange;
             payload: import("./editorReducer").Pos;
         };
         actChangeWidgetPos: (deltaX: number, deltaY: number) => {
-            type: import("./editorReducer").Types.ChangeWidgetPos;
+            type: Types.ChangeWidgetPos;
             payload: {
                 deltaX: number;
                 deltaY: number;
             };
         };
         actCommitChangeWidgetPos: (pos: import("./editorReducer").Pos) => {
-            type: import("./editorReducer").Types.CommitWidgetPosChange;
+            type: Types.CommitWidgetPosChange;
             payload: import("./editorReducer").Pos;
         };
         actDeleteItems: () => {
-            type: import("./editorReducer").Types.DeleteItem;
+            type: Types.DeleteItem;
             payload: null;
         };
         actCopySelectedItems: () => {
-            type: import("./editorReducer").Types.CopySelected;
+            type: Types.CopySelected;
             payload: null;
         };
         actResetDraw: () => {
-            type: import("./editorReducer").Types.ResetDraw;
+            type: Types.ResetDraw;
             payload: null;
         };
         actChangeWorkingPos: (pos: {
@@ -69,7 +112,7 @@ declare const reducersMap: {
             y: number;
             scale: number;
         }) => {
-            type: import("./editorReducer").Types.ChangeWorkingPos;
+            type: Types.ChangeWorkingPos;
             payload: {
                 x: number;
                 y: number;
@@ -77,15 +120,15 @@ declare const reducersMap: {
             };
         };
         actUndo: () => {
-            type: import("./editorReducer").Types.Undo;
+            type: Types.Undo;
             payload: null;
         };
         actRedo: () => {
-            type: import("./editorReducer").Types.Redo;
+            type: Types.Redo;
             payload: null;
         };
         actMoveCanvasToCenter: () => {
-            type: import("./editorReducer").Types.MoveCanvasToCenter;
+            type: Types.MoveCanvasToCenter;
             payload: null;
         };
         actSetInitCanvasPos: (pos: {
@@ -93,7 +136,7 @@ declare const reducersMap: {
             y: number;
             scale: number;
         }) => {
-            type: import("./editorReducer").Types.SetInitCanvasPos;
+            type: Types.SetInitCanvasPos;
             payload: {
                 x: number;
                 y: number;
@@ -101,122 +144,141 @@ declare const reducersMap: {
             };
         };
         actSelectTool: (tool: import("./editorReducer").Tools | null) => {
-            type: import("./editorReducer").Types.SelectTools;
+            type: Types.SelectTools;
             payload: import("./editorReducer").Tools | null;
         };
         actStickFlags: (stickFlags: import("../utils").StickFlags) => {
-            type: import("./editorReducer").Types.StickFlags;
+            type: Types.StickFlags;
             payload: import("../utils").StickFlags;
         };
         actStickPx: (px: number) => {
-            type: import("./editorReducer").Types.StickPx;
+            type: Types.StickPx;
             payload: number;
         };
         actShowPx: (px: number) => {
-            type: import("./editorReducer").Types.ShowPx;
+            type: Types.ShowPx;
             payload: number;
         };
         actImportJson: (renderConfig: import("..").RenderConfig) => {
-            type: import("./editorReducer").Types.ImportJson;
+            type: Types.ImportJson;
             payload: import("..").RenderConfig;
         };
         actChangeHistory: (historyIdx: number) => {
-            type: import("./editorReducer").Types.ChangeHistory;
+            type: Types.ChangeHistory;
             payload: number;
         };
         actAddPage: (path: string) => {
-            type: import("./editorReducer").Types.AddPath;
+            type: Types.AddPath;
             payload: string;
         };
         actChangeWidgetPath: (path: string[]) => {
-            type: import("./editorReducer").Types.ChangeWidgetPath;
+            type: Types.ChangeWidgetPath;
             payload: string[];
         };
         actRouterMode: (mode: "history" | "hash") => {
-            type: import("./editorReducer").Types.ChangeRouterMode;
+            type: Types.ChangeRouterMode;
             payload: "history" | "hash";
         };
         actChangeWidgetExact: (exact: boolean) => {
-            type: import("./editorReducer").Types.ChangeWidgetExact;
+            type: Types.ChangeWidgetExact;
             payload: boolean;
         };
         actDeleteHistory: (idx: number) => {
-            type: import("./editorReducer").Types.DeleteHistory;
+            type: Types.DeleteHistory;
             payload: number;
         };
     }>>;
 };
-declare type GetBaseState<T extends {
-    [k: string]: (...args: any) => any;
-}> = {
-    [K in keyof T]: ReturnType<T[K]>;
-};
 export declare type BaseState = GetBaseState<typeof reducersMap>;
 declare const store: import("redux").Store<import("redux").EmptyObject & {
+    serviceReducer: import("./serviceReducer").ServiceState;
     editorReducer: import("./editorReducer").BaseState;
-}, import("./editorReducer").GetActionTypes<{
+}, import("./serviceReducer").SActions | GetActionTypes<{
+    actNewProject: (projectName: string, pos: {
+        w: number;
+        h: number;
+    }) => {
+        type: Types.NewProject;
+        payload: import("..").RenderConfig;
+    };
+    actAddWidgetDep: (wid: string) => {
+        type: Types.AddWidgetDep;
+        payload: string;
+    };
+    actRemoveWidget: (wid: string) => {
+        type: Types.RemoveWidget;
+        payload: string;
+    };
+    actWid: (wid: string) => {
+        type: Types.SetWid;
+        payload: string;
+    };
+    actPid: (pid: string) => {
+        type: Types.SetProjectId;
+        payload: string;
+    };
     actProjectName: (name: string) => {
-        type: import("./editorReducer").Types.ProjectName;
+        type: Types.ProjectName;
         payload: string;
     };
     actSelect: (indexes: number[] | null) => {
-        type: import("./editorReducer").Types.SelectMultiple;
+        type: Types.SelectMultiple;
         payload: number[] | null;
     };
     actSelectOne: (idx: number | null) => {
-        type: import("./editorReducer").Types.SelectOne;
+        type: Types.SelectOne;
         payload: number | null;
     };
     actChangeCanvasWH: (pos: {
         w: number;
         h: number;
     }) => {
-        type: import("./editorReducer").Types.ChangeCanvasWH;
+        type: Types.ChangeCanvasWH;
         payload: {
             w: number;
             h: number;
         };
     };
     actAddItem: (config: import("..").WidgetConfig<any>) => {
-        type: import("./editorReducer").Types.AddItem;
+        type: Types.AddItem;
         payload: import("..").WidgetConfig<any>;
     };
     actWidgetConfig: (config: import("..").WidgetConfig<any>) => {
-        type: import("./editorReducer").Types.WidgetConfig;
+        type: Types.WidgetConfig;
         payload: import("..").WidgetConfig<any>;
     };
     actChangeWidgetShowInPage: (idx: number, show: boolean) => {
-        type: import("./editorReducer").Types.ChangeWidgetShowInPage;
+        type: Types.ChangeWidgetShowInPage;
         payload: {
             idx: number;
             show: boolean;
         };
     };
     actStartWidgetPos: (initPos: import("./editorReducer").Pos) => {
-        type: import("./editorReducer").Types.StartWidgetChange;
+        type: Types.StartWidgetChange;
         payload: import("./editorReducer").Pos;
     };
     actChangeWidgetPos: (deltaX: number, deltaY: number) => {
-        type: import("./editorReducer").Types.ChangeWidgetPos;
+        type: Types.ChangeWidgetPos;
         payload: {
             deltaX: number;
             deltaY: number;
         };
     };
     actCommitChangeWidgetPos: (pos: import("./editorReducer").Pos) => {
-        type: import("./editorReducer").Types.CommitWidgetPosChange;
+        type: Types.CommitWidgetPosChange;
         payload: import("./editorReducer").Pos;
     };
     actDeleteItems: () => {
-        type: import("./editorReducer").Types.DeleteItem;
+        type: Types.DeleteItem;
         payload: null;
     };
     actCopySelectedItems: () => {
-        type: import("./editorReducer").Types.CopySelected;
+        type: Types.CopySelected;
         payload: null;
     };
     actResetDraw: () => {
-        type: import("./editorReducer").Types.ResetDraw;
+        type: Types.ResetDraw;
         payload: null;
     };
     actChangeWorkingPos: (pos: {
@@ -224,7 +286,7 @@ declare const store: import("redux").Store<import("redux").EmptyObject & {
         y: number;
         scale: number;
     }) => {
-        type: import("./editorReducer").Types.ChangeWorkingPos;
+        type: Types.ChangeWorkingPos;
         payload: {
             x: number;
             y: number;
@@ -232,15 +294,15 @@ declare const store: import("redux").Store<import("redux").EmptyObject & {
         };
     };
     actUndo: () => {
-        type: import("./editorReducer").Types.Undo;
+        type: Types.Undo;
         payload: null;
     };
     actRedo: () => {
-        type: import("./editorReducer").Types.Redo;
+        type: Types.Redo;
         payload: null;
     };
     actMoveCanvasToCenter: () => {
-        type: import("./editorReducer").Types.MoveCanvasToCenter;
+        type: Types.MoveCanvasToCenter;
         payload: null;
     };
     actSetInitCanvasPos: (pos: {
@@ -248,7 +310,7 @@ declare const store: import("redux").Store<import("redux").EmptyObject & {
         y: number;
         scale: number;
     }) => {
-        type: import("./editorReducer").Types.SetInitCanvasPos;
+        type: Types.SetInitCanvasPos;
         payload: {
             x: number;
             y: number;
@@ -256,47 +318,47 @@ declare const store: import("redux").Store<import("redux").EmptyObject & {
         };
     };
     actSelectTool: (tool: import("./editorReducer").Tools | null) => {
-        type: import("./editorReducer").Types.SelectTools;
+        type: Types.SelectTools;
         payload: import("./editorReducer").Tools | null;
     };
     actStickFlags: (stickFlags: import("../utils").StickFlags) => {
-        type: import("./editorReducer").Types.StickFlags;
+        type: Types.StickFlags;
         payload: import("../utils").StickFlags;
     };
     actStickPx: (px: number) => {
-        type: import("./editorReducer").Types.StickPx;
+        type: Types.StickPx;
         payload: number;
     };
     actShowPx: (px: number) => {
-        type: import("./editorReducer").Types.ShowPx;
+        type: Types.ShowPx;
         payload: number;
     };
     actImportJson: (renderConfig: import("..").RenderConfig) => {
-        type: import("./editorReducer").Types.ImportJson;
+        type: Types.ImportJson;
         payload: import("..").RenderConfig;
     };
     actChangeHistory: (historyIdx: number) => {
-        type: import("./editorReducer").Types.ChangeHistory;
+        type: Types.ChangeHistory;
         payload: number;
     };
     actAddPage: (path: string) => {
-        type: import("./editorReducer").Types.AddPath;
+        type: Types.AddPath;
         payload: string;
     };
     actChangeWidgetPath: (path: string[]) => {
-        type: import("./editorReducer").Types.ChangeWidgetPath;
+        type: Types.ChangeWidgetPath;
         payload: string[];
     };
     actRouterMode: (mode: "history" | "hash") => {
-        type: import("./editorReducer").Types.ChangeRouterMode;
+        type: Types.ChangeRouterMode;
         payload: "history" | "hash";
     };
     actChangeWidgetExact: (exact: boolean) => {
-        type: import("./editorReducer").Types.ChangeWidgetExact;
+        type: Types.ChangeWidgetExact;
         payload: boolean;
     };
     actDeleteHistory: (idx: number) => {
-        type: import("./editorReducer").Types.DeleteHistory;
+        type: Types.DeleteHistory;
         payload: number;
     };
 }>>;

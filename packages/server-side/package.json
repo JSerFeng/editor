@@ -1,8 +1,8 @@
 {
-	"name": "@editor/server-side",
+	"name": "@v-editor/server-side",
 	"version": "0.0.1",
 	"description": "",
-	"author": "FY1010",
+	"author": "jserfeng",
 	"private": true,
 	"license": "MIT",
 	"scripts": {

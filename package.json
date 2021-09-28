@@ -1,6 +1,6 @@
 {
-	"name": "v-editor",
-	"version": "1.0.0",
+	"name": "@v-editor/core",
+	"version": "0.0.1",
 	"description": "可视化编辑器",
 	"main": "index.js",
 	"scripts": {

@@ -7,7 +7,7 @@ import { RectangleProps } from "./schema";
 export const Rectangle: FC<WidgetProps<RectangleProps>> = (props) => {
 	const { style, config, pos } = props
 	const { backgroundColor, borders, bgImage, bgSize } = config
-	
+
 	return (
 		<div
 			style={ {
@@ -24,7 +24,9 @@ export const Rectangle: FC<WidgetProps<RectangleProps>> = (props) => {
 				backgroundImage: `url(${bgImage})`,
 				backgroundSize: bgSize
 			} }
-		></div>
+		>
+
+    </div>
 	)
 }
 

@@ -45,6 +45,7 @@ declare const _default: import("react-redux").ConnectedComponent<FC<{
     }[];
     currHistoryIdx: number;
     openDrawer: () => void;
+    pid: string;
 }>, import("react-redux").Omit<{
     dispatch: Dispatch<import("redux").AnyAction>;
     workPlace: {
@@ -88,5 +89,6 @@ declare const _default: import("react-redux").ConnectedComponent<FC<{
     }[];
     currHistoryIdx: number;
     openDrawer: () => void;
-}, "renderConfig" | "histories" | "currHistoryIdx" | "dispatch" | "workPlace">>;
+    pid: string;
+}, "renderConfig" | "pid" | "histories" | "currHistoryIdx" | "dispatch" | "workPlace">>;
 export default _default;

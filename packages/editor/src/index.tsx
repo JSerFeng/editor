@@ -53,9 +53,9 @@ export const Editor: FC<{
 					<WorkPlace
 						widgetsCenter={ widgetsCenter || defaultWidgetsCenter } />
 				</Route>
-				<Route path="/generator">
-					<Generator />
-				</Route>
+				{/*<Route path="/generator">*/}
+				{/*	<Generator />*/}
+				{/*</Route>*/}
 				<Route path="/preset">
 					<Preset widgetsCenter={ widgetsCenter || defaultWidgetsCenter } />
 				</Route>

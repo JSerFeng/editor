@@ -493,8 +493,7 @@ export const RenderWidget: FC<WrapperProps> = ({
 				zIndex: widgetConfig.style?.zIndex || 0,
 			} }
 			title={ `x:${layout.x} y:${layout.y} w:${layout.w} h:${layout.h}` }
-			onContextMenu={ handleContextMenu }
-		>
+			onContextMenu={ handleContextMenu }	>
 			<div className="move-dot lt" ref={ dLT }></div>
 			<div className="move-dot mt" ref={ dMT }></div>
 			<div className="move-dot rt" ref={ dRT }></div>

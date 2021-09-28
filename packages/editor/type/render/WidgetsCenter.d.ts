@@ -1,42 +1,42 @@
 /// <reference types="react" />
 import { ReactComp, WidgetConfig, WidgetConfigProp, WidgetDescription, WidgetPackage, WidgetProps } from "./interfaces";
 declare type WidgetsMap = Map<string, WidgetPackage>;
+export declare type HooksCallbak = (pkg: WidgetPackage) => (WidgetPackage);
 declare class WidgetsCenter {
     widgetsMap: WidgetsMap;
     subQueue: ((...args: any[]) => any)[];
+    preHooks: Set<HooksCallbak>;
     constructor(initMap?: WidgetsMap);
     static createConfig(info: WidgetDescription): {
-        pos: import("./interfaces").Pos;
+        pos: {
+            w: number;
+            h: number;
+        } | {
+            x: number;
+            y: number;
+            w: number;
+            h: number;
+        };
         name: string;
         showName: string;
         editorConfig: ({
             key: string;
             name: string;
-            type: import("./interfaces").EditorTypes.Color;
-        } | {
-            key: string;
-            name: string;
-            type: import("./interfaces").EditorTypes.Upload;
-            options: Record<string, any>;
-        } | {
-            key: string;
-            name: string;
-            type: import("./interfaces").EditorTypes.Text;
-        } | {
-            key: string;
-            name: string;
-            type: import("./interfaces").EditorTypes.Number;
-        } | {
-            key: string;
-            name: string;
-            type: import("./interfaces").EditorTypes.Select;
-            options: {
+            type: any;
+            options: Record<string, any> | {
                 label: string;
                 value: string;
             }[];
+        } | {
+            key: string;
+            name: string;
+            type: any;
         })[];
         config: any;
-        initPos?: import("./interfaces").Pos | undefined;
+        initPos?: {
+            w: number;
+            h: number;
+        } | undefined;
         version?: string | undefined;
         from?: string | undefined;
         style?: Partial<import("react").CSSProperties> | undefined;
@@ -44,11 +44,14 @@ declare class WidgetsCenter {
         description?: string | undefined;
         dependencies?: Record<string, string> | undefined;
     };
-    use(widgets: WidgetPackage | WidgetPackage[]): void;
+    use(widget: WidgetPackage): void;
+    remove(name: string): void;
+    unPre(cb: HooksCallbak): void;
     notify(): void;
     subscribe(cb: (all: WidgetPackage[]) => any): void;
-    get(widgetConfig: WidgetConfig | string): WidgetPackage | null;
-    getAll(): WidgetPackage[];
+    get(widgetConfig: WidgetConfig | string): WidgetPackage<any> | null;
+    getAll(): WidgetPackage<any>[];
+    pre(cb: HooksCallbak): void;
     create(widgetName: string): WidgetConfig | null;
 }
 export default WidgetsCenter;
