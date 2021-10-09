@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { ProjectsService } from "./projects.service";
-import { copy, ensureDir, readFile, remove, mkdir, writeFile } from "fs-extra";
+import { copy, ensureDir, readFile, remove, writeFile } from "fs-extra";
 import * as path from "path";
 import { STORE_PATH } from "src/constant";
 import { RenderConfig } from "src/renderConfig.interface";
@@ -41,7 +41,7 @@ export class ProductionService {
 		/**模板文件路径 */
 		const tplPath = path.resolve(STORE_PATH, "tpl", "commonTpl");
 		try {
-		  console.log(tplPath)
+			console.log(tplPath);
 			await copy(tplPath, targetPath);
 		} catch (e) {
 			console.log("模板获取失败，请检查网络");
@@ -91,7 +91,11 @@ export class ProductionService {
 		if (widgetsToImport.length > 0) {
 			await Promise.all(
 				widgetsToImport.map(([wid, name]) =>
-					writeInImportWidgets(wid, path.resolve(componentPath, "widgets"), name),
+					writeInImportWidgets(
+						wid,
+						path.resolve(componentPath, "widgets"),
+						name,
+					),
 				),
 			);
 		}
@@ -179,12 +183,16 @@ async function writeInImportWidgets(
 	return new Promise(async (resolve, reject) => {
 		const zipPath = path.resolve(STORE_PATH, "widgets", wid, "prod", "lib.zip");
 		const zip = new AdmZip(zipPath);
-		zip.extractAllToAsync(path.resolve(targetPath, rewriteName), true, async (err) => {
-			if (err) {
-				reject(err);
-			} else {
-				resolve(null);
-			}
-		});
+		zip.extractAllToAsync(
+			path.resolve(targetPath, rewriteName),
+			true,
+			async (err) => {
+				if (err) {
+					reject(err);
+				} else {
+					resolve(null);
+				}
+			},
+		);
 	});
 }

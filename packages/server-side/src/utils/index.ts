@@ -12,7 +12,8 @@ import * as path from "path";
 import { DEFAULT_PAGE_NUM, STORE_PATH } from "src/constant";
 import { Readable, Writable } from "stream";
 import * as AdmZip from "adm-zip";
-import { produce } from "immer"
+import { produce } from "immer";
+import { Query } from "mongoose";
 
 export enum ErrorCode {
 	Success = 200,
@@ -55,8 +56,23 @@ export function res(code: ErrorCode, data?: any, msg?: string): Res {
 	}
 }
 
+export function pageQuery<T, R>(
+	query: Query<T, R>,
+	pageQuery: PageQueryDTO,
+): Query<T, R> {
+	return query.skip(pageQuery.num * (pageQuery.page - 1)).limit(pageQuery.num);
+}
+
+export function genAssetsUrl(url: string): string {
+	return "http://localhost:7001/assets/" + url;
+}
+
+export function findAssetsDir() {
+	return path.resolve(STORE_PATH, "assets");
+}
+
 export function findUserDir(id: string) {
-	return path.resolve(STORE_PATH, "users", id)
+	return path.resolve(STORE_PATH, "users", id);
 }
 
 export async function createUserDir(uid: string) {
@@ -68,9 +84,9 @@ export async function createUserDir(uid: string) {
 }
 
 export function updateStringObj<T>(str: string, cb: (it: T) => void): string {
-	console.log(str)
-	const target = JSON.parse(str) as T
-	return JSON.stringify(produce(target, cb))
+	console.log(str);
+	const target = JSON.parse(str) as T;
+	return JSON.stringify(produce(target, cb));
 }
 
 export async function addWidget(
@@ -82,15 +98,24 @@ export async function addWidget(
 	const targetPath = path.resolve(STORE_PATH, "widgets", wid, "dev");
 	await ensureDir(targetPath);
 	await Promise.all([
-		pipe(createWriteStream(path.join(targetPath, umd.originalname)), umd.buffer),
-		pipe(createWriteStream(path.join(targetPath, esm.originalname)), esm.buffer),
-		pipe(createWriteStream(path.join(targetPath, style.originalname)), style.buffer),
+		pipe(
+			createWriteStream(path.join(targetPath, umd.originalname)),
+			umd.buffer,
+		),
+		pipe(
+			createWriteStream(path.join(targetPath, esm.originalname)),
+			esm.buffer,
+		),
+		pipe(
+			createWriteStream(path.join(targetPath, style.originalname)),
+			style.buffer,
+		),
 	]);
 
 	return {
 		umdPath: path.join("widgets", wid, "dev", umd.originalname),
 		esmPath: path.join("widgets", wid, "dev", esm.originalname),
-		stylePath: path.join("widgets", wid, "dev", style.originalname)
+		stylePath: path.join("widgets", wid, "dev", style.originalname),
 	};
 }
 
@@ -117,10 +142,10 @@ export async function pipe(ws: Writable, rsOrBuf: Readable | Buffer) {
 }
 
 export async function comprese(dir: string, targetFile: string) {
-	const zip = new AdmZip()
-	zip.addLocalFolder(dir)
-	zip.writeZip(targetFile)
-	return targetFile
+	const zip = new AdmZip();
+	zip.addLocalFolder(dir);
+	zip.writeZip(targetFile);
+	return targetFile;
 }
 
 export class PageQueryDTO {

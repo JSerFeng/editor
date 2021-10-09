@@ -7,7 +7,7 @@ import {
 	ProjectsDoc,
 	ProjectsDTO,
 } from "src/schemas/projects.schema";
-import { res, ErrorCode, PageQueryDTO } from "src/utils";
+import { res, ErrorCode, PageQueryDTO, pageQuery } from "src/utils";
 import { UserService } from "./user.service";
 
 @Injectable()
@@ -15,15 +15,15 @@ export class ProjectsService {
 	constructor(
 		@InjectModel(Projects.name) private projectModel: Model<ProjectsDoc>,
 		private userService: UserService,
-	) { }
+	) {}
 
 	async addNewProject(body: ProjectsDTO) {
 		if (!body.dependencies) {
 			body.dependencies = [];
 		}
 		const newProject = new this.projectModel(body);
-		newProject.createTime = new Date()
-		newProject.lastModified = new Date()
+		newProject.createTime = new Date();
+		newProject.lastModified = new Date();
 		await newProject.save();
 		return newProject;
 	}
@@ -51,19 +51,19 @@ export class ProjectsService {
 	}
 
 	async findUserProjects(uid: string, query: PageQueryDTO) {
-		const author = await this.userService.findUser(uid)
-		const projects = await this.projectModel
-			.find({ author })
-			.skip(query.num * (query.page - 1))
-			.limit(query.num)
-			.exec();
-		const totalNum = await this.projectModel.countDocuments()
+		const author = await this.userService.findUser(uid);
+		const projects = await pageQuery(
+			this.projectModel.find({ author }),
+			query,
+		).exec();
+		const totalNum = await this.projectModel.countDocuments();
 
 		return {
-			projects, pagination: {
+			projects,
+			pagination: {
 				totalNum,
-				totalPages: Math.ceil(totalNum / query.num)
-			}
+				totalPages: Math.ceil(totalNum / query.num),
+			},
 		};
 	}
 }

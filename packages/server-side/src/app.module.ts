@@ -18,7 +18,17 @@ import { PassportModule } from "@nestjs/passport";
 import { JwtStrategy } from "./auth/auth.strategy";
 import { ProductionService } from "./services/production.service";
 import { Productiontroller } from "./controllers/production.controller";
-
+import { ClothesShopController } from "./controllers/shop.controller";
+import { ShopService as ClothesShopService } from "./services/shop.service";
+import {
+	ClothesShopCategory,
+	ClothesShopCategorySchema,
+} from "./schemas/shop.schema";
+import { AssetsController } from "./controllers/assets.controller";
+import {
+	ClothesTemplate,
+	ClothesTemplateSchema,
+} from "./schemas/clothes-template";
 @Module({
 	imports: [
 		MongooseModule.forRoot("mongodb://127.0.0.1:27017/editor", {
@@ -34,6 +44,8 @@ import { Productiontroller } from "./controllers/production.controller";
 			{ name: User.name, schema: UserSchema },
 			{ name: Projects.name, schema: ProjectsSchema },
 			{ name: Widgets.name, schema: WidgetsSchema },
+			{ name: ClothesShopCategory.name, schema: ClothesShopCategorySchema },
+			{ name: ClothesTemplate.name, schema: ClothesTemplateSchema },
 		]),
 		JwtModule.register({
 			secret: jwtConstants.secret,
@@ -46,6 +58,8 @@ import { Productiontroller } from "./controllers/production.controller";
 		WidgetsStoreController,
 		UserController,
 		Productiontroller,
+		ClothesShopController,
+		AssetsController,
 	],
 	providers: [
 		AppService,
@@ -55,6 +69,7 @@ import { Productiontroller } from "./controllers/production.controller";
 		AuthService,
 		JwtStrategy,
 		ProductionService,
+		ClothesShopService,
 	],
 })
 export class AppModule {}

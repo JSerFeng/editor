@@ -28,21 +28,24 @@ export class ProjectsController {
 	constructor(
 		private service: ProjectsService,
 		private userService: UserService,
-	) { }
+	) {}
 
 	@Post("all")
 	@ApiBearerAuth()
 	@UseGuards(JwtAuthGuard)
 	async findUserProjects(@Body() body: PageQueryDTO, @Request() req: ReqBody) {
 		try {
-			const { projects, pagination } = await this.service.findUserProjects(req.user._id, body);
+			const { projects, pagination } = await this.service.findUserProjects(
+				req.user._id,
+				body,
+			);
 			return res(ErrorCode.Success, {
 				projects: projects,
 				pagination: {
 					page: body.page,
 					num: body.num,
-					...pagination
-				}
+					...pagination,
+				},
 			});
 		} catch (e) {
 			return res(ErrorCode.Fail, "查询用户项目失败");
@@ -64,7 +67,7 @@ export class ProjectsController {
 			user.projects.push(proj);
 			await user.save();
 			return res(ErrorCode.Success, {
-				pid: proj._id
+				pid: proj._id,
 			});
 		} catch (e) {
 			console.log(e);
@@ -83,7 +86,7 @@ export class ProjectsController {
 	@ApiBearerAuth()
 	@UseGuards(JwtAuthGuard)
 	async modifyProject(@Request() req: ReqBody, @Body() body: ModifyProjDTO) {
-		const _id = req.user._id
+		const _id = req.user._id;
 		const project = await this.service.findProject(body.pid);
 		if (!project) {
 			return res(ErrorCode.Fail, "没有找到此项目");
