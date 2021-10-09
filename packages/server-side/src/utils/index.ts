@@ -157,7 +157,7 @@ export class PageQueryDTO {
 	num = DEFAULT_PAGE_NUM;
 
 	@ApiProperty()
-	kwd: string;
+	kwd?: string;
 }
 
 export class UnauthError extends UnauthorizedException {

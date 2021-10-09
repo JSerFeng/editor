@@ -29,6 +29,7 @@ import {
 	ClothesTemplate,
 	ClothesTemplateSchema,
 } from "./schemas/clothes-template";
+import { ClothesTemplateService } from "./services/clothesTemplate.service";
 @Module({
 	imports: [
 		MongooseModule.forRoot("mongodb://127.0.0.1:27017/editor", {
@@ -70,6 +71,7 @@ import {
 		JwtStrategy,
 		ProductionService,
 		ClothesShopService,
+		ClothesTemplateService,
 	],
 })
 export class AppModule {}
