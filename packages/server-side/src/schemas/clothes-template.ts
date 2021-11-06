@@ -36,8 +36,6 @@ export class ClothesTemplateDTO {
 
 	name: string;
 
-	snapshot: File;
-
 	authorId: string;
 
 	renderConfig: string;

@@ -579,4 +579,3 @@ export default connect(
 	}),
 	dispatch => ({ dispatch })
 )(Renderer)
-

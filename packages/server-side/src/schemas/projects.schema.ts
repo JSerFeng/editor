@@ -40,7 +40,7 @@ export class ProjectsDTO {
 	@IsNotEmpty()
 	@ApiProperty()
 	name: string;
-	
+
 	@IsNotEmpty()
 	@ApiProperty()
 	renderConfigStr: string;

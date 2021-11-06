@@ -1,0 +1,11 @@
+.confirm-modal {
+	width: fit-content;
+	height: fit-content;
+	padding: 15px;
+	background-color: #fff;
+	border-radius: 15px;
+	position: fixed;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+}

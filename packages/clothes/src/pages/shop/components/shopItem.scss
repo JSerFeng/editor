@@ -1,0 +1,74 @@
+.shop-item {
+	display: grid;
+	grid-template-columns: repeat(5, 7vw);
+	grid-template-rows: repeat(3, 7vw);
+	gap: 10px;
+	grid-template-areas:
+		'tl tl tm1 tr tr'
+		'tl tl tm2 tr tr'
+		'b1 b2 b3 b4 b5';
+	padding: 15px;
+	box-shadow: 0 0 15px rgb(224, 224, 224);
+	border-radius: 10px;
+	width: fit-content;
+	color: #fff;
+	margin: 15px;
+	transition: .2s;
+	&:hover {
+		box-shadow: 0 0 20px rgb(180, 180, 180);
+		cursor: pointer;
+	}
+}
+
+.shop-item-unit {
+	background-color: rgb(238, 238, 238);
+	border-radius: 10px;
+	background-size: cover;
+	background-position: center;
+
+	div, h3 {
+		opacity: .7;
+	}
+}
+
+.tl {
+	grid-area: tl;
+	padding: 15px;
+
+	.title {
+		font-size: 35px;
+		color: #fff;
+	}
+}
+
+.tm1 {
+	grid-area: tm1;
+}
+
+.tm2 {
+	grid-area: tm2;
+}
+
+.tr {
+	grid-area: tr;
+}
+
+.b1 {
+	grid-area: b1;
+}
+
+.b2 {
+	grid-area: b2;
+}
+
+.b3 {
+	grid-area: b3;
+}
+
+.b4 {
+	grid-area: b4;
+}
+
+.b5 {
+	grid-area: b5;
+}

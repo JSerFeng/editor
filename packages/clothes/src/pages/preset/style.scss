@@ -1,0 +1,22 @@
+.preset {
+	width: 100vw;
+	height: 100vh;
+	background-color: rgb(202, 202, 202);
+
+	>.back-button {
+		z-index: 9999999999;
+		position: fixed;
+		left: 10px;
+		top: 10px;
+		opacity: .5;
+		transition: .2s;
+		border: 2px solid rgb(91, 91, 255);
+		color: rgb(91, 91, 255);
+		border-radius: 10px;
+		padding: 5px;
+
+		&:hover {
+			opacity: 1;
+		}
+	}
+}

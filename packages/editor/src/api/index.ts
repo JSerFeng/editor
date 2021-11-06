@@ -119,12 +119,12 @@ export const apiGetAllWidgets = (page: number, kwd?: string) => request.post("/w
 }>>
 
 export const apiRemoveWidget = (pid: string, wid: string) => request.post("/widgets-store/remove", {
-  pid,
-  wid
+	pid,
+	wid
 }) as Promise<Res>
 
 export const apiDeleteWidget = (wid: string) =>
-    request.post("/widgets-store/delete") as Promise<Res>
+	request.post("/widgets-store/delete") as Promise<Res>
 
 export const apiGenerate = (pid: string) => {
 	const tk = storage.get("access_token")

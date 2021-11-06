@@ -12,6 +12,7 @@ import * as path from "path";
 import {
 	findAssetsDir,
 	genAssetsUrl,
+	getExt,
 	pageQuery,
 	PageQueryDTO,
 } from "src/utils";
@@ -23,20 +24,21 @@ export class ClothesTemplateService {
 		private userService: UserService,
 	) {}
 
-	async addOneTemplate(dto: ClothesTemplateDTO) {
+	async addOneTemplate(dto: ClothesTemplateDTO, snapshot: Express.Multer.File) {
 		const newTemplate = new this.model(dto);
 		newTemplate.author = await this.userService.findUser(dto.authorId);
-		const snapShotUrl = genAssetsUrl(newTemplate.id.toString());
-		newTemplate.snapshot = snapShotUrl;
+		const snapShotUrl = genAssetsUrl(newTemplate._id.toString());
+		const ext = getExt(snapshot);
+		newTemplate.snapshot = snapShotUrl + `.${ext}`;
 		await writeFile(
-			path.join(findAssetsDir(), newTemplate.id.toString()),
-			dto.snapshot,
+			path.join(findAssetsDir(), newTemplate._id.toString() + `.${ext}`),
+			snapshot.buffer,
 		);
 		await newTemplate.save();
 	}
 
 	async findTemplates(query: PageQueryDTO, category: string) {
 		const res = await pageQuery(this.model.find({ category }), query).exec();
-		return res || [];
+		return res;
 	}
 }

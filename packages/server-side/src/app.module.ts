@@ -30,6 +30,7 @@ import {
 	ClothesTemplateSchema,
 } from "./schemas/clothes-template";
 import { ClothesTemplateService } from "./services/clothesTemplate.service";
+import { ClothesTemplateController } from "./controllers/clothesTemplate.controller";
 @Module({
 	imports: [
 		MongooseModule.forRoot("mongodb://127.0.0.1:27017/editor", {
@@ -61,6 +62,7 @@ import { ClothesTemplateService } from "./services/clothesTemplate.service";
 		Productiontroller,
 		ClothesShopController,
 		AssetsController,
+		ClothesTemplateController,
 	],
 	providers: [
 		AppService,

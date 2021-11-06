@@ -60,6 +60,9 @@ export function pageQuery<T, R>(
 	query: Query<T, R>,
 	pageQuery: PageQueryDTO,
 ): Query<T, R> {
+	if (!pageQuery.num) {
+		pageQuery.num = 8;
+	}
 	return query.skip(pageQuery.num * (pageQuery.page - 1)).limit(pageQuery.num);
 }
 
@@ -185,4 +188,15 @@ export class ReqBody {
 	user: {
 		_id: string;
 	};
+}
+
+export function getExt(file: Express.Multer.File): string {
+	switch (file.mimetype) {
+		case "image/png":
+			return "png";
+		case "image/jpg":
+			return "jpg";
+		case "image/jpeg":
+			return "jpeg";
+	}
 }

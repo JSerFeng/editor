@@ -14,21 +14,30 @@ export class ShopService {
 		private clothesTemplateService: ClothesTemplateService,
 	) {}
 
-	async getList(query: PageQueryDTO) {
+	async getList(query: PageQueryDTO): Promise<
+		{
+			category: string;
+			lastModified: Date;
+			bgColor: string;
+			bgImage: string;
+			pics: string[];
+		}[]
+	> {
 		const categories = await pageQuery(this.shopModel.find(), query).exec();
-		const res = await Promise.all(
+		const picsList = await Promise.all(
 			categories.map((category) =>
 				this.clothesTemplateService
-					.findTemplates({ page: 1, num: 8, kwd: "" }, category.category)
-					.then((res) => {
-						return {
-							...category,
-							pics: res.map((item) => item.snapshot),
-						};
-					}),
+					.findTemplates({ page: 1, num: 8 }, category.category)
+					.then((res) => res.map((item) => item.snapshot)),
 			),
 		);
-		return res;
+		return categories.map((category, i) => ({
+			category: category.category,
+			lastModified: category.lastModified,
+			bgColor: category.bgColor,
+			bgImage: category.bgImage,
+			pics: picsList[i],
+		}));
 	}
 
 	async setCategory(@Body() setCategoryDTO: SetCategoryDTO) {

@@ -7,10 +7,7 @@ import {
 	Request,
 	UseGuards,
 } from "@nestjs/common";
-import {
-	FileFieldsInterceptor,
-	FilesInterceptor,
-} from "@nestjs/platform-express";
+import { FileFieldsInterceptor } from "@nestjs/platform-express";
 import {
 	ApiBearerAuth,
 	ApiConsumes,

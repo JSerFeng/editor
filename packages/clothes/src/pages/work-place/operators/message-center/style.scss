@@ -1,0 +1,29 @@
+.message-item {
+	padding: 15px;
+	background-color: rgb(214, 214, 214);
+	border-radius: 5px;
+	cursor: pointer;
+
+	.message-dot {
+	flex-shrink: 0;
+		border-radius: 50%;
+		width: 15px;
+		height: 15px;
+		margin-right: 5px;
+	}
+
+	.message-warn {
+		background-color: rgb(221, 152, 3);
+	}
+
+	.message-tip {
+		background-color: rgb(43, 255, 0);
+	}
+
+	.message-error {
+		background-color: rgb(202, 0, 0);
+	}
+
+	.message-text {
+	}
+}

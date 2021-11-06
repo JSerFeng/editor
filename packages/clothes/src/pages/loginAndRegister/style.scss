@@ -1,0 +1,41 @@
+@import "../../index.scss";
+
+.login-main {
+	height: 100vh;
+	width: 100%;
+	margin-bottom: 15px;
+	background-image: radial-gradient(circle farthest-corner at 10% 20%, rgba(255, 94, 247, 1) 17.8%, rgba(2, 245, 255, 1) 100.2%);
+
+	.wrap {
+		padding: 20px 0;
+		width: 80%;
+		height: 70%;
+		position: absolute;
+	}
+
+	.login-title {
+		height: 30%;
+		width: 100%;
+
+		.btn {
+			font-size: 26px;
+			transform: scale(.8);
+			color: $MAIN_THEME;
+			filter: brightness(1.5);
+			cursor: pointer;
+			transition: .2s;
+
+			&.active {
+				transform: scale(1);
+				transition: .2s;
+				filter: brightness(1);
+				cursor: initial;
+			}
+		}
+	}
+
+	.login-body {
+		width: 100%;
+		min-height: 400px;
+	}
+}

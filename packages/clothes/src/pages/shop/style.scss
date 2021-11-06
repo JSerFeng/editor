@@ -1,0 +1,13 @@
+.shop {
+	padding: 20px;
+
+	.shop-title {
+		font-weight: 800;
+		font-size: 30px;
+	}
+
+	.shop-categories {
+		display: flex;
+		overflow-x: auto;
+	}
+}
