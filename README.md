@@ -7,10 +7,16 @@ monorepo
 
 ### packages
 server-side: 可视化页面搭建项目的服务端（nest框架）
+
 editor: 可视化页面搭建的基本组件
+
 preset: 在线搭建的前端部分（内部基于editor基本组件）
+
 v-generator-template: 可视化页面搭建项目的模板文件
+
 widget-factory: 基于vite开发自定义的组件
+
 cmd: 命令行面板，方便开发完组件后上传（WIP...）
+
 
 clothes: 定制衣服图案项目
