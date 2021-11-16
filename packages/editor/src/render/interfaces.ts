@@ -47,10 +47,10 @@ export interface Pos {
 
 export function normalizePos(pos: any): Pos {
 	return {
-		x: pos.x || 0,
-		y: pos.y || 0,
-		w: pos.w || 100,
-		h: pos.h || 100,
+		x: pos?.x || 0,
+		y: pos?.y || 0,
+		w: pos?.w || 100,
+		h: pos?.h || 100,
 	}
 }
 

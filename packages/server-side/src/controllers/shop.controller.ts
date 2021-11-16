@@ -1,5 +1,6 @@
-import { Body, Controller, Post } from "@nestjs/common";
+import { Body, Controller, Get, Post } from "@nestjs/common";
 import { ApiTags } from "@nestjs/swagger";
+import { mockImgData, mockFontsData } from "src/mock";
 import { ShopService } from "src/services/shop.service";
 import { ErrorCode, PageQueryDTO, res } from "src/utils";
 export class SetCategoryDTO {
@@ -26,5 +27,15 @@ export class ClothesShopController {
 		}
 		await this.service.setCategory(setCategoryDTO);
 		return res(ErrorCode.Success);
+	}
+
+	@Get("/images")
+	async getImages() {
+		return res(ErrorCode.Success, mockImgData);
+	}
+
+	@Get("/fonts")
+	async getFonts() {
+		return res(ErrorCode.Success, mockFontsData);
 	}
 }

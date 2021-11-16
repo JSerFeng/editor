@@ -1,10 +1,10 @@
-import { EditorTypes, WidgetPackage } from "../../render/interfaces";
+import { createPkg } from "../..";
+import { EditorTypes } from "../../render/interfaces";
 import { Rectangle, RectangleConfig } from "./rectangle";
 
-const pkg: WidgetPackage = {
-	FC: Rectangle,
-	Configuration: RectangleConfig,
-	description: {
+export default createPkg(
+	Rectangle,
+	() => ({
 		name: "rectangle",
 		showName: "矩形",
 		version: "0.0.1",
@@ -66,7 +66,6 @@ const pkg: WidgetPackage = {
 			]
 		},
 		from: "presets"
-	}
-}
-
-export default pkg
+	}),
+	RectangleConfig
+)

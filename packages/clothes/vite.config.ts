@@ -1,32 +1,12 @@
 import { defineConfig } from 'vite'
 import reactRefresh from '@vitejs/plugin-react-refresh'
 import reactJsx from 'vite-react-jsx'
-import * as path from "path"
-
+import windiCss from "vite-plugin-windicss"
+import unpluginIcons from "unplugin-icons/vite"
 import type { UserConfig } from "vite"
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
-	const buildOption: UserConfig["build"] = mode === "development"
-		? {}
-		: {
-			lib: {
-				entry: path.resolve(__dirname, "src/index.tsx"),
-				name: "Editor",
-			},
-			rollupOptions: {
-				external: [
-					"react",
-					"react-dom"
-				],
-				output: {
-					globals: {
-						"react": "React",
-						"react-dom": "ReactDOM"
-					},
-				}
-			}
-		}
 	const server: UserConfig["server"] = {}
 	if (mode === "development") {
 		server.proxy = {
@@ -38,8 +18,14 @@ export default defineConfig(({ mode }) => {
 		}
 	}
 	return {
-		plugins: [reactRefresh(), reactJsx()],
-		build: buildOption,
+		plugins: [
+			unpluginIcons({
+				jsx: "react"
+			}),
+			windiCss(),
+			reactRefresh(), 
+			reactJsx(),
+		],
 		server,
 	}
 })

@@ -1,9 +1,8 @@
 import { FC, useEffect, useState } from "react";
 import Render from "../../render";
 import Operators from "./operators";
-import WidgetsList from "./WidgetsList";
 import { normalizePos, Pos, RenderConfig, WidgetConfig } from "../../render/interfaces";
-import WidgetsCenter, { HooksCallbak } from "../../render/WidgetsCenter";
+import WidgetsCenter, { HooksCallback } from "../../render/WidgetsCenter";
 import HeaderConfig from "./operators/HeaderConfig";
 import EventEmitter from "../../utils/eventEmitter"
 import Side from "../../components/Side";
@@ -13,6 +12,7 @@ import { Drawer } from "@material-ui/core";
 import ProjectConfig from "./projectConfig";
 
 import "./style.scss"
+import MenuNav from "./menu-nav";
 
 const eventPool = new EventEmitter()
 
@@ -38,13 +38,14 @@ const WorkPlace: FC<{
 	const createWidgetConfig = (name: string, pos?: Pos): WidgetConfig => {
 		const pkg = widgetsCenter.get(name)
 		if (pkg) {
+			const description = pkg.getDescription();
 			pos = pos
 				? pos
-				: normalizePos(pkg.description.initPos)
+				: normalizePos(description.initPos)
 			pos.x = renderConfig.pos.w / 2 - pos.w / 2
 			pos.y = renderConfig.pos.h / 2 - pos.h / 2
 			return {
-				...pkg.description,
+				...description,
 				routeInfo: {
 					exact: true,
 					path: [currHistory]
@@ -64,9 +65,9 @@ const WorkPlace: FC<{
 	}, [widgetsCenter, setAllWidgetPkges])
 
 	useEffect(() => {
-		const cb: HooksCallbak = (w) => {
-			if (w.description.from === "custom") {
-				w.description.from = wid
+		const cb: HooksCallback = (w) => {
+			if (w.getDescription().from === "custom") {
+				w.getDescription().from = wid
 			}
 			return w
 		}
@@ -99,10 +100,7 @@ const WorkPlace: FC<{
 					open={ openWidgetList }
 					setOpen={ setOpenWidgetList }
 					placement="left">
-					<WidgetsList
-						allWidgets={ allWidgetPkges }
-						widgetsCenter={ widgetsCenter }
-						createWidgetConfig={ createWidgetConfig } />
+					<MenuNav createWidgetConfig={ createWidgetConfig }/>
 				</Side>
 				<Side
 					open={ openOperator }

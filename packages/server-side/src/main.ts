@@ -3,8 +3,7 @@ import { AppModule } from "./app.module";
 import { SwaggerModule, DocumentBuilder } from "@nestjs/swagger";
 import { ValidationPipe } from "@nestjs/common";
 import { UnauthErrorFilter } from "./utils";
-import { NestExpressApplication} from "@nestjs/platform-express"
-import * as path from "path"
+import { NestExpressApplication } from "@nestjs/platform-express";
 import { STORE_PATH } from "./constant";
 
 async function bootstrap() {
@@ -20,7 +19,7 @@ async function bootstrap() {
 
 	app.useGlobalPipes(new ValidationPipe());
 	app.useGlobalFilters(new UnauthErrorFilter());
-	app.useStaticAssets(STORE_PATH)
+	app.useStaticAssets(STORE_PATH);
 
 	await app.listen(7001);
 }

@@ -1,5 +1,6 @@
 import { deepCopy } from "../utils"
 import {
+	normalizePos,
 	ReactComp,
 	WidgetConfig,
 	WidgetConfigProp,
@@ -9,12 +10,12 @@ import {
 
 type WidgetsMap = Map<string, WidgetPackage>
 
-export type HooksCallbak = (pkg: WidgetPackage) => (WidgetPackage)
+export type HooksCallback = (pkg: WidgetPackage) => (WidgetPackage)
 
 class WidgetsCenter {
 	widgetsMap: WidgetsMap
 	subQueue: ((...args: any[]) => any)[]
-	preHooks: Set<HooksCallbak>
+	preHooks: Set<HooksCallback>
 
 	constructor(
 		initMap: WidgetsMap = new Map()
@@ -24,7 +25,7 @@ class WidgetsCenter {
 		this.preHooks = new Set()
 	}
 
-	createConfig(info: WidgetDescription): WidgetConfig {
+	createConfigFromDescription(info: WidgetDescription): WidgetConfig {
 		return {
 			...info,
 			pos: info.initPos ? { ...info.initPos, x: 10, y: 10 } : { x: 10, y: 10, w: 60, h: 60 },
@@ -39,8 +40,9 @@ class WidgetsCenter {
 		for (const cb of this.preHooks) {
 			widget = cb(widget)
 		}
-		const { description, FC, Configuration } = widget
-		this.widgetsMap.set(description.name, { FC, description, Configuration })
+		const { getDescription, FC, Configuration } = widget
+		const description = getDescription();
+		this.widgetsMap.set(description.name, { FC, getDescription, Configuration })
 		this.notify()
 	}
 
@@ -51,7 +53,7 @@ class WidgetsCenter {
 		}
 	}
 
-	unPre(cb: HooksCallbak) {
+	unPre(cb: HooksCallback) {
 		if (this.preHooks.has(cb)) {
 			this.preHooks.delete(cb)
 		}
@@ -66,15 +68,16 @@ class WidgetsCenter {
 		this.subQueue.push(cb)
 	}
 
-	get(widgetConfig: WidgetConfig | string) {
+	get(widgetConfig: WidgetConfig | string): WidgetPackage | null {
 		let name: string
 		if (typeof widgetConfig === "string") {
 			name = widgetConfig
 		} else {
 			name = widgetConfig.name
 		}
-
-		return this.widgetsMap.get(name) || null
+		const pkg = this.widgetsMap.get(name)
+		if (!pkg) return null
+		return pkg
 	}
 
 	getAll() {
@@ -83,19 +86,17 @@ class WidgetsCenter {
 		return widgets
 	}
 
-	pre(cb: HooksCallbak) {
+	pre(cb: HooksCallback) {
 		this.preHooks.add(cb)
 	}
 
-	create(widgetName: string): WidgetConfig | null {
+	createConfigFromName(widgetName: string): WidgetConfig | null {
 		let widget = this.widgetsMap.get(widgetName)
 		if (!widget) return null
-		widget.description = deepCopy(widget.description)
+		const description = widget.getDescription()
 		return {
-			...widget.description,
-			pos: widget.description.initPos
-				? { ...widget.description.initPos, x: 10, y: 10 }
-				: { x: 10, y: 10, w: 60, h: 60 },
+			...description,
+			pos: normalizePos(description.initPos),
 			routeInfo: {
 				exact: true,
 				path: ["/"],
@@ -122,19 +123,18 @@ const defaultDescription: Required<WidgetDescription> = {
 
 export const createPkg = <T = any>(
 	Comp: ReactComp<WidgetProps<T>>,
-	options: WidgetDescription<T>,
+	getDescription: (...args: any) => WidgetDescription<T>,
 	Configuration?: ReactComp<WidgetConfigProp<T>>
 ): WidgetPackage => {
-	options = { ...defaultDescription, ...options }
 	if (Configuration) {
 		return {
 			FC: Comp as ReactComp<WidgetProps>,
 			Configuration,
-			description: options
+			getDescription
 		}
 	}
 	return {
 		FC: Comp as ReactComp<WidgetProps>,
-		description: options
+		getDescription
 	}
 }

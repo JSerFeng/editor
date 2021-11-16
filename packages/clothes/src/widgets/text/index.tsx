@@ -1,10 +1,9 @@
 import { EditorTypes } from "../../render/interfaces"
 import { createPkg } from "../../render/WidgetsCenter"
-import { TextProps } from "./schema"
-import Text from "./Text"
+import Text, { TextProps } from "./Text"
 
-export default createPkg<TextProps>(Text, {
-	name: "text",
+export default createPkg<TextProps>(Text, () => ({
+	name: "text-wrapper",
 	showName: "文本",
 	version: "0.0.1",
 	description: "基础文本控件",
@@ -53,10 +52,11 @@ export default createPkg<TextProps>(Text, {
 		fontSize: 16,
 		color: "black",
 		padding: 15,
-		content: "文本框",
+		content: "文本框 Hello",
 		justifyContent: "center",
 		alignItems: "center",
-		backgroundColor: "#fff"
+		backgroundColor: "#fff",
+		fontFace: "serif"
 	},
 	from: "presets"
-})
+}))

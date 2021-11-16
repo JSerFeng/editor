@@ -116,9 +116,11 @@ export interface WidgetConfigProp<T = any> {
   dispatchConfig: (widgetConfig: WidgetConfig<T>) => void
 }
 
+// every widget must have their unique config file, so fix this by
+// rename description to getDescription()
 export interface WidgetPackage<T = any> {
   FC: ReactComp<WidgetProps<T>>,
-  description: WidgetDescription<T>
+  getDescription: (...args: any) => WidgetDescription<T>,
   Configuration?: ReactComp<WidgetConfigProp> | undefined,
 }
 

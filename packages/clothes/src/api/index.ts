@@ -2,6 +2,7 @@ import { notification } from "antd";
 import { RenderConfig } from "../render/interfaces";
 import { aTagDownload, storage } from "../utils";
 import { request, ErrorCode, QueryBody, baseURL } from "./request";
+import { FontsApiData, ImageApiData } from "./stores";
 
 export { ErrorCode } from "./request"
 
@@ -184,6 +185,10 @@ export const apiExportJSON = (dir: string, renderConfig: RenderConfig) => reques
 
 
 /**以下为电商作业的部分 */
+export const apiGetImages = () => request.get("/clothes-shop/images") as Promise<Res<ImageApiData>>
+
+export const apiGetFonts = () => request.get("/clothes-shop/fonts") as Promise<Res<FontsApiData>>
+
 export interface ShopCategory {
 	category: string,
 	bgColor: string,
