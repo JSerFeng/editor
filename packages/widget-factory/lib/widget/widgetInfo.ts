@@ -1,4 +1,4 @@
-import {WidgetDescription} from "@editor/editor";
+import {WidgetDescription} from "@v-editor/editor";
 // @ts-ignore
 import {name, description, snapShot} from "../../package.json";
 

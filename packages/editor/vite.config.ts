@@ -25,7 +25,8 @@ export default defineConfig(({ mode }) => {
 						"react-dom": "ReactDOM"
 					},
 				}
-			}
+			},
+			cssCodeSplit: false
 		}
 	const server: UserConfig["server"] = {}
 	if (mode === "development") {

@@ -1,9 +1,7 @@
 import { FC } from "react";
-import { Editor, widgetsCenter } from "@editor/editor";
-
+import { Editor, widgetsCenter } from "@v-editor/editor";
 import MyWidgets from "../lib"
-
-import "./style.css"
+import "@v-editor/editor/dist/style.css"
 
 widgetsCenter.use(MyWidgets)
 

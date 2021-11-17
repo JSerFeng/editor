@@ -15,11 +15,12 @@
     ".": {
       "import": "./dist/editor.es.js",
       "require": "./dist/editor.umd.js"
-    }
+    },
+		"./": "./dist"
   },
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "tsc || vite build",
     "serve": "vite preview"
   },
   "eslintConfig": {
