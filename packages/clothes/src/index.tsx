@@ -2,7 +2,6 @@ import WorkPlace from "./pages/work-place"
 import { Provider } from "react-redux"
 import { store } from "./store"
 import { FC } from "react"
-import WidgetsCenter from "./render/WidgetsCenter"
 import { widgetsCenter as defaultWidgetsCenter } from "./widgets"
 import {
 	BrowserRouter,
@@ -16,6 +15,7 @@ import Preset from "./pages/preset/Preset"
 import Login from "./pages/loginAndRegister"
 import { Snackbar } from "@material-ui/core"
 import Shop from "./pages/shop/Shop"
+import { WidgetsCenter } from "@v-editor/widgets-center"
 
 export type {
 	WidgetConfig,
@@ -24,16 +24,14 @@ export type {
 	WidgetPackage,
 	WidgetProps,
 	EditorConfig,
-	RenderConfig
-} from "./render/interfaces"
+	RenderConfig,
+} from "@v-editor/widgets-center"
 
 export {
-	EditorTypes
-} from "./render/interfaces"
-
-export {
-	createPkg
-} from "./render/WidgetsCenter"
+	EditorTypes,
+	createPkg,
+	WidgetsCenter
+} from "@v-editor/widgets-center"
 
 export const widgetsCenter = defaultWidgetsCenter
 

@@ -1,7 +1,6 @@
 import { FC, memo } from "react";
 import { Dispatch } from "redux";
 import { EditorActions } from "../../../store/editorReducer";
-
 import { Button, Input, Switch, Slider, Grid } from "@material-ui/core"
 import { connect } from "react-redux";
 import { BaseState } from "../../../store";

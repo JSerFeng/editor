@@ -2,8 +2,14 @@ import { FC, useEffect, useState } from "react";
 import Render from "../../render";
 import Operators from "./operators";
 import WidgetsList from "./WidgetsList";
-import { normalizePos, Pos, RenderConfig, WidgetConfig } from "../../render/interfaces";
-import WidgetsCenter, { HooksCallbak } from "../../render/WidgetsCenter";
+import {
+	WidgetsCenter,
+	HooksCallback,
+	normalizePos,
+	Pos,
+	RenderConfig,
+	WidgetConfig
+} from "@v-editor/widgets-center";
 import HeaderConfig from "./operators/HeaderConfig";
 import EventEmitter from "../../utils/eventEmitter"
 import Side from "../../components/Side";
@@ -38,13 +44,14 @@ const WorkPlace: FC<{
 	const createWidgetConfig = (name: string, pos?: Pos): WidgetConfig => {
 		const pkg = widgetsCenter.get(name)
 		if (pkg) {
+			const description = pkg.getDescription();
 			pos = pos
 				? pos
-				: normalizePos(pkg.description.initPos)
+				: normalizePos(description.initPos)
 			pos.x = renderConfig.pos.w / 2 - pos.w / 2
 			pos.y = renderConfig.pos.h / 2 - pos.h / 2
 			return {
-				...pkg.description,
+				...description,
 				routeInfo: {
 					exact: true,
 					path: [currHistory]
@@ -64,9 +71,14 @@ const WorkPlace: FC<{
 	}, [widgetsCenter, setAllWidgetPkges])
 
 	useEffect(() => {
-		const cb: HooksCallbak = (w) => {
-			if (w.description.from === "custom") {
-				w.description.from = wid
+		const cb: HooksCallback = (w) => {
+			const getDescription = w.getDescription
+			if (getDescription().from === "custom") {
+				w.getDescription = (...args: any) => {
+					const description = getDescription(...args)
+					description.from = wid
+					return description
+				}
 			}
 			return w
 		}

@@ -23,7 +23,7 @@ import {
 	Input,
 } from "@material-ui/core";
 import { Tooltip } from "antd"
-import { RenderConfig } from "../../../render/interfaces";
+import { RenderConfig } from "@v-editor/widgets-center";
 import {
 	useHistory
 } from "react-router-dom"

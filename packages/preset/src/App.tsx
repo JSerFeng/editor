@@ -1,4 +1,4 @@
-import * as _Editor from "@editor/editor"
+import * as _Editor from "@v-editor/editor"
 import './App.scss'
 
 const { Editor, widgetsCenter } = _Editor

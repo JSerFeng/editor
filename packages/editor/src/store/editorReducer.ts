@@ -1,6 +1,6 @@
 import produce from 'immer'
 import { Reducer } from 'redux'
-import { RenderConfig, WidgetConfig } from '../render/interfaces'
+import { RenderConfig, WidgetConfig } from '@v-editor/widgets-center'
 import { WritableDraft } from 'immer/dist/internal'
 import { deepCopy, StickFlags } from '../utils'
 import { apiSave } from '../api'

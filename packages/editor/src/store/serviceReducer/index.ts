@@ -1,4 +1,3 @@
-import { filter } from "rxjs/operators";
 import { produce } from "immer";
 import { Reducer } from "redux";
 import { combineEpics } from "redux-observable";

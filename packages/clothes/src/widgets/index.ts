@@ -1,12 +1,15 @@
-import WidgetsCenter from "../render/WidgetsCenter"
-import Text from "../widgets/text"
-import Rectangle from "./rectangle"
-import Svg from "./svg"
-import Img from "./img"
+import { presetsWidgets, WidgetsCenter } from "@v-editor/widgets-center"
+
+const {
+	text,
+	rectangle,
+	svg,
+	img,
+} = presetsWidgets
 
 export const widgetsCenter = new WidgetsCenter()
 
-widgetsCenter.use(Text)
-widgetsCenter.use(Rectangle)
-widgetsCenter.use(Svg)
-widgetsCenter.use(Img)
+widgetsCenter.use(text)
+widgetsCenter.use(rectangle)
+widgetsCenter.use(svg)
+widgetsCenter.use(img)

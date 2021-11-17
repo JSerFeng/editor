@@ -7,7 +7,7 @@ import {
 	ReactComp,
 	WidgetConfig,
 	WidgetConfigProp
-} from "../../../render/interfaces";
+} from "@v-editor/widgets-center";
 import { EditorActions } from "../../../store/editorReducer";
 import {
 	Button,

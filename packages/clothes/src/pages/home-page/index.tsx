@@ -5,7 +5,7 @@ import {
 	checkIfValidRenderConfig,
 	RenderConfig,
 	sureStrToRenderConfig
-} from "../../render/interfaces";
+} from "@v-editor/widgets-center";
 import {
 	CircularProgress,
 	Modal,

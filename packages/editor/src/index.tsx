@@ -2,7 +2,6 @@ import WorkPlace from "./pages/work-place"
 import { Provider } from "react-redux"
 import { store } from "./store"
 import { FC } from "react"
-import WidgetsCenter from "./render/WidgetsCenter"
 import { widgetsCenter as defaultWidgetsCenter } from "./widgets"
 import {
 	BrowserRouter,
@@ -11,29 +10,13 @@ import {
 
 import './index.scss';
 import "antd/dist/antd.css"
-import Generator from "./pages/generate"
 import HomePage from "./pages/home-page"
 import Preset from "./pages/preset/Preset"
 import Login from "./pages/loginAndRegister"
 import { Snackbar } from "@material-ui/core"
+import { WidgetsCenter } from "@v-editor/widgets-center"
 
-export type {
-	WidgetConfig,
-	WidgetConfigProp,
-	WidgetDescription,
-	WidgetPackage,
-	WidgetProps,
-	EditorConfig,
-	RenderConfig
-} from "./render/interfaces"
-
-export {
-	EditorTypes
-} from "./render/interfaces"
-
-export {
-	createPkg
-} from "./render/WidgetsCenter"
+export * from "@v-editor/widgets-center"
 
 export const widgetsCenter = defaultWidgetsCenter
 
@@ -53,9 +36,9 @@ export const Editor: FC<{
 					<WorkPlace
 						widgetsCenter={ widgetsCenter || defaultWidgetsCenter } />
 				</Route>
-				{/*<Route path="/generator">*/}
-				{/*	<Generator />*/}
-				{/*</Route>*/}
+				{/*<Route path="/generator">*/ }
+				{/*	<Generator />*/ }
+				{/*</Route>*/ }
 				<Route path="/preset">
 					<Preset widgetsCenter={ widgetsCenter || defaultWidgetsCenter } />
 				</Route>

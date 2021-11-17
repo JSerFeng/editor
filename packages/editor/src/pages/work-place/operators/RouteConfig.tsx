@@ -1,7 +1,7 @@
 import { Switch, Grid } from "@material-ui/core";
 import { FC } from "react";
 import { connect } from "react-redux";
-import { WidgetConfig } from "../../../render/interfaces";
+import { WidgetConfig } from "@v-editor/widgets-center";
 import { Dispatch } from "redux"
 import { EditorActions } from "../../../store/editorReducer";
 import ListConfig from "../../../components/list-config/ListConfig";

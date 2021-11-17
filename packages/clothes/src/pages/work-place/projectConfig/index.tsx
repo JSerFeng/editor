@@ -3,14 +3,13 @@ import { notification } from "antd"
 import { FC, useState } from "react"
 import { connect } from "react-redux"
 import { Dispatch } from "redux"
-import { checkIfValidRenderConfig, RenderConfig } from "../../../render/interfaces"
+import { checkIfValidRenderConfig, RenderConfig } from "@v-editor/widgets-center"
 import { BaseState } from "../../../store"
 import { EditorActions } from "../../../store/editorReducer"
 import FileExplorer from "../../../components/file-explorer"
 
 import "./style.scss"
 import { apiExportJSON, ErrorCode } from "../../../api"
-
 
 const {
 	actImportJson

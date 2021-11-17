@@ -1,13 +1,12 @@
 import { FC } from "react";
 import { connect } from "react-redux";
-import { RenderConfig } from "../../render/interfaces";
+import { RenderConfig, WidgetsCenter } from "@v-editor/widgets-center";
 import {
 	Route,
 	useHistory,
 	BrowserRouter
 } from "react-router-dom"
 import "./style.scss"
-import WidgetsCenter from "../../render/WidgetsCenter";
 import { BaseState } from "../../store";
 import { ButtonBase } from "@material-ui/core";
 import {
@@ -55,7 +54,7 @@ const Preset: FC<{
 											position: "absolute",
 											left: widgetConfig.pos.x,
 											top: widgetConfig.pos.y,
-											zIndex: widgetConfig.style?.zIndex || 0
+											zIndex: widgetConfig.style?.zIndex || "0"
 										} }
 									>
 										<FC

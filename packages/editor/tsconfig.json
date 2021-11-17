@@ -18,5 +18,5 @@
 		"declaration": true,
 		"declarationDir": "type"
   },
-  "include": ["./src"]
+  "include": ["./src", "../widgetsCenter/src/widgets/router-link"]
 }

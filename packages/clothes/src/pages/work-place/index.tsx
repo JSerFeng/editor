@@ -1,10 +1,16 @@
 import { FC, useEffect, useState } from "react";
 import Render from "../../render";
 import Operators from "./operators";
-import { normalizePos, Pos, RenderConfig, WidgetConfig } from "../../render/interfaces";
-import WidgetsCenter, { HooksCallback } from "../../render/WidgetsCenter";
+import {
+	normalizePos,
+	Pos,
+	RenderConfig,
+	WidgetConfig,
+	EventEmitter,
+	WidgetsCenter,
+	HooksCallback
+} from "@v-editor/widgets-center";
 import HeaderConfig from "./operators/HeaderConfig";
-import EventEmitter from "../../utils/eventEmitter"
 import Side from "../../components/Side";
 import { connect } from "react-redux";
 import { BaseState } from "../../store";
@@ -100,7 +106,7 @@ const WorkPlace: FC<{
 					open={ openWidgetList }
 					setOpen={ setOpenWidgetList }
 					placement="left">
-					<MenuNav createWidgetConfig={ createWidgetConfig }/>
+					<MenuNav createWidgetConfig={ createWidgetConfig } />
 				</Side>
 				<Side
 					open={ openOperator }

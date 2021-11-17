@@ -6,6 +6,8 @@
 	"scripts": {
 		"editor:dev": "node ./scripts/run.js editor dev",
 		"editor:build": "node ./scripts/run.js editor build",
+		"widgetsCenter:dev": "node ./scripts/run.js widgetsCenter dev",
+		"widgetsCenter:build": "node ./scripts/run.js widgetsCenter build",
 		"clothes:dev": "node ./scripts/run.js clothes dev",
 		"clothes:build": "node ./scripts/run.js clothes build",
 		"server:start": "node ./scripts/run.js server-side start:dev",
