@@ -17,7 +17,6 @@ import {
 	Radio,
 	Grid
 } from "@material-ui/core";
-import NumberText from "../../../components/NumberText";
 import ColorPicker from "../../../components/color-picker";
 import ErrorCatch from "../../../components/error-widget";
 
@@ -60,7 +59,6 @@ const SingleConfig: FC<{
 											if (Number.isNaN(zIdx)) {
 												zIdx = 0
 											}
-											console.log(zIdx)
 											dispatch(actWidgetConfig(produce(widgetConfig, it => {
 												if (!it.style) {
 													it.style = { zIndex: 0 }

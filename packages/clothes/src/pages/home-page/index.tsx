@@ -27,7 +27,7 @@ import {
 import { connect } from "react-redux";
 import { EditorActions } from "../../store/editorReducer";
 import { Hover, HoverItem } from "../../components/hover";
-import { notification } from "antd";
+import { notification } from "../../components/msg";
 import InitProject from "./InitProject";
 import { QUERY_PAGE_NUM } from "../../constants/common";
 

@@ -64,7 +64,6 @@
     "postcss": "^8.3.0",
     "redux-devtools-extension": "^2.13.9",
     "sass": "^1.34.1",
-    "typescript": "^4.3.2",
-    "vite": "^2.3.7"
+    "typescript": "^4.3.2"
   }
 }

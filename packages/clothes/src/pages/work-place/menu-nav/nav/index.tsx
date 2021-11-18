@@ -1,9 +1,13 @@
 import { FC, Dispatch } from "react"
-import { Button } from "@material-ui/core"
+import { ButtonBase } from "@material-ui/core"
 import Upload from "../content/Upload"
 import ImagesContent from "../content/ImagesContent"
 import ResourceContent from "../content/Resource"
 import TextContent from "../content/TextContent"
+import UploadIcon from "~icons/ic/outline-cloud-upload"
+import ImgIcon from "~icons/ic/baseline-image-search"
+import ResourceIcon from "~icons/ic/sharp-gesture"
+import TextIcon from "~icons/ic/sharp-text-fields"
 
 interface INav {
 	setContent: Dispatch<{ FC: FC }>
@@ -15,29 +19,34 @@ const Nav: FC<INav> = ({ setContent }) => {
 	}
 	return (
 		<div className="
-			w-80px
+			w-50px
 			h-full
 			bg-gray-900
 		">
-			<Button
-				variant="contained"
-				color="primary"
-				onClick={ changeContent.bind(null, Upload) }>上传</Button>
-			<Button
-				variant="contained"
-				color="primary"
+			<ButtonBase
+				onClick={ changeContent.bind(null, Upload) }
+				style={ {
+					width: "100%",
+					margin: "20px 0"
+				} }
+				>
+				<UploadIcon className="w-3rem h-full text-light-50"/>
+			</ButtonBase>
+			<ButtonBase
+				style={ { width: "100%", marginBottom: "20px" } }
 				onClick={ changeContent.bind(null, ImagesContent) }>
-				图片</Button>
-			<Button
-				variant="contained"
-				color="primary"
+				<ImgIcon className="w-3rem h-full text-light-50" />
+			</ButtonBase>
+			<ButtonBase
+				style={ { width: "100%", marginBottom: "20px" } }
 				onClick={ changeContent.bind(null, ResourceContent) }>
-					素材</Button>
-			<Button
-				variant="contained"
-				color="primary"
+				<ResourceIcon className="w-3rem h-full text-light-50" />
+			</ButtonBase>
+			<ButtonBase
+				style={ { width: "100%", marginBottom: "20px" } }
 				onClick={ changeContent.bind(null, TextContent) }>
-				文字</Button>
+				<TextIcon className="w-3rem h-full text-light-50" />
+			</ButtonBase>
 		</div>
 	)
 }

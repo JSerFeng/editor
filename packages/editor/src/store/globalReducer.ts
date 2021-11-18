@@ -1,9 +1,3 @@
-/*
-该文件没有使用！！！！！！！
-原因:
-本来准备做全局通知组件的，但是发现不好实现命令式的展示多条消息，
-先用antd的 notification api凑合下
-*/
 import { produce } from "immer"
 import { Reducer } from "redux"
 import { ServiceTypes } from "./serviceReducer"

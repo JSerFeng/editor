@@ -1,5 +1,5 @@
-import { Button, Modal } from "@material-ui/core"
-import { notification, Tooltip } from "antd"
+import { Button, Modal, Tooltip } from "@material-ui/core"
+import { notification } from "../../components/msg"
 import { FC, useState } from "react"
 import { connect } from "react-redux"
 import { Dispatch } from "redux"

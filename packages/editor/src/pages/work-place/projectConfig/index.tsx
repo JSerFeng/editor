@@ -1,5 +1,5 @@
 import { Grid, Input, Select, MenuItem, Button, Modal } from "@material-ui/core"
-import { notification } from "antd"
+import { notification } from "../../../components/msg"
 import { FC, useState } from "react"
 import { connect } from "react-redux"
 import { Dispatch } from "redux"

@@ -1,6 +1,5 @@
 import { defineConfig } from 'vite'
-import reactRefresh from '@vitejs/plugin-react-refresh'
-import reactJsx from 'vite-react-jsx'
+import reactPlugin from '@vitejs/plugin-react'
 import windiCss from "vite-plugin-windicss"
 import unpluginIcons from "unplugin-icons/vite"
 import type { UserConfig } from "vite"
@@ -19,12 +18,12 @@ export default defineConfig(({ mode }) => {
 	}
 	return {
 		plugins: [
-			unpluginIcons({
-				jsx: "react"
-			}),
+			reactPlugin(),
 			windiCss(),
-			reactRefresh(), 
-			reactJsx(),
+			unpluginIcons({
+				jsx: "react",
+				compiler: "jsx"
+			}),
 		],
 		server,
 	}

@@ -1,5 +1,5 @@
-import { notification } from "antd";
-import { RenderConfig } from "../render/interfaces";
+import { notification } from "../components/msg";
+import { RenderConfig } from "@v-editor/widgets-center";
 import { aTagDownload, storage } from "../utils";
 import { request, ErrorCode, QueryBody, baseURL } from "./request";
 import { FontsApiData, ImageApiData } from "./stores";

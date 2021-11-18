@@ -28,7 +28,7 @@ import {
 	useHistory
 } from "react-router-dom"
 import { apiGenerate, apiSave, ErrorCode } from "../../../api";
-import { notification } from "antd";
+import { notification } from "../../../components/msg";
 
 const {
 	actUndo,

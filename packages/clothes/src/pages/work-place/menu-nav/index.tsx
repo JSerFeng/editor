@@ -2,7 +2,7 @@ import Nav from "./nav"
 import { FC, useState } from "react"
 import Upload from "./content/Upload";
 import { WidgetConfig } from "../../..";
-import { Pos } from "../../../render/interfaces";
+import { Pos } from "@v-editor/widgets-center";
 
 const MenuNav: FC<{
 	createWidgetConfig: (name: string, pos?: Pos) => WidgetConfig
@@ -15,7 +15,7 @@ const MenuNav: FC<{
 
 	return (
 		<div className="
-		w-30vw 
+		w-20vw 
 		h-screen 
 		bg-gray-800
 		flex">

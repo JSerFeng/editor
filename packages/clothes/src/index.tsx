@@ -13,9 +13,9 @@ import "antd/dist/antd.css"
 import HomePage from "./pages/home-page"
 import Preset from "./pages/preset/Preset"
 import Login from "./pages/loginAndRegister"
-import { Snackbar } from "@material-ui/core"
 import Shop from "./pages/shop/Shop"
 import { WidgetsCenter } from "@v-editor/widgets-center"
+import Msg from "./components/msg"
 
 export type {
 	WidgetConfig,
@@ -65,7 +65,7 @@ export const Editor: FC<{
 					<Login />
 				</Route>
 			</Provider>
-			<Snackbar></Snackbar>
+			<Msg />
 		</BrowserRouter>
 	)
 }

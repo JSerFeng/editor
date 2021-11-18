@@ -87,6 +87,8 @@ export class ProjectsController {
 	@UseGuards(JwtAuthGuard)
 	async modifyProject(@Request() req: ReqBody, @Body() body: ModifyProjDTO) {
 		const _id = req.user._id;
+		if (!_id) return res(ErrorCode.Fail, "用户认证失败，请登陆");
+		if (!body.pid) return res(ErrorCode.Fail, "未找到该项目");
 		const project = await this.service.findProject(body.pid);
 		if (!project) {
 			return res(ErrorCode.Fail, "没有找到此项目");

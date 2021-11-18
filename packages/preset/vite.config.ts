@@ -1,11 +1,10 @@
 import { defineConfig } from 'vite'
-import reactRefresh from '@vitejs/plugin-react-refresh'
-import reactJsx from 'vite-react-jsx'
+import reactPlugin from '@vitejs/plugin-react'
 import externalGlobals from "rollup-plugin-external-globals";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-	plugins: [reactRefresh(), reactJsx()],
+	plugins: [reactPlugin()],
 	build: {
 		rollupOptions: {
 			plugins: [externalGlobals({
