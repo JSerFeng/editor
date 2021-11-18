@@ -13,7 +13,10 @@ const NumberText: FC<{
       placeholder={ placeholder || "" }
       onChange={
         e => {
-          const num = Number(e.target.value)
+          let num = Number(e.target.value)
+					if (Number.isNaN(num)) {
+						num = e.target.value === "-" ? -1 : 0
+					}
           setVal(num)
           onChange(num)
         }

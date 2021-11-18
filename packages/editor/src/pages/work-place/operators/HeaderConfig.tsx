@@ -23,12 +23,12 @@ import {
 	Input,
 } from "@material-ui/core";
 import { Tooltip } from "antd"
-import { RenderConfig } from "../../../render/interfaces";
+import { RenderConfig } from "@v-editor/widgets-center";
 import {
 	useHistory
 } from "react-router-dom"
 import { apiGenerate, apiSave, ErrorCode } from "../../../api";
-import { notification } from "antd";
+import { notification } from "../../../components/msg";
 
 const {
 	actUndo,

@@ -15,11 +15,12 @@
     ".": {
       "import": "./dist/editor.es.js",
       "require": "./dist/editor.umd.js"
-    }
+    },
+		"./": "./dist"
   },
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "tsc || vite build",
     "serve": "vite preview"
   },
   "eslintConfig": {
@@ -32,6 +33,7 @@
     "@material-ui/core": "^4.11.4",
     "@material-ui/icons": "^4.11.2",
     "@material-ui/lab": "^4.0.0-alpha.60",
+		"@v-editor/widgets-center": "workspace:*",
     "antd": "^4.16.0",
     "axios": "^0.21.1",
     "immer": "^9.0.2",
@@ -62,7 +64,6 @@
     "postcss": "^8.3.0",
     "redux-devtools-extension": "^2.13.9",
     "sass": "^1.34.1",
-    "typescript": "^4.3.2",
-    "vite": "^2.3.7"
+    "typescript": "^4.3.2"
   }
 }

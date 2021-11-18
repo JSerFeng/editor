@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { notification } from "antd"
+import { notification } from "../components/msg"
 import { storage } from '../utils'
 import { Res } from '.'
 

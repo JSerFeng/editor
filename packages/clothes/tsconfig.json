@@ -16,7 +16,10 @@
 		"noEmit": false,
     "jsx": "react-jsx",
 		"declaration": true,
-		"declarationDir": "type"
+		"declarationDir": "type",
+		"types": [
+			"unplugin-icons/types/react",
+		]
   },
   "include": ["./src"]
 }

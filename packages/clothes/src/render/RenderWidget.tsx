@@ -9,7 +9,7 @@ import {
 	MouseEvent as ReactMouseEvent
 } from "react"
 import { Dispatch as ReduxDispatch } from "redux"
-import type { Pos, WidgetConfig, WidgetProps } from "./interfaces"
+import type { Pos, WidgetConfig, WidgetProps, EventEmitter } from "@v-editor/widgets-center"
 import produce from "immer"
 import { fromEvent, Subject } from "rxjs"
 import { tap, map, switchMap, takeUntil, filter } from "rxjs/operators"
@@ -17,7 +17,6 @@ import { StickFlags, createRefLine, getOffsetLeft, getOffsetTop, getNearestLine,
 import { EditorActions } from "../store/editorReducer"
 import { connect } from "react-redux"
 import { BaseState } from "../store"
-import EventEmitter from "../utils/eventEmitter"
 import { useRouteMatch } from "react-router-dom"
 import ErrorCatch from "../components/error-widget"
 
@@ -490,7 +489,7 @@ export const RenderWidget: FC<WrapperProps> = ({
 				top: layout.y + "px",
 				width: layout.w + "px",
 				height: layout.h + "px",
-				zIndex: widgetConfig.style?.zIndex || 0,
+				zIndex: widgetConfig.style?.zIndex || "0",
 			} }
 			title={ `x:${layout.x} y:${layout.y} w:${layout.w} h:${layout.h}` }
 			onContextMenu={ handleContextMenu }	>

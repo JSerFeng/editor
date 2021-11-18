@@ -20,13 +20,17 @@ import {
 	map,
 } from 'rxjs/operators';
 import { EditorActions, Tools } from '../store/editorReducer';
-import { normalizePos, Pos, WidgetConfig, WidgetProps } from './interfaces';
+import {
+	normalizePos,
+	Pos,
+	WidgetConfig,
+	WidgetProps,
+	EventEmitter
+} from '@v-editor/widgets-center';
 import produce from 'immer';
-import EventEmitter from '../utils/eventEmitter';
 import { createRefLine, getOffsetLeft, getOffsetTop, RefLine } from '../utils';
 
 import "./style.scss"
-
 
 const MENU_WIDTH = 100
 const MENU_HEIGHT = 140

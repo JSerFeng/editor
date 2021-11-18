@@ -3,7 +3,7 @@ import { Add, Delete } from "@material-ui/icons"
 import produce from "immer";
 import { FC, useState } from "react";
 import { Dispatch } from "redux";
-import { WidgetConfig } from "../../../render/interfaces";
+import { WidgetConfig } from "@v-editor/widgets-center";
 import { EditorActions } from "../../../store/editorReducer";
 import { isUndef } from "../../../utils";
 

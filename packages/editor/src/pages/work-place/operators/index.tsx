@@ -2,8 +2,7 @@ import { Button } from "@material-ui/core";
 import { FC, useState } from "react";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
-import { WidgetConfig } from "../../../render/interfaces";
-import WidgetsCenter from "../../../render/WidgetsCenter";
+import { WidgetConfig, WidgetsCenter } from "@v-editor/widgets-center";
 import { BaseState } from "../../../store";
 import CanvasConfig from "./canvasConfig";
 import MessageCenter from "./message-center";
@@ -48,7 +47,7 @@ const Operators: FC<{
 									? null
 									: <SingleConfig
 										dispatch={ dispatch }
-										CustomConfig={ widgetsCenter.get(currWidget)!.Configuration || null }
+										CustomConfig={ widgetsCenter.get(currWidget)?.Configuration || null }
 										widgetConfig={ currWidget as WidgetConfig }
 									/>
 						: value === "样式"

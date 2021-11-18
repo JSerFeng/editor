@@ -9,7 +9,12 @@ import {
 	MouseEvent as ReactMouseEvent
 } from "react"
 import { Dispatch as ReduxDispatch } from "redux"
-import type { Pos, WidgetConfig, WidgetProps } from "./interfaces"
+import { 
+	Pos, 
+	WidgetConfig, 
+	WidgetProps, 
+	EventEmitter
+} from "@v-editor/widgets-center"
 import produce from "immer"
 import { fromEvent, Subject } from "rxjs"
 import { tap, map, switchMap, takeUntil, filter } from "rxjs/operators"
@@ -17,7 +22,6 @@ import { StickFlags, createRefLine, getOffsetLeft, getOffsetTop, getNearestLine,
 import { EditorActions } from "../store/editorReducer"
 import { connect } from "react-redux"
 import { BaseState } from "../store"
-import EventEmitter from "../utils/eventEmitter"
 import { useRouteMatch } from "react-router-dom"
 import ErrorCatch from "../components/error-widget"
 

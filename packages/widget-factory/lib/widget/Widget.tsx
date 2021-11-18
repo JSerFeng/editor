@@ -1,5 +1,5 @@
 import { FC } from "react"
-import { WidgetProps } from "@editor/editor"
+import { WidgetProps } from "@v-editor/editor"
 
 interface Props {
 	customColor: string,

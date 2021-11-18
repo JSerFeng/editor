@@ -1,11 +1,10 @@
-import { Button, Modal } from "@material-ui/core"
-import { notification, Tooltip } from "antd"
+import { Button, Modal, Tooltip } from "@material-ui/core"
+import { notification } from "../../components/msg"
 import { FC, useState } from "react"
 import { connect } from "react-redux"
 import { Dispatch } from "redux"
 import ErrorCatch from "../../components/error-widget"
-import { WidgetConfig, WidgetPackage } from "../../render/interfaces"
-import WidgetsCenter from "../../render/WidgetsCenter"
+import { WidgetConfig, WidgetPackage, WidgetsCenter } from "@v-editor/widgets-center"
 import { BaseState } from "../../store"
 import { EditorActions } from "../../store/editorReducer"
 import WidgetStore from "./widget-store"
@@ -41,8 +40,9 @@ const WidgetsList: FC<{
 			</div>
 			<div className="widgets-list flex jb">
 				{
-					allWidgets.map(({ description, FC }, i) => (
-						<Tooltip key={ i } title={ description.description || description.showName } color="blue" placement="right">
+					allWidgets.map(({ getDescription, FC }, i) => {
+						const description = getDescription();
+						return <Tooltip key={ i } title={ description.description || description.showName } color="blue" placement="right">
 							<div
 								className="widgets-list-item" onClick={ addWidget.bind(null, description.name) }
 								onDragStart={ e => {
@@ -61,7 +61,7 @@ const WidgetsList: FC<{
 								</ErrorCatch>
 							</div>
 						</Tooltip>
-					))
+					})
 				}
 			</div>
 

@@ -1,0 +1,34 @@
+{
+	"name": "@v-editor/widgets-center",
+	"version": "0.0.0",
+	"scripts": {
+		"dev": "vite",
+		"build": "tsc || vite build",
+		"serve": "vite preview"
+	},
+	"files": [
+		"dist",
+		"type"
+	],
+	"main": "./dist/widgetsCenter.umd.js",
+	"module": "./dist/widgetsCenter.es.js",
+	"exports": {
+		".": {
+			"import": "./dist/widgetsCenter.es.js",
+			"require": "./dist/widgetsCenter.umd.js"
+		}
+	},
+	"types": "./type/main.d.ts",
+	"dependencies": {
+		"@emotion/react": "^11.6.0",
+		"@emotion/styled": "^11.6.0",
+		"@material-ui/core": "^4.12.3",
+		"@types/css-font-loading-module": "^0.0.7"
+	},
+	"devDependencies": {
+		"@types/react": "^17.0.0",
+		"@types/react-dom": "^17.0.0",
+		"@vitejs/plugin-react": "^1.0.0",
+		"typescript": "^4.3.2"
+	}
+}

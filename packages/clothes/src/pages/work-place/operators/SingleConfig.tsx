@@ -7,7 +7,7 @@ import {
 	ReactComp,
 	WidgetConfig,
 	WidgetConfigProp
-} from "../../../render/interfaces";
+} from "@v-editor/widgets-center";
 import { EditorActions } from "../../../store/editorReducer";
 import {
 	Button,
@@ -17,7 +17,6 @@ import {
 	Radio,
 	Grid
 } from "@material-ui/core";
-import NumberText from "../../../components/NumberText";
 import ColorPicker from "../../../components/color-picker";
 import ErrorCatch from "../../../components/error-widget";
 
@@ -52,15 +51,20 @@ const SingleConfig: FC<{
 							<Grid container>
 								<Grid item xs={ 6 }>层级</Grid>
 								<Grid item xs={ 6 }>
-									<NumberText
+									<TextField
 										placeholder="层级"
 										value={ Number(widgetConfig.style?.zIndex || 0) }
-										onChange={ zIdx => {
+										onChange={ e => {
+											let zIdx = parseFloat(e.target.value);
+											if (Number.isNaN(zIdx)) {
+												zIdx = 0
+											}
 											dispatch(actWidgetConfig(produce(widgetConfig, it => {
 												if (!it.style) {
 													it.style = { zIndex: 0 }
+												} else {
+													it.style.zIndex = zIdx
 												}
-												it.style.zIndex = zIdx
 											})))
 										} }
 									/>
