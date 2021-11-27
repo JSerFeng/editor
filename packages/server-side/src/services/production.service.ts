@@ -41,7 +41,6 @@ export class ProductionService {
 		/**模板文件路径 */
 		const tplPath = path.resolve(STORE_PATH, "tpl", "commonTpl");
 		try {
-			console.log(tplPath);
 			await copy(tplPath, targetPath);
 		} catch (e) {
 			console.log("模板获取失败，请检查网络");
@@ -77,7 +76,12 @@ export class ProductionService {
 				if (imported.has(name)) return null;
 				//如果不是预设组件，那from就是组件id，取出相应的组件代码放入到
 				//项目的src/components/widgets下
-				if (from !== "presets" && from !== "local" && from !== "preset") {
+				if (
+					from !== "presets" &&
+					from !== "local" &&
+					from !== "preset" &&
+					!!from
+				) {
 					widgetsToImport.push([from, name]);
 				}
 				imported.add(name);

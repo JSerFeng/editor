@@ -1,4 +1,4 @@
-import { RenderConfig } from "../render/interfaces";
+import { RenderConfig } from "@v-editor/widgets-center";
 import { ErrorCode, QueryBody } from "./request";
 export { ErrorCode } from "./request";
 export interface UserInfo {

@@ -20,12 +20,23 @@ declare type GetBaseState<T extends {
 declare const reducersMap: {
     serviceReducer: import("redux").Reducer<import("./serviceReducer").ServiceState, import("./serviceReducer").SActions>;
     editorReducer: import("redux").Reducer<import("./editorReducer").BaseState, GetActionTypes<{
+        newMessage(type: import("./editorReducer").MessageType, text: string): {
+            type: Types.NewMessage;
+            payload: import("./editorReducer").Message;
+        };
+        removeMessage(type: import("./editorReducer").MessageType, idx: number): {
+            type: Types.RemoveMessage;
+            payload: {
+                type: import("./editorReducer").MessageType;
+                idx: number;
+            };
+        };
         actNewProject: (projectName: string, pos: {
             w: number;
             h: number;
         }) => {
             type: Types.NewProject;
-            payload: import("..").RenderConfig;
+            payload: import("@v-editor/widgets-center").RenderConfig;
         };
         actAddWidgetDep: (wid: string) => {
             type: Types.AddWidgetDep;
@@ -65,13 +76,13 @@ declare const reducersMap: {
                 h: number;
             };
         };
-        actAddItem: (config: import("..").WidgetConfig<any>) => {
+        actAddItem: (config: import("@v-editor/widgets-center").WidgetConfig<any>) => {
             type: Types.AddItem;
-            payload: import("..").WidgetConfig<any>;
+            payload: import("@v-editor/widgets-center").WidgetConfig<any>;
         };
-        actWidgetConfig: (config: import("..").WidgetConfig<any>) => {
+        actWidgetConfig: (config: import("@v-editor/widgets-center").WidgetConfig<any>) => {
             type: Types.WidgetConfig;
-            payload: import("..").WidgetConfig<any>;
+            payload: import("@v-editor/widgets-center").WidgetConfig<any>;
         };
         actChangeWidgetShowInPage: (idx: number, show: boolean) => {
             type: Types.ChangeWidgetShowInPage;
@@ -159,9 +170,9 @@ declare const reducersMap: {
             type: Types.ShowPx;
             payload: number;
         };
-        actImportJson: (renderConfig: import("..").RenderConfig) => {
+        actImportJson: (renderConfig: import("@v-editor/widgets-center").RenderConfig) => {
             type: Types.ImportJson;
-            payload: import("..").RenderConfig;
+            payload: import("@v-editor/widgets-center").RenderConfig;
         };
         actChangeHistory: (historyIdx: number) => {
             type: Types.ChangeHistory;
@@ -194,12 +205,23 @@ declare const store: import("redux").Store<import("redux").EmptyObject & {
     serviceReducer: import("./serviceReducer").ServiceState;
     editorReducer: import("./editorReducer").BaseState;
 }, import("./serviceReducer").SActions | GetActionTypes<{
+    newMessage(type: import("./editorReducer").MessageType, text: string): {
+        type: Types.NewMessage;
+        payload: import("./editorReducer").Message;
+    };
+    removeMessage(type: import("./editorReducer").MessageType, idx: number): {
+        type: Types.RemoveMessage;
+        payload: {
+            type: import("./editorReducer").MessageType;
+            idx: number;
+        };
+    };
     actNewProject: (projectName: string, pos: {
         w: number;
         h: number;
     }) => {
         type: Types.NewProject;
-        payload: import("..").RenderConfig;
+        payload: import("@v-editor/widgets-center").RenderConfig;
     };
     actAddWidgetDep: (wid: string) => {
         type: Types.AddWidgetDep;
@@ -239,13 +261,13 @@ declare const store: import("redux").Store<import("redux").EmptyObject & {
             h: number;
         };
     };
-    actAddItem: (config: import("..").WidgetConfig<any>) => {
+    actAddItem: (config: import("@v-editor/widgets-center").WidgetConfig<any>) => {
         type: Types.AddItem;
-        payload: import("..").WidgetConfig<any>;
+        payload: import("@v-editor/widgets-center").WidgetConfig<any>;
     };
-    actWidgetConfig: (config: import("..").WidgetConfig<any>) => {
+    actWidgetConfig: (config: import("@v-editor/widgets-center").WidgetConfig<any>) => {
         type: Types.WidgetConfig;
-        payload: import("..").WidgetConfig<any>;
+        payload: import("@v-editor/widgets-center").WidgetConfig<any>;
     };
     actChangeWidgetShowInPage: (idx: number, show: boolean) => {
         type: Types.ChangeWidgetShowInPage;
@@ -333,9 +355,9 @@ declare const store: import("redux").Store<import("redux").EmptyObject & {
         type: Types.ShowPx;
         payload: number;
     };
-    actImportJson: (renderConfig: import("..").RenderConfig) => {
+    actImportJson: (renderConfig: import("@v-editor/widgets-center").RenderConfig) => {
         type: Types.ImportJson;
-        payload: import("..").RenderConfig;
+        payload: import("@v-editor/widgets-center").RenderConfig;
     };
     actChangeHistory: (historyIdx: number) => {
         type: Types.ChangeHistory;

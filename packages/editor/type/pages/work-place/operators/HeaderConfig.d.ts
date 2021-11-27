@@ -1,12 +1,12 @@
 import { FC } from "react";
 import { Dispatch } from "redux";
 import { Tools } from "../../../store/editorReducer";
-import { RenderConfig } from "../../../render/interfaces";
+import { RenderConfig } from "@v-editor/widgets-center";
 declare const _default: import("react-redux").ConnectedComponent<FC<{
     dispatch: Dispatch<import("redux").AnyAction>;
     workPlace: {
         renderConfig: RenderConfig;
-        currPageWidgets: import("../../../render/interfaces").WidgetConfig<any>[];
+        currPageWidgets: import("@v-editor/widgets-center").WidgetConfig<any>[];
         selectedIndex: number[] | null;
         canvas: {
             x: number;
@@ -50,7 +50,7 @@ declare const _default: import("react-redux").ConnectedComponent<FC<{
     dispatch: Dispatch<import("redux").AnyAction>;
     workPlace: {
         renderConfig: RenderConfig;
-        currPageWidgets: import("../../../render/interfaces").WidgetConfig<any>[];
+        currPageWidgets: import("@v-editor/widgets-center").WidgetConfig<any>[];
         selectedIndex: number[] | null;
         canvas: {
             x: number;

@@ -1,12 +1,11 @@
 import { ComponentClass, FC } from 'react';
 import { Dispatch } from "redux";
 import { Tools } from '../store/editorReducer';
-import { Pos, WidgetConfig, WidgetProps } from './interfaces';
-import EventEmitter from '../utils/eventEmitter';
+import { Pos, WidgetConfig, WidgetProps, EventEmitter } from '@v-editor/widgets-center';
 import "./style.scss";
 declare const _default: import("react-redux").ConnectedComponent<FC<{
     workplace: {
-        renderConfig: import("./interfaces").RenderConfig;
+        renderConfig: import("@v-editor/widgets-center").RenderConfig;
         currPageWidgets: WidgetConfig<any>[];
         selectedIndex: number[] | null;
         canvas: {
@@ -21,13 +20,13 @@ declare const _default: import("react-redux").ConnectedComponent<FC<{
         };
         selectArea: import("../store/editorReducer").Pos;
         undoStack: {
-            renderConfig: import("./interfaces").RenderConfig;
+            renderConfig: import("@v-editor/widgets-center").RenderConfig;
             selectedIndex: number[] | null;
             selectArea: import("../store/editorReducer").Pos;
             selectedTool: Tools | null;
         }[];
         redoStack: {
-            renderConfig: import("./interfaces").RenderConfig;
+            renderConfig: import("@v-editor/widgets-center").RenderConfig;
             selectedIndex: number[] | null;
             selectArea: import("../store/editorReducer").Pos;
             selectedTool: Tools | null;
@@ -46,7 +45,7 @@ declare const _default: import("react-redux").ConnectedComponent<FC<{
     eventPool: EventEmitter;
 }>, import("react-redux").Omit<{
     workplace: {
-        renderConfig: import("./interfaces").RenderConfig;
+        renderConfig: import("@v-editor/widgets-center").RenderConfig;
         currPageWidgets: WidgetConfig<any>[];
         selectedIndex: number[] | null;
         canvas: {
@@ -61,13 +60,13 @@ declare const _default: import("react-redux").ConnectedComponent<FC<{
         };
         selectArea: import("../store/editorReducer").Pos;
         undoStack: {
-            renderConfig: import("./interfaces").RenderConfig;
+            renderConfig: import("@v-editor/widgets-center").RenderConfig;
             selectedIndex: number[] | null;
             selectArea: import("../store/editorReducer").Pos;
             selectedTool: Tools | null;
         }[];
         redoStack: {
-            renderConfig: import("./interfaces").RenderConfig;
+            renderConfig: import("@v-editor/widgets-center").RenderConfig;
             selectedIndex: number[] | null;
             selectArea: import("../store/editorReducer").Pos;
             selectedTool: Tools | null;

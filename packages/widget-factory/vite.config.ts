@@ -1,31 +1,30 @@
 import { defineConfig } from "vite"
 import * as path from "path"
 import type { UserConfig } from "vite"
-import reactRefresh from "@vitejs/plugin-react-refresh"
-import reactJsx from 'vite-react-jsx'
+import react from "@vitejs/plugin-react"
 
 const config = defineConfig(({ mode }) => {
 	let buildOption: UserConfig["build"] = {}
 	if (mode === "production") {
-	  buildOption.minify = false
-	  buildOption.cssCodeSplit = false
+		buildOption.minify = false
+		buildOption.cssCodeSplit = false
 		buildOption.rollupOptions = {
 			external: [
 				"react",
 				"react-dom",
-				"@editor/editor"
+				"@v-editor/editor"
 			],
 			output: {
 				globals: {
 					"react": "React",
 					"react-dom": "ReactDom",
-					"@editor/editor": "Editor"
+					"@v-editor/editor": "Editor"
 				}
 			}
 		}
 		buildOption.lib = {
 			fileName: "bundle",
-      name: "custom-widget",
+			name: "custom-widget",
 			entry: path.join(__dirname, "./lib/entry.ts")
 		}
 	}
@@ -33,8 +32,7 @@ const config = defineConfig(({ mode }) => {
 	return {
 		build: buildOption,
 		plugins: [
-			reactJsx(),
-			reactRefresh(),
+			react()
 		],
 	}
 })

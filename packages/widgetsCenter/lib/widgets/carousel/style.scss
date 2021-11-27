@@ -1,0 +1,21 @@
+.v-carousel-item {
+	border: 1px solid #9568ff;
+}
+
+.v-carousel-title {
+	margin-bottom: 15px;
+	letter-spacing: 1.2em;
+	color: #fff;
+	padding: 12px;
+	background-color: #9568ff;
+}
+
+.v-carousel-content {
+	padding: 12px;
+}
+
+.v-carousel-del-btn {
+	&:hover {
+		filter: brightness(.8);
+	}
+}

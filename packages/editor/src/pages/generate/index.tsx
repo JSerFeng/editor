@@ -9,7 +9,7 @@ import FileExplorer from "../../components/file-explorer"
 import {
 	apiGenerate, ErrorCode
 } from "../../api";
-import { RenderConfig } from "../../render/interfaces";
+import { RenderConfig } from "@v-editor/widgets-center";
 import { BaseState } from "../../store";
 import {
 	useHistory

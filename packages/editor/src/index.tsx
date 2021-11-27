@@ -7,14 +7,14 @@ import {
 	BrowserRouter,
 	Route
 } from "react-router-dom"
-
 import './index.scss';
-import "antd/dist/antd.css"
 import HomePage from "./pages/home-page"
 import Preset from "./pages/preset/Preset"
 import Login from "./pages/loginAndRegister"
 import { Snackbar } from "@material-ui/core"
 import { WidgetsCenter } from "@v-editor/widgets-center"
+
+import "./widgetsCenter.css"
 
 export * from "@v-editor/widgets-center"
 

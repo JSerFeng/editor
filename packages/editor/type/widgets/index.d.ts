@@ -1,2 +1,2 @@
-import WidgetsCenter from "../render/WidgetsCenter";
+import { WidgetsCenter } from "@v-editor/widgets-center";
 export declare const widgetsCenter: WidgetsCenter;

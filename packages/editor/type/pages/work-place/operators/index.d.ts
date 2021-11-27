@@ -1,7 +1,6 @@
 import { FC } from "react";
 import { Dispatch } from "redux";
-import { WidgetConfig } from "../../../render/interfaces";
-import WidgetsCenter from "../../../render/WidgetsCenter";
+import { WidgetConfig, WidgetsCenter } from "@v-editor/widgets-center";
 declare const _default: import("react-redux").ConnectedComponent<FC<{
     widgetsCenter: WidgetsCenter;
     currWidget: WidgetConfig<any> | WidgetConfig<any>[] | null;

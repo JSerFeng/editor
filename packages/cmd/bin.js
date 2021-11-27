@@ -9,6 +9,8 @@ async function main(cmd) {
     case "login":
       await login()
       break
+		case "dev":
+			
   }
 }
 

@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { Dispatch } from "redux";
-import { WidgetConfig } from "../../../render/interfaces";
+import { WidgetConfig } from "@v-editor/widgets-center";
 interface StyleConfigProps {
     widgetConfig: WidgetConfig | WidgetConfig[] | null;
     dispatch: Dispatch;

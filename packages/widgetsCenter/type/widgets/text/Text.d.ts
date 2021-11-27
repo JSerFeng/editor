@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { WidgetProps } from "../../core/interfaces";
+import { WidgetConfigProp, WidgetProps } from "../../core/interfaces";
 export interface TextProps {
     fontSize: number;
     fontFace: string;
@@ -11,5 +11,5 @@ export interface TextProps {
     alignItems: "center" | "flex-start" | "flex-end";
     backgroundColor: "#fff";
 }
-declare const Text: FC<WidgetProps<TextProps>>;
-export default Text;
+export declare const Text: FC<WidgetProps<TextProps>>;
+export declare const TextConfiguration: FC<WidgetConfigProp<TextProps>>;

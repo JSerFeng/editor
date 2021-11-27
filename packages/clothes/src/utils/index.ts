@@ -1,4 +1,5 @@
-import { Modal } from "antd"
+//TODO: REPLACE ANTD
+// import { Modal } from "antd"
 
 export enum StickFlags {
 	NO_STICK = /**   */ 0 << 0,
@@ -350,17 +351,6 @@ export const createRefLine = (
 
 export const isUndef = (target: unknown): target is undefined | null => {
 	return target === undefined || target === null
-}
-
-const { confirm } = Modal;
-
-export function withConfirm(message: string, cb: () => void) {
-	confirm({
-		title: message,
-		onOk: cb,
-		okText: "确认",
-		cancelText: "取消"
-	})
 }
 
 export function deepCopy<T>(obj: T): T {

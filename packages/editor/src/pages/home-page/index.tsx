@@ -108,6 +108,10 @@ const HomePage: FC<{
 	}, [reqProjectList])
 
 	return <div>
+		<Backdrop open={ workState === WorkState.Installing }>
+			<CircularProgress />
+			安装依赖组件中...
+		</Backdrop>
 		{
 			projectList
 				? (
@@ -207,10 +211,7 @@ const HomePage: FC<{
 					</div>
 				)
 		}
-		<Backdrop open={ workState === WorkState.Installing }>
-			<CircularProgress />
-			安装依赖组件中...
-		</Backdrop>
+
 	</div>
 }
 

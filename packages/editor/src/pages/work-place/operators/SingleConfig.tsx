@@ -15,7 +15,8 @@ import {
 	RadioGroup,
 	FormControlLabel,
 	Radio,
-	Grid
+	Grid,
+	Switch
 } from "@material-ui/core";
 import NumberText from "../../../components/NumberText";
 import ColorPicker from "../../../components/color-picker";
@@ -131,6 +132,10 @@ const Config: FC<{
 		case EditorTypes.Number:
 			return <TextField value={ value } onChange={ e => {
 				setProperty(e.target.value)
+			} } />
+		case EditorTypes.Switch:
+			return <Switch color="primary" checked={ Boolean(value) } onChange={ e => {
+				setProperty(e.target.checked)
 			} } />
 		case EditorTypes.Select:
 			return <Grid>

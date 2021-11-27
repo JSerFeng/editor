@@ -9,7 +9,6 @@ import {
 } from "react-router-dom"
 
 import './index.scss';
-import "antd/dist/antd.css"
 import HomePage from "./pages/home-page"
 import Preset from "./pages/preset/Preset"
 import Login from "./pages/loginAndRegister"

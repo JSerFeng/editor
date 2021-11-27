@@ -4,8 +4,8 @@ import { StickFlags } from "../../../utils";
 declare const _default: import("react-redux").ConnectedComponent<import("react").NamedExoticComponent<{
     dispatch: Dispatch<import("redux").AnyAction>;
     workplace: {
-        renderConfig: import("../../..").RenderConfig;
-        currPageWidgets: import("../../..").WidgetConfig<any>[];
+        renderConfig: import("@v-editor/widgets-center").RenderConfig;
+        currPageWidgets: import("@v-editor/widgets-center").WidgetConfig<any>[];
         selectedIndex: number[] | null;
         canvas: {
             x: number;
@@ -19,13 +19,13 @@ declare const _default: import("react-redux").ConnectedComponent<import("react")
         };
         selectArea: import("../../../store/editorReducer").Pos;
         undoStack: {
-            renderConfig: import("../../..").RenderConfig;
+            renderConfig: import("@v-editor/widgets-center").RenderConfig;
             selectedIndex: number[] | null;
             selectArea: import("../../../store/editorReducer").Pos;
             selectedTool: import("../../../store/editorReducer").Tools | null;
         }[];
         redoStack: {
-            renderConfig: import("../../..").RenderConfig;
+            renderConfig: import("@v-editor/widgets-center").RenderConfig;
             selectedIndex: number[] | null;
             selectArea: import("../../../store/editorReducer").Pos;
             selectedTool: import("../../../store/editorReducer").Tools | null;
@@ -41,8 +41,8 @@ declare const _default: import("react-redux").ConnectedComponent<import("react")
 }>, import("react-redux").Omit<{
     dispatch: Dispatch<import("redux").AnyAction>;
     workplace: {
-        renderConfig: import("../../..").RenderConfig;
-        currPageWidgets: import("../../..").WidgetConfig<any>[];
+        renderConfig: import("@v-editor/widgets-center").RenderConfig;
+        currPageWidgets: import("@v-editor/widgets-center").WidgetConfig<any>[];
         selectedIndex: number[] | null;
         canvas: {
             x: number;
@@ -56,13 +56,13 @@ declare const _default: import("react-redux").ConnectedComponent<import("react")
         };
         selectArea: import("../../../store/editorReducer").Pos;
         undoStack: {
-            renderConfig: import("../../..").RenderConfig;
+            renderConfig: import("@v-editor/widgets-center").RenderConfig;
             selectedIndex: number[] | null;
             selectArea: import("../../../store/editorReducer").Pos;
             selectedTool: import("../../../store/editorReducer").Tools | null;
         }[];
         redoStack: {
-            renderConfig: import("../../..").RenderConfig;
+            renderConfig: import("@v-editor/widgets-center").RenderConfig;
             selectedIndex: number[] | null;
             selectArea: import("../../../store/editorReducer").Pos;
             selectedTool: import("../../../store/editorReducer").Tools | null;

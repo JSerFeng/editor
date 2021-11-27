@@ -4,7 +4,7 @@
     "useDefineForClassFields": true,
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "allowJs": false,
-    "skipLibCheck": false,
+    "skipLibCheck": true,
     "esModuleInterop": false,
     "allowSyntheticDefaultImports": true,
     "strict": true,
@@ -17,7 +17,10 @@
 		"outDir": "dist",
 		"declaration": true,
 		"declarationDir": "type",
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+		"types": [
+			"unplugin-icons/types/react",
+		]
   },
-  "include": ["./src"]
+  "include": ["lib"]
 }

@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite'
 import reactPlugin from '@vitejs/plugin-react'
 import * as path from "path"
+import icon from "unplugin-icons/vite"
 
 import type { UserConfig } from "vite"
 
@@ -16,12 +17,14 @@ export default defineConfig(({ mode }) => {
 			rollupOptions: {
 				external: [
 					"react",
-					"react-dom"
+					"react-dom",
+					"@v-editor/widgets-center"
 				],
 				output: {
 					globals: {
 						"react": "React",
-						"react-dom": "ReactDOM"
+						"react-dom": "ReactDOM",
+						"@v-editor/widgets-center": "WidgetsCenter"
 					},
 				}
 			},
@@ -38,8 +41,16 @@ export default defineConfig(({ mode }) => {
 		}
 	}
 	return {
-		plugins: [reactPlugin()],
+		plugins: [
+			reactPlugin(),
+			icon()
+		],
 		build: buildOption,
+		resolve: {
+			alias: {
+				"@": path.resolve(__dirname, "src"),
+			}
+		},
 		server,
 	}
 })

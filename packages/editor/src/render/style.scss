@@ -108,24 +108,24 @@
 		}
 
 		&:hover::after {
-			border: 1px solid rgb(88, 106, 126);
+			border: 3px solid rgb(126, 167, 255);
 		}
 
 		&.select::after {
 			opacity: .5;
-			border: 1px solid rgb(88, 106, 126);
+			border: 3px solid rgb(50, 115, 255);
 		}
 
 		&.select {
 			.move-dot {
 				z-index: 9999999;
-				width: 10px;
-				height: 10px;
-				border-radius: 50%;
+				width: 5px;
+				height: 5px;
 				background-color: #fff;
-				border: 1px solid grey;
+				background-color: rgb(50, 115, 255);
 				position: absolute;
 				transform: translate(-50%, -50%) scale(2);
+
 				&.lt {
 					left: 0;
 					top: 0;

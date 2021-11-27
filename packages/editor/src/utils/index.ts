@@ -1,5 +1,3 @@
-import { Modal } from "antd"
-
 export enum StickFlags {
 	NO_STICK = /**   */ 0 << 0,
 	STICK_ROW = /**  */ 1 << 0,
@@ -13,7 +11,7 @@ export const aTagDownload = (url: string) => {
 	document.body.append(aTag)
 	aTag.click()
 	setTimeout(() => {
-		document.body.removeChild(aTag)	
+		document.body.removeChild(aTag)
 	});
 }
 
@@ -74,7 +72,6 @@ interface RefLinesOptions {
 	stickPx: number,
 	showPx: number
 }
-/*@__PURE__*/
 const defaultRefLinesOptions: RefLinesOptions = {
 	stickTo: StickFlags.STICK_COL | StickFlags.STICK_ROW,
 	showSelf: false,
@@ -347,29 +344,17 @@ export const createRefLine = (
 	}
 	return result
 }
-/*@__PURE__*/
+
 export const isUndef = (target: unknown): target is undefined | null => {
 	return target === undefined || target === null
 }
 
-const { confirm } = Modal;
-/*@__PURE__*/
-export function withConfirm(message: string, cb: () => void) {
-	confirm({
-		title: message,
-		onOk: cb,
-		okText: "确认",
-		cancelText: "取消"
-	})
-}
 
-/*@__PURE__*/
 export function deepCopy<T>(obj: T): T {
 	return JSON.parse(JSON.stringify(obj))
 }
 
 /**获取到屏幕左边的距离 */
-/*@__PURE__*/
 export function getOffsetLeft(node: HTMLElement | null) {
 	let offsetLeft = 0
 
@@ -382,7 +367,6 @@ export function getOffsetLeft(node: HTMLElement | null) {
 }
 
 /**获取到屏幕上边的距离 */
-/*@__PURE__*/
 export function getOffsetTop(node: HTMLElement | null) {
 	let offsetTop = 0
 
@@ -395,7 +379,6 @@ export function getOffsetTop(node: HTMLElement | null) {
 }
 
 
-/*@__PURE__*/
 export function getNearestLine(
 	arr: RefLine[],
 	initValue?: RefLine
@@ -406,4 +389,16 @@ export function getNearestLine(
 		: prev,
 		initValue || arr[0]
 	)
+}
+
+export function debounce<T extends (...args: any[]) => any>(fn: T, ms: number) {
+	let timer: number | null = null
+	return (...args: T extends ((...args: infer U) => any) ? U : never) => {
+		if (timer) {
+			clearTimeout(timer)
+		}
+		timer = setTimeout(() => {
+			fn(...args)
+		}, ms) as unknown as number
+	}
 }

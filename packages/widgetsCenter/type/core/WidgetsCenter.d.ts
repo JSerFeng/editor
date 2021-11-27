@@ -18,5 +18,5 @@ export declare class WidgetsCenter {
     createConfigFromName(widgetName: string): WidgetConfig | null;
 }
 export declare const defaultDescription: Required<WidgetDescription>;
-export declare const createPkg: <T = any>(Comp: ReactComp<WidgetProps<T>>, getDescription: (...args: any) => WidgetDescription<T>, Configuration?: ReactComp<WidgetConfigProp<T>> | undefined) => WidgetPackage;
+export declare const createPkg: <T = any>(Comp: ReactComp<WidgetProps<T>>, getDescription: WidgetDescription<T> | ((...args: any) => WidgetDescription<T>), Configuration?: ReactComp<WidgetConfigProp<T>> | undefined) => WidgetPackage;
 export {};

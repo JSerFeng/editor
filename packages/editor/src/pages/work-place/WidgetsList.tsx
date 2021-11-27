@@ -54,11 +54,13 @@ const WidgetsList: FC<{
 									description.snapShot && <img className="sm-pic" src={ description.snapShot } alt={ description.name } />
 								}
 								<div>{ description.showName }</div>
-								<ErrorCatch name={ description.showName }>
-									<FC
-										isDev={ true }
-										{ ...description } pos={ { x: 0, y: 0, w: 80, h: 80 } } />
-								</ErrorCatch>
+								<div style={ { position: "relative" } }>
+									<ErrorCatch name={ description.showName }>
+										<FC
+											isDev={ true }
+											{ ...description } pos={ { x: 0, y: 0, w: 80, h: 80 } } />
+									</ErrorCatch>
+								</div>
 							</div>
 						</Tooltip>
 					})

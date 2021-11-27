@@ -1,0 +1,17 @@
+.svg-render {
+	svg {
+		width: 100% !important;
+	}
+}
+
+.text-config-item {
+	background-color: #fff;
+	color: rgb(48, 48, 48);
+	font-size: 20px;
+	padding: 10px;
+
+	&:hover {
+		background-color: rgb(231, 231, 231);
+		cursor: pointer;
+	}
+}

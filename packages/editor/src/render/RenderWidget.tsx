@@ -9,10 +9,10 @@ import {
 	MouseEvent as ReactMouseEvent
 } from "react"
 import { Dispatch as ReduxDispatch } from "redux"
-import { 
-	Pos, 
-	WidgetConfig, 
-	WidgetProps, 
+import {
+	Pos,
+	WidgetConfig,
+	WidgetProps,
 	EventEmitter
 } from "@v-editor/widgets-center"
 import produce from "immer"
@@ -494,6 +494,7 @@ export const RenderWidget: FC<WrapperProps> = ({
 				top: layout.y + "px",
 				width: layout.w + "px",
 				height: layout.h + "px",
+				//@ts-ignore
 				zIndex: widgetConfig.style?.zIndex || 0,
 			} }
 			title={ `x:${layout.x} y:${layout.y} w:${layout.w} h:${layout.h}` }

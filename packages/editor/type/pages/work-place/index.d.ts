@@ -1,6 +1,5 @@
 import { FC } from "react";
-import { RenderConfig } from "../../render/interfaces";
-import WidgetsCenter from "../../render/WidgetsCenter";
+import { WidgetsCenter, RenderConfig } from "@v-editor/widgets-center";
 import "./style.scss";
 declare const _default: import("react-redux").ConnectedComponent<FC<{
     widgetsCenter: WidgetsCenter;

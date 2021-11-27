@@ -6,6 +6,7 @@ export declare const EditorTypes: {
     Text: "Text";
     Number: "Number";
     Select: "Select";
+    Switch: "Switch";
 };
 declare type E<T extends Record<string, any>> = {
     [K in keyof T]: K;

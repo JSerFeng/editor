@@ -3,7 +3,7 @@
 	"version": "0.0.0",
 	"scripts": {
 		"dev": "vite",
-		"build": "tsc || vite build",
+		"build": "tsc && vite build",
 		"serve": "vite preview"
 	},
 	"files": [
@@ -18,12 +18,15 @@
 			"require": "./dist/widgetsCenter.umd.js"
 		}
 	},
-	"types": "./type/main.d.ts",
+	"types": "./type/index.d.ts",
 	"dependencies": {
 		"@emotion/react": "^11.6.0",
 		"@emotion/styled": "^11.6.0",
 		"@material-ui/core": "^4.12.3",
-		"@types/css-font-loading-module": "^0.0.7"
+		"@types/css-font-loading-module": "^0.0.7",
+		"@v-editor/editor": "workspace:*",
+		"react-awesome-slider": "^4.1.0",
+		"react-color": "^2.19.3"
 	},
 	"devDependencies": {
 		"@types/react": "^17.0.0",

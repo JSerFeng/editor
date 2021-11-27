@@ -21,8 +21,8 @@ import {
 	MenuItem,
 	IconButton,
 	Input,
+	Tooltip
 } from "@material-ui/core";
-import { Tooltip } from "antd"
 import { RenderConfig } from "@v-editor/widgets-center";
 import {
 	useHistory

@@ -1,5 +1,5 @@
 import { Reducer } from 'redux';
-import { RenderConfig, WidgetConfig } from '../render/interfaces';
+import { RenderConfig, WidgetConfig } from '@v-editor/widgets-center';
 import { StickFlags } from '../utils';
 import type { GetActionTypes } from ".";
 import { ServiceTypes } from './serviceReducer';
@@ -14,6 +14,15 @@ export interface Pos {
     y: number;
 }
 declare type MemoState = Pick<BaseState["workplace"], "renderConfig" | "selectedIndex" | "selectArea" | "selectedTool">;
+export declare enum MessageType {
+    WARN = "warnCount",
+    ERROR = "errorCount",
+    TIP = "tipCount"
+}
+export declare type Message = {
+    type: MessageType;
+    text: string;
+};
 export interface BaseState {
     workplace: {
         renderConfig: RenderConfig;
@@ -42,8 +51,17 @@ export interface BaseState {
     };
     pid: string;
     wid: string;
+    messages: {
+        total: number;
+        warnCount: number;
+        errorCount: number;
+        tipCount: number;
+        list: Message[];
+    };
 }
 export declare enum Types {
+    NewMessage = "NewMessage",
+    RemoveMessage = "RemoveMessage",
     NewProject = "NewProject",
     ProjectName = "ProjectName",
     RenderConfig = "RenderConfig",
@@ -88,6 +106,17 @@ export declare enum Tools {
     Select = "Select"
 }
 export declare const EditorActions: {
+    newMessage(type: MessageType, text: string): {
+        type: Types.NewMessage;
+        payload: Message;
+    };
+    removeMessage(type: MessageType, idx: number): {
+        type: Types.RemoveMessage;
+        payload: {
+            type: MessageType;
+            idx: number;
+        };
+    };
     actNewProject: (projectName: string, pos: {
         w: number;
         h: number;

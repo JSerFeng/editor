@@ -1,9 +1,8 @@
 import { FC, Dispatch, RefObject, ComponentClass } from "react";
 import { Dispatch as ReduxDispatch } from "redux";
-import type { Pos, WidgetConfig, WidgetProps } from "./interfaces";
+import { Pos, WidgetConfig, WidgetProps, EventEmitter } from "@v-editor/widgets-center";
 import { RefLine } from "../utils";
 import { BaseState } from "../store";
-import EventEmitter from "../utils/eventEmitter";
 interface WrapperProps {
     selected: boolean;
     widgetConfig: WidgetConfig;

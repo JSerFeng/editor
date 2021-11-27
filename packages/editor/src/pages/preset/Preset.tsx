@@ -24,7 +24,7 @@ const Preset: FC<{
 		<BrowserRouter
 			basename="/preset"
 		>
-			<div className="preset flex jc ac">
+			<div className="preset flex jc">
 				<ButtonBase
 					className="back-button flex jc ac"
 					onClick={ router.goBack }
@@ -54,6 +54,7 @@ const Preset: FC<{
 											position: "absolute",
 											left: widgetConfig.pos.x,
 											top: widgetConfig.pos.y,
+											//@ts-ignore
 											zIndex: widgetConfig.style?.zIndex || "0"
 										} }
 									>

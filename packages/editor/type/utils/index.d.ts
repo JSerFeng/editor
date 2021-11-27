@@ -49,7 +49,6 @@ export declare const createRefLine: ({ x: l, w: width, h: height, y: t }: {
     };
 };
 export declare const isUndef: (target: unknown) => target is null | undefined;
-export declare function withConfirm(message: string, cb: () => void): void;
 export declare function deepCopy<T>(obj: T): T;
 /**获取到屏幕左边的距离 */
 export declare function getOffsetLeft(node: HTMLElement | null): number;
