@@ -35,8 +35,8 @@ import { ClothesTemplateController } from "./controllers/clothesTemplate.control
 	imports: [
 		MongooseModule.forRoot("mongodb://127.0.0.1:27017/editor", {
 			auth: {
-				user: "fy",
-				password: "fyvery261",
+				user: "editor",
+				password: "123",
 			},
 		}),
 		PassportModule.register({
