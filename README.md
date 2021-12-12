@@ -6,6 +6,8 @@
 
 可以实时动态引入其它人编写的组件
 
+![image](https://github.com/JSerFeng/resources/blob/main/editor-3.png)
+
 ![image](https://github.com/JSerFeng/resources/blob/main/editor-1.png)
 
 ![image](https://github.com/JSerFeng/resources/blob/main/editor-2.png)
