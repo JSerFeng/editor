@@ -6,6 +6,10 @@
 
 可以实时动态引入其它人编写的组件
 
+DEV:
+
+确保本地有mongodb，并且有名为editor的数据库和管理员editor, pwd 123
+
 ### packages
 server-side: 可视化页面搭建项目的服务端（nest框架）
 
