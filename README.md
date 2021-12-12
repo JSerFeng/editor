@@ -6,6 +6,10 @@
 
 可以实时动态引入其它人编写的组件
 
+![image](https://github.com/JSerFeng/resources/blob/main/editor-1.png)
+
+![image](https://github.com/JSerFeng/resources/blob/main/editor-2.png)
+
 DEV:
 
 确保本地有mongodb，并且有名为editor的数据库和管理员editor, pwd 123
