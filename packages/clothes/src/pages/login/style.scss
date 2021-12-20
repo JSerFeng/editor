@@ -1,0 +1,44 @@
+@import "../../index.scss";
+
+.login-main {
+	height: 100vh;
+	width: 100%;
+	margin-bottom: 15px;
+	background:url("./image/background_2.png");
+	background-size: cover;
+	background-repeat: no-repeat;
+	
+
+	.wrap {
+		padding: 20px 0;
+		width: 80%;
+		height: 70%;
+		position: absolute;
+	}
+
+	.login-title {
+		height: 30%;
+		width: 100%;
+
+		.btn {
+			font-size: 26px;
+			transform: scale(.8);
+			color: $MAIN_THEME;
+			filter: brightness(1.5);
+			cursor: pointer;
+			transition: .2s;
+
+			&.active {
+				transform: scale(1);
+				transition: .2s;
+				filter: brightness(1);
+				cursor: initial;
+			}
+		}
+	}
+
+	.login-body {
+		width: 100%;
+		min-height: 400px;
+	}
+}

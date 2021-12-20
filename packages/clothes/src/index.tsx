@@ -14,6 +14,7 @@ import "antd/dist/antd.css"
 import HomePage from "./pages/home-page"
 import Preset from "./pages/preset/Preset"
 import Login from "./pages/loginAndRegister"
+import Enter from "./pages/login"
 import { Snackbar } from "@material-ui/core"
 import Shop from "./pages/shop/Shop"
 
@@ -65,6 +66,9 @@ export const Editor: FC<{
 				</Route>
 				<Route path="/login">
 					<Login />
+				</Route>
+				<Route path="/enter">
+			  		 <Enter />
 				</Route>
 			</Provider>
 			<Snackbar></Snackbar>
